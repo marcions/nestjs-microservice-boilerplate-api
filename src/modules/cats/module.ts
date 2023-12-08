@@ -10,7 +10,7 @@ import { CatsGetByIdUsecase } from '@/core/cats/use-cases/cats-getByID';
 import { CatsListUsecase } from '@/core/cats/use-cases/cats-list';
 import { CatsUpdateUsecase } from '@/core/cats/use-cases/cats-update';
 import { RedisCacheModule } from '@/infra/cache/redis';
-import { CatsSchema } from '@/infra/database/postgres/schema/cats';
+import { CatsSchema } from '@/infra/database/postgres/schemas/cats';
 import { ILoggerAdapter, LoggerModule } from '@/infra/logger';
 import { TokenModule } from '@/libs/auth';
 import { IsLoggedMiddleware } from '@/utils/middlewares/is-logged.middleware';

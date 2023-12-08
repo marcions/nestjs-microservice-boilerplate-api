@@ -4,7 +4,7 @@ import { FindOptionsWhere, Repository } from 'typeorm';
 import { CatsEntity } from '@/core/cats/entity/cats';
 import { ICatsRepository } from '@/core/cats/repository/cats';
 import { CatsListInput, CatsListOutput } from '@/core/cats/use-cases/cats-list';
-import { CatsSchema } from '@/infra/database/postgres/schema/cats';
+import { CatsSchema } from '@/infra/database/postgres/schemas/cats';
 import { PostgresRepository } from '@/infra/repository/postgres/repository';
 import { ValidatePostgresFilter } from '@/utils/decorators/database/postgres/validate-typeorm-filter.decorator';
 import { ValidateDatabaseSortAllowed } from '@/utils/decorators/database/validate-database-sort-allowed.decorator';

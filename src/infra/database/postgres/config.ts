@@ -16,7 +16,7 @@ const dataSource = new DataSource({
   migrationsTableName: 'migrations_table',
   synchronize: configService.get<string>('ENV').toLowerCase() !== 'prd',
   migrations: ['src/infra/database/postgres/migrations/*.ts'],
-  entities: ['src/infra/database/postgres/schema/*.ts']
+  entities: ['src/infra/database/postgres/schemas/*.ts']
 });
 
 export default dataSource;
