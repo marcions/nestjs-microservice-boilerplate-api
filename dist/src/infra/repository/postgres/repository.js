@@ -7,8 +7,8 @@ class PostgresRepository {
     constructor(repository) {
         this.repository = repository;
         this.excludeColumns = (columnsToExclude) => this.repository.metadata.columns
-            .map(column => column.databaseName)
-            .filter(columnName => !columnsToExclude.includes(columnName));
+            .map((column) => column.databaseName)
+            .filter((columnName) => !columnsToExclude.includes(columnName));
     }
     async create(document, saveOptions) {
         const entity = this.repository.create(document);

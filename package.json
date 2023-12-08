@@ -19,7 +19,7 @@
     "infra": "./scripts/mongo/start-replicaset.sh",
     "scaffold": "./node_modules/@mikemajesty/microservice-crud/bin/microservice-crud",
     "typeorm": "ts-node \"./node_modules/typeorm/cli.js\"",
-    "migration-postgres:create": "yarn typeorm migration:create \"./src/infra/database/postgres/migrations/migration\"",
+    "migration-postgres:create": "yarn typeorm migration:create \"./src/infra/database/postgres/migrations/rename\"",
     "migration-postgres:run": "npm run typeorm migration:run -- -d ./src/infra/database/postgres/config --transaction none",
     "make-badges": "istanbul-badges-readme"
   },
@@ -115,6 +115,6 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.1",
-    "typescript": "^4.7.4"
+    "typescript": "5.1.6"
   }
 }
