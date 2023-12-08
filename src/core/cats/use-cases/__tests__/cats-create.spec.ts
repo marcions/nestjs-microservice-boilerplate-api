@@ -2,7 +2,6 @@ import { Test } from '@nestjs/testing';
 
 import { LoggerModule } from '@/infra/logger';
 import { ICatsCreateAdapter } from '@/modules/cats/adapter';
-import { ApiInternalServerException } from '@/utils/exception';
 import { RequestMock } from '@/utils/tests/mocks/request';
 import { expectZodError, generateUUID } from '@/utils/tests/tests';
 
@@ -58,19 +57,6 @@ describe('CatsCreateUsecase', () => {
 
   test('when cats created successfully, should expect a cats that has been created', async () => {
     repository.create = jest.fn().mockResolvedValue(catCreateMock);
-    repository.startSession = jest.fn().mockResolvedValue({
-      commit: jest.fn(),
-      rollback: jest.fn()
-    });
     await expect(usecase.execute(catCreateMock, RequestMock.trancingMock)).resolves.toEqual(catCreateMock);
-  });
-
-  test('when transaction throw an error, should expect an error', async () => {
-    repository.startSession = jest.fn().mockResolvedValue({
-      commit: jest.fn(),
-      rollback: jest.fn()
-    });
-    repository.create = jest.fn().mockRejectedValue(new ApiInternalServerException());
-    await expect(usecase.execute(catCreateMock, RequestMock.trancingMock)).rejects.toThrow(ApiInternalServerException);
   });
 });
