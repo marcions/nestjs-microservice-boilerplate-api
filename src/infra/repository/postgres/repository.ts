@@ -157,10 +157,9 @@ export class PostgresRepository<T extends BaseEntity & IEntity> implements IRepo
   }
 
   async findAllWithSelectFields<TQuery = Partial<T>>(includeProperties: (keyof T)[], filter?: TQuery): Promise<T[]> {
-    Object.assign(filter, { deletedAt: null });
     const select = includeProperties.map((e) => `${e.toString()}`);
     return this.repository.find({
-      where: filter as FindOptionsWhere<T>,
+      where: { ...filter, deletedAt: null } as FindOptionsWhere<T>,
       select: select as FindOptionsSelectByString<T>
     });
   }

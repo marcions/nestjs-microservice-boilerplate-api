@@ -127,10 +127,9 @@ class PostgresRepository {
         });
     }
     async findAllWithSelectFields(includeProperties, filter) {
-        Object.assign(filter, { deletedAt: null });
         const select = includeProperties.map((e) => `${e.toString()}`);
         return this.repository.find({
-            where: filter,
+            where: Object.assign(Object.assign({}, filter), { deletedAt: null }),
             select: select
         });
     }
