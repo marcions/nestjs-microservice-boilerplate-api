@@ -8,27 +8,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgresDatabaseModule = void 0;
 const common_1 = require("@nestjs/common");
-const logger_1 = require("../../logger");
-const adapter_1 = require("../adapter");
-const config_1 = require("./config");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const secrets_1 = require("../../secrets");
 const service_1 = require("./service");
-let PostgresDatabaseModule = exports.PostgresDatabaseModule = class PostgresDatabaseModule {
+let PostgresDatabaseModule = class PostgresDatabaseModule {
 };
-exports.PostgresDatabaseModule = PostgresDatabaseModule = __decorate([
+PostgresDatabaseModule = __decorate([
     (0, common_1.Module)({
-        imports: [logger_1.LoggerModule],
-        providers: [
-            {
-                provide: adapter_1.IDataBaseAdapter,
-                useFactory: async (logger) => {
-                    const postgres = new service_1.SequelizeService(config_1.sequelizeConfig, logger);
-                    await postgres.connect();
-                    return postgres;
+        imports: [
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: ({ POSTGRES_URL, ENV }) => {
+                    const conn = new service_1.PostgresService().getConnection({ URI: POSTGRES_URL });
+                    return Object.assign(Object.assign({}, conn), { timeout: 5000, connectTimeout: 5000, logging: ENV === 'DEV', autoLoadEntities: true, synchronize: true, migrationsTableName: 'migration_collection' });
                 },
-                inject: [logger_1.ILoggerAdapter]
-            }
-        ],
-        exports: [adapter_1.IDataBaseAdapter]
+                async dataSourceFactory(options) {
+                    return new typeorm_2.DataSource(options);
+                },
+                imports: [secrets_1.SecretsModule],
+                inject: [secrets_1.ISecretsAdapter]
+            })
+        ]
     })
 ], PostgresDatabaseModule);
+exports.PostgresDatabaseModule = PostgresDatabaseModule;
 //# sourceMappingURL=module.js.map

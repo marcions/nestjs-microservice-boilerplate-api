@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { BaseEntity } from '@/utils/entity';
+import { BaseEntity, IEntity } from '@/utils/entity';
 
 const ID = z.string().uuid();
 const Name = z.string().trim().min(1).max(200);
@@ -22,7 +22,7 @@ export const CatsEntitySchema = z.object({
 
 type Cat = z.infer<typeof CatsEntitySchema>;
 
-export class CatsEntity extends BaseEntity<CatsEntity>(CatsEntitySchema) {
+export class CatsEntity extends BaseEntity<CatsEntity>(CatsEntitySchema) implements IEntity {
   name: string;
 
   breed: string;

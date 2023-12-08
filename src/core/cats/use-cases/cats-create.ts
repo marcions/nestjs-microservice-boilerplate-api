@@ -24,18 +24,10 @@ export class CatsCreateUsecase {
   async execute(input: CatsCreateInput, { tracing, user }: ApiTrancingInput): Promise<CatsCreateOutput> {
     const entity = new CatsEntity(input);
 
-    const transaction = await this.catsRepository.startSession();
-    try {
-      const cats = await this.catsRepository.create<DatabaseOptionsType>(entity, { transaction });
+    const cats = await this.catsRepository.create<DatabaseOptionsType>(entity);
 
-      await transaction.commit();
+    tracing.logEvent('cats-created', `cats created by: ${user.login}`);
 
-      tracing.logEvent('cats-created', `cats created by: ${user.login}`);
-
-      return cats;
-    } catch (error) {
-      await transaction.rollback();
-      throw error;
-    }
+    return cats;
   }
 }

@@ -23,24 +23,16 @@ class CatsCreateUsecase {
     }
     async execute(input, { tracing, user }) {
         const entity = new cats_1.CatsEntity(input);
-        const transaction = await this.catsRepository.startSession();
-        try {
-            const cats = await this.catsRepository.create(entity, { transaction });
-            await transaction.commit();
-            tracing.logEvent('cats-created', `cats created by: ${user.login}`);
-            return cats;
-        }
-        catch (error) {
-            await transaction.rollback();
-            throw error;
-        }
+        const cats = await this.catsRepository.create(entity);
+        tracing.logEvent('cats-created', `cats created by: ${user.login}`);
+        return cats;
     }
 }
-exports.CatsCreateUsecase = CatsCreateUsecase;
 __decorate([
     (0, validate_schema_decorator_1.ValidateSchema)(exports.CatsCreateSchema),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], CatsCreateUsecase.prototype, "execute", null);
+exports.CatsCreateUsecase = CatsCreateUsecase;
 //# sourceMappingURL=cats-create.js.map

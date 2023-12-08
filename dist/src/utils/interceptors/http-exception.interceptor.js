@@ -12,7 +12,7 @@ const api_1 = require("@opentelemetry/api");
 const semantic_conventions_1 = require("@opentelemetry/semantic-conventions");
 const operators_1 = require("rxjs/operators");
 const zod_1 = require("zod");
-let ExceptionInterceptor = exports.ExceptionInterceptor = class ExceptionInterceptor {
+let ExceptionInterceptor = class ExceptionInterceptor {
     intercept(executionContext, next) {
         return next.handle().pipe((0, operators_1.catchError)((error) => {
             var _a;
@@ -56,7 +56,8 @@ let ExceptionInterceptor = exports.ExceptionInterceptor = class ExceptionInterce
         }
     }
 };
-exports.ExceptionInterceptor = ExceptionInterceptor = __decorate([
+ExceptionInterceptor = __decorate([
     (0, common_1.Injectable)()
 ], ExceptionInterceptor);
+exports.ExceptionInterceptor = ExceptionInterceptor;
 //# sourceMappingURL=http-exception.interceptor.js.map

@@ -1,25 +1,32 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
-import { ILoggerAdapter, LoggerModule } from '@/infra/logger';
+import { ISecretsAdapter, SecretsModule } from '@/infra/secrets';
 
-import { IDataBaseAdapter } from '../adapter';
-import { sequelizeConfig } from './config';
-import { SequelizeService } from './service';
+import { PostgresService } from './service';
 
 @Module({
-  imports: [LoggerModule],
-  providers: [
-    {
-      provide: IDataBaseAdapter,
-      useFactory: async (logger: ILoggerAdapter) => {
-        const postgres = new SequelizeService(sequelizeConfig, logger);
-        await postgres.connect();
-
-        return postgres;
+  imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: ({ POSTGRES_URL, ENV }: ISecretsAdapter) => {
+        const conn = new PostgresService().getConnection({ URI: POSTGRES_URL });
+        return {
+          ...conn,
+          timeout: 5000,
+          connectTimeout: 5000,
+          logging: ENV === 'DEV',
+          autoLoadEntities: true,
+          synchronize: true,
+          migrationsTableName: 'migration_collection'
+        };
       },
-      inject: [ILoggerAdapter]
-    }
-  ],
-  exports: [IDataBaseAdapter]
+      async dataSourceFactory(options) {
+        return new DataSource(options);
+      },
+      imports: [SecretsModule],
+      inject: [ISecretsAdapter]
+    })
+  ]
 })
 export class PostgresDatabaseModule {}

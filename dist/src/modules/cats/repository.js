@@ -11,40 +11,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CatsRepository = void 0;
 const common_1 = require("@nestjs/common");
-const cats_1 = require("../../core/cats/entity/cats");
+const typeorm_1 = require("typeorm");
 const repository_1 = require("../../infra/repository/postgres/repository");
-const sequelize_1 = require("../../utils/database/sequelize");
-const convert_paginate_input_to_sequelize_filter_decorator_1 = require("../../utils/decorators/database/postgres/convert-paginate-input-to-sequelize-filter.decorator");
+const validate_typeorm_filter_decorator_1 = require("../../utils/decorators/database/postgres/validate-typeorm-filter.decorator");
 const validate_database_sort_allowed_decorator_1 = require("../../utils/decorators/database/validate-database-sort-allowed.decorator");
 const types_1 = require("../../utils/decorators/types");
-let CatsRepository = exports.CatsRepository = class CatsRepository extends repository_1.SequelizeRepository {
+const pagination_1 = require("../../utils/pagination");
+let CatsRepository = class CatsRepository extends repository_1.PostgresRepository {
     constructor(repository) {
         super(repository);
         this.repository = repository;
     }
-    async startSession() {
-        const transaction = await this.repository.sequelize.transaction();
-        return transaction;
-    }
-    async paginate(input, options) {
-        const { schema } = sequelize_1.DatabaseOptionsSchema.parse(options);
-        const list = await this.repository.schema(schema).findAndCountAll(input);
-        return { docs: list.rows.map((r) => new cats_1.CatsEntity(r)), limit: input.limit, page: input.page, total: list.count };
+    async paginate(input) {
+        const skip = (0, pagination_1.calucaleSkip)(input);
+        const [docs, total] = await this.repository.findAndCount({
+            take: input.limit,
+            skip,
+            order: input.sort,
+            where: input.search
+        });
+        return { docs, total, page: input.page, limit: input.limit };
     }
 };
 __decorate([
     (0, validate_database_sort_allowed_decorator_1.ValidateDatabaseSortAllowed)('createdAt', 'breed'),
-    (0, convert_paginate_input_to_sequelize_filter_decorator_1.ConvertPaginateInputToSequelizeFilter)([
+    (0, validate_typeorm_filter_decorator_1.ValidatePostgresFilter)([
         { name: 'name', type: types_1.SearchTypeEnum.like },
         { name: 'breed', type: types_1.SearchTypeEnum.like },
         { name: 'age', type: types_1.SearchTypeEnum.equal }
     ]),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], CatsRepository.prototype, "paginate", null);
-exports.CatsRepository = CatsRepository = __decorate([
+CatsRepository = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [typeorm_1.Repository])
 ], CatsRepository);
+exports.CatsRepository = CatsRepository;
 //# sourceMappingURL=repository.js.map

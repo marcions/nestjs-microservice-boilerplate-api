@@ -13,7 +13,7 @@ exports.HttpLoggerInterceptor = void 0;
 const common_1 = require("@nestjs/common");
 const uuid_1 = require("uuid");
 const logger_1 = require("../../infra/logger");
-let HttpLoggerInterceptor = exports.HttpLoggerInterceptor = class HttpLoggerInterceptor {
+let HttpLoggerInterceptor = class HttpLoggerInterceptor {
     constructor(logger) {
         this.logger = logger;
     }
@@ -31,8 +31,9 @@ let HttpLoggerInterceptor = exports.HttpLoggerInterceptor = class HttpLoggerInte
         return next.handle();
     }
 };
-exports.HttpLoggerInterceptor = HttpLoggerInterceptor = __decorate([
+HttpLoggerInterceptor = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [logger_1.ILoggerAdapter])
 ], HttpLoggerInterceptor);
+exports.HttpLoggerInterceptor = HttpLoggerInterceptor;
 //# sourceMappingURL=http-logger.interceptor.js.map

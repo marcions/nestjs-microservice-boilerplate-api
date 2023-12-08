@@ -48,7 +48,7 @@ async function bootstrap() {
         legacyHeaders: false
     });
     app.use(limiter);
-    app.use(body_parser_1.default.urlencoded());
+    app.use(body_parser_1.default.urlencoded({ extended: true }));
     app.enableVersioning({ type: common_1.VersioningType.URI });
     process.on('uncaughtException', (error) => {
         if (!(error instanceof exception_1.BaseException)) {

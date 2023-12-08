@@ -1,285 +1,145 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SequelizeRepository = void 0;
-const sequelize_1 = require("sequelize");
-const sequelize_2 = __importDefault(require("sequelize"));
-const sequelize_3 = require("../../../utils/database/sequelize");
-const convert_sequelize_filter_decorator_1 = require("../../../utils/decorators/database/postgres/convert-sequelize-filter.decorator");
+exports.PostgresRepository = void 0;
+const typeorm_1 = require("typeorm");
 const exception_1 = require("../../../utils/exception");
-const util_1 = require("../util");
-class SequelizeRepository {
-    constructor(Model) {
-        this.Model = Model;
-    }
-    async findByCommands(filterList, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const postgresSearch = {
-            equal: { type: sequelize_1.Op.in, like: false },
-            not_equal: { type: sequelize_1.Op.notIn, like: false },
-            not_contains: { type: sequelize_1.Op.notILike, like: true },
-            contains: { type: sequelize_1.Op.iLike, like: true }
-        };
-        const searchList = {};
-        (0, util_1.validateFindByCommandsFilter)(filterList);
-        for (const filter of filterList) {
-            const command = postgresSearch[filter.command];
-            if (command.like) {
-                Object.assign(searchList, {
-                    [filter.property]: { [command.type]: { [sequelize_1.Op.any]: filter.value.map((v) => `%${v}%`) } }
-                });
-                continue;
-            }
-            Object.assign(searchList, { [filter.property]: { [command.type]: filter.value } });
-        }
-        Object.assign(searchList, { deletedAt: null });
-        const model = await this.Model.schema(schema).findAll({
-            where: searchList
-        });
-        return model.map((m) => m.toJSON());
-    }
-    async createOrUpdate(document, options) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        if (!document['id']) {
-            throw new exception_1.ApiBadRequestException('id is required');
-        }
-        const exists = await this.findById(document['id'], options);
-        if (!exists) {
-            const savedDoc = await this.Model.schema(schema).create(document, {
-                transaction
-            });
-            const model = await savedDoc.save();
-            return { id: model.id, created: true, updated: false };
-        }
-        await this.Model.schema(schema).update(document, {
-            where: { id: exists.id },
-            transaction
-        });
-        return { id: exists.id, created: false, updated: true };
-    }
-    async findAll(filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).findAll({
-            where: filter
-        });
-        return model.map((m) => m.toJSON());
-    }
-    async find(filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).findAll({
-            where: filter
-        });
-        return model.map((m) => m.toJSON());
-    }
-    async findIn(filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const key = Object.keys(filter)[0];
-        const model = await this.Model.schema(schema).findAll({
-            where: { [key]: { [sequelize_2.default.Op.in]: filter[`${key}`] } }
-        });
-        return model.map((m) => m.toJSON());
-    }
-    async remove(filter, options) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).destroy({
-            where: filter,
-            transaction
-        });
-        return { deletedCount: model, deleted: !!model };
-    }
-    async findOne(filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).findOne({
-            where: filter
-        });
-        if (!model)
-            return;
-        return model.toJSON();
-    }
-    async findOneAndUpdate(filter, updated, options) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const [rowsEffected] = await this.Model.schema(schema).update(updated, {
-            where: filter,
-            transaction
-        });
-        if (!rowsEffected) {
-            return null;
-        }
-        const model = await this.Model.schema(schema).findOne({
-            where: filter
-        });
-        return model.toJSON();
-    }
-    async updateOne(filter, updated, options) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).update(updated, {
-            where: filter,
-            transaction
-        });
-        return {
-            modifiedCount: model.length,
-            matchedCount: model.length,
-            acknowledged: null,
-            upsertedCount: model.length,
-            upsertedId: null
-        };
-    }
-    async updateMany(filter, updated, options) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).update(updated, {
-            where: filter,
-            transaction
-        });
-        return {
-            modifiedCount: model.length,
-            matchedCount: model.length,
-            acknowledged: null,
-            upsertedCount: model.length,
-            upsertedId: null
-        };
-    }
-    async seed(entityList, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        for (const model of entityList) {
-            const data = await this.findById(model.id, { schema });
-            if (!data) {
-                await this.create(model, { schema: schema });
-            }
-        }
+class PostgresRepository {
+    constructor(repository) {
+        this.repository = repository;
     }
     async create(document, saveOptions) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(saveOptions);
-        const savedDoc = await this.Model.schema(schema).create(document, {
-            transaction
-        });
-        const model = await savedDoc.save();
-        return { id: model.id, created: !!model.id };
+        const entity = this.repository.create(document);
+        const model = await entity.save(saveOptions);
+        return { created: model.hasId(), id: model.id };
     }
-    async insertMany(documents, saveOptions) {
-        const { schema, transaction } = sequelize_3.DatabaseOptionsSchema.parse(saveOptions);
-        await this.Model.schema(schema).bulkCreate(documents, {
-            transaction
+    async findById(id) {
+        return this.repository.findOne({
+            where: { id, deletedAt: null }
         });
     }
-    async findOneWithExcludeFields(filter, excludeProperties, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const exclude = excludeProperties.map((e) => `${e.toString()}`);
-        const model = await this.Model.schema(schema).findOne({
-            where: filter,
-            attributes: { exclude }
-        });
-        if (!model)
-            return;
-        return model.toJSON();
+    async insertMany(document) {
+        await this.repository.insert(document);
     }
-    async findAllWithExcludeFields(includeProperties, filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const exclude = includeProperties.map((e) => `${e.toString()}`);
-        if (!filter) {
-            filter = { deletedAt: null };
+    async createOrUpdate(updated) {
+        if (!updated['id']) {
+            throw new exception_1.ApiBadRequestException('id is required');
         }
-        const model = await this.Model.schema(schema).findAll({
-            where: filter,
-            attributes: { exclude }
-        });
-        return model.map((m) => m.toJSON());
-    }
-    async findOneWithSelectFields(filter, includeProperties, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const include = includeProperties.map((e) => `${e.toString()}`);
-        const model = await this.Model.schema(schema).findOne({
-            where: filter,
-            attributes: include
-        });
-        if (!model)
-            return;
-        return model.toJSON();
-    }
-    async findAllWithSelectFields(includeProperties, filter, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const include = includeProperties.map((e) => `${e.toString()}`);
-        if (!filter) {
-            filter = { deletedAt: null };
+        const exists = await this.findById(updated['id']);
+        if (!exists) {
+            const created = await this.create(updated);
+            return { id: created.id, created: true, updated: false };
         }
-        const model = await this.Model.schema(schema).findAll({
-            where: filter,
-            attributes: include
-        });
-        return model.map((m) => m.toJSON());
+        const row = await this.repository.update({ id: exists.id }, Object.assign(Object.assign({}, exists), updated));
+        return { id: exists.id, created: false, updated: row.affected > 0 };
     }
-    async findById(id, options) {
-        const { schema } = sequelize_3.DatabaseOptionsSchema.parse(options);
-        const model = await this.Model.schema(schema).findOne({ where: { id, deletedAt: null } });
-        if (!model)
-            return;
-        return model.toJSON();
+    async findAll() {
+        return this.repository.find({
+            where: { deletedAt: null }
+        });
+    }
+    async find(filter) {
+        return this.repository.find({
+            where: Object.assign(Object.assign({}, filter), { deletedAt: null })
+        });
+    }
+    async findIn(filter) {
+        const key = Object.keys(filter)[0];
+        return this.repository.find({
+            where: { [key]: (0, typeorm_1.In)(filter[`${key}`]), deletedAt: null }
+        });
+    }
+    async findByCommands(filterList) {
+        const searchList = {
+            deletedAt: null
+        };
+        const postgresSearch = {
+            equal: {
+                query: (value) => (0, typeorm_1.Raw)((alias) => `${alias} ILIKE ANY ('{${value.map((v) => `${`${v}`}`).join(', ')}}')`),
+                like: false
+            },
+            not_equal: {
+                query: (value) => (0, typeorm_1.Raw)((alias) => `${alias} NOT ILIKE ALL (ARRAY[${value.map((v) => `'${v}'`).join(', ')}])`),
+                like: false
+            },
+            not_contains: {
+                query: (value) => (0, typeorm_1.Raw)((alias) => `${alias} NOT ILIKE ALL (ARRAY[${value.map((v) => `'%${v}%'`).join(', ')}])`),
+                like: true
+            },
+            contains: {
+                query: (value) => (0, typeorm_1.Raw)((alias) => `${alias} ILIKE ANY ('{${value.map((v) => `${`%${v}%`}`).join(', ')}}')`),
+                like: true
+            }
+        };
+        for (const filter of filterList) {
+            searchList[`${filter.property.toString()}`] = postgresSearch[filter.command].query(filter.value);
+        }
+        return this.repository.find({
+            where: searchList
+        });
+    }
+    async remove(filter) {
+        const data = await this.repository.delete(filter);
+        return { deletedCount: data.affected, deleted: !!data.affected };
+    }
+    async findOne(filter) {
+        Object.assign(filter, { deletedAt: null });
+        return this.repository.findOne({
+            where: filter
+        });
+    }
+    async updateOne(filter, updated) {
+        const data = await this.repository.update(filter, updated);
+        return {
+            modifiedCount: data.affected,
+            upsertedCount: 0,
+            upsertedId: 0,
+            matchedCount: data.affected,
+            acknowledged: !!data.affected
+        };
+    }
+    async findOneAndUpdate(filter, updated) {
+        const data = await this.repository.update(filter, updated);
+        if (data.affected === 0) {
+            throw new exception_1.ApiNotFoundException();
+        }
+        return this.findOne(filter);
+    }
+    async updateMany(filter, updated) {
+        Object.assign(filter, { deletedAt: null });
+        const data = await this.repository.update(filter, updated);
+        return {
+            modifiedCount: data.affected,
+            upsertedCount: 0,
+            upsertedId: 0,
+            matchedCount: data.affected,
+            acknowledged: !!data.affected
+        };
+    }
+    async findOneWithSelectFields(filter, includeProperties) {
+        Object.assign(filter, { deletedAt: null });
+        const select = includeProperties.map((e) => `${e.toString()}`);
+        return this.repository.findOne({
+            where: filter,
+            select: select
+        });
+    }
+    async findAllWithSelectFields(includeProperties, filter) {
+        Object.assign(filter, { deletedAt: null });
+        const select = includeProperties.map((e) => `${e.toString()}`);
+        return this.repository.find({
+            where: filter,
+            select: select
+        });
+    }
+    seed(entityList) {
+        throw new Error('Method not implemented.' + entityList);
+    }
+    findOneWithExcludeFields(filter, excludeProperties) {
+        throw new Error('Method not implemented.' + filter + excludeProperties);
+    }
+    findAllWithExcludeFields(excludeProperties) {
+        throw new Error('Method not implemented.' + excludeProperties);
     }
 }
-exports.SequelizeRepository = SequelizeRepository;
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_a = typeof TQuery !== "undefined" && TQuery) === "function" ? _a : Object, typeof (_b = typeof TOpt !== "undefined" && TOpt) === "function" ? _b : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "findAll", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_c = typeof TQuery !== "undefined" && TQuery) === "function" ? _c : Object, typeof (_d = typeof TOptions !== "undefined" && TOptions) === "function" ? _d : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "find", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_e = typeof TQuery !== "undefined" && TQuery) === "function" ? _e : Object, typeof (_f = typeof TOpt !== "undefined" && TOpt) === "function" ? _f : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "remove", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_g = typeof TQuery !== "undefined" && TQuery) === "function" ? _g : Object, typeof (_h = typeof TOptions !== "undefined" && TOptions) === "function" ? _h : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "findOne", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_j = typeof TQuery !== "undefined" && TQuery) === "function" ? _j : Object, typeof (_k = typeof TUpdate !== "undefined" && TUpdate) === "function" ? _k : Object, typeof (_l = typeof TOptions !== "undefined" && TOptions) === "function" ? _l : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "findOneAndUpdate", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_m = typeof TQuery !== "undefined" && TQuery) === "function" ? _m : Object, typeof (_o = typeof TUpdate !== "undefined" && TUpdate) === "function" ? _o : Object, typeof (_p = typeof TOptions !== "undefined" && TOptions) === "function" ? _p : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "updateOne", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_q = typeof TQuery !== "undefined" && TQuery) === "function" ? _q : Object, typeof (_r = typeof TUpdate !== "undefined" && TUpdate) === "function" ? _r : Object, typeof (_s = typeof TOptions !== "undefined" && TOptions) === "function" ? _s : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "updateMany", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_t = typeof TQuery !== "undefined" && TQuery) === "function" ? _t : Object, Array, typeof (_u = typeof TOptions !== "undefined" && TOptions) === "function" ? _u : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "findOneWithExcludeFields", null);
-__decorate([
-    (0, convert_sequelize_filter_decorator_1.ConvertSequelizeFilterToRepository)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_v = typeof TQuery !== "undefined" && TQuery) === "function" ? _v : Object, Array, typeof (_w = typeof TOptions !== "undefined" && TOptions) === "function" ? _w : Object]),
-    __metadata("design:returntype", Promise)
-], SequelizeRepository.prototype, "findOneWithSelectFields", null);
+exports.PostgresRepository = PostgresRepository;
 //# sourceMappingURL=repository.js.map

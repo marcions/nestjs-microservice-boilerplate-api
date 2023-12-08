@@ -18,8 +18,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "infra": "./scripts/mongo/start-replicaset.sh",
     "scaffold": "./node_modules/@mikemajesty/microservice-crud/bin/microservice-crud",
-    "migration:create": "npx sequelize-cli migration:generate --name migration-skeleton",
-    "migration:run": "npx sequelize-cli db:migrate",
+    "typeorm": "ts-node \"./node_modules/typeorm/cli.js\"",
+    "migration-postgres:create": "yarn typeorm migration:create \"./src/infra/database/postgres/migrations/migration\"",
+    "migration-postgres:run": "npm run typeorm migration:run -- -d ./src/infra/database/postgres/config --transaction none",
     "make-badges": "istanbul-badges-readme"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@nestjs/mongoose": "^10.0.2",
     "@nestjs/platform-express": "^10.2.10",
     "@nestjs/swagger": "^7.1.16",
+    "@nestjs/typeorm": "^9.0.1",
     "@opentelemetry/api": "^1.7.0",
     "@opentelemetry/exporter-metrics-otlp-http": "^0.45.0",
     "@opentelemetry/exporter-trace-otlp-proto": "^0.45.0",
@@ -65,9 +67,9 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "sequelize": "^6.35.0",
-    "sequelize-typescript": "^2.1.6",
     "swagger-ui-express": "^5.0.0",
     "ts-jest": "^29.1.1",
+    "typeorm": "^0.3.13",
     "uuid": "^9.0.0",
     "zod": "^3.20.2"
   },
@@ -113,6 +115,6 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.1",
-    "typescript": "5.1.6"
+    "typescript": "^4.7.4"
   }
 }
