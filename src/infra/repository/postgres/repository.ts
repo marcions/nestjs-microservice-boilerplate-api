@@ -1,7 +1,7 @@
 import { BaseEntity, FindOneOptions, FindOptionsSelectByString, FindOptionsWhere, In, Raw, Repository } from 'typeorm';
 
 import { IEntity } from '@/utils/entity';
-import { ApiBadRequestException, ApiNotFoundException } from '@/utils/exception';
+import { ApiBadRequestException, ApiInternalServerException, ApiNotFoundException } from '@/utils/exception';
 
 import { IRepository } from '../adapter';
 import { CreatedModel, CreatedOrUpdateModel, DatabaseOperationCommand, RemovedModel, UpdatedModel } from '../types';
@@ -165,15 +165,44 @@ export class PostgresRepository<T extends BaseEntity & IEntity> implements IRepo
     });
   }
 
-  seed(entityList: T[]): Promise<void> {
-    throw new Error('Method not implemented.' + entityList);
+  async seed(entityList: T[]): Promise<void> {
+    try {
+      const someHasNoID = entityList.some((e) => !e.id);
+
+      if (someHasNoID) {
+        throw new ApiInternalServerException('seed id is required');
+      }
+
+      for (const model of entityList) {
+        const data = await this.findById(model.id);
+        if (!data) {
+          await this.create(model);
+        }
+      }
+    } catch (error) {
+      console.error('MongoRepository:Error', error);
+    }
   }
 
-  findOneWithExcludeFields(filter: unknown, excludeProperties: (keyof T)[]): Promise<T> {
-    throw new Error('Method not implemented.' + filter + excludeProperties);
+  async findOneWithExcludeFields(filter: unknown, excludeProperties: (keyof T)[]): Promise<T> {
+    Object.assign(filter, { deletedAt: null });
+    const select = excludeProperties.map((e) => `${e.toString()}`);
+    return this.repository.findOne({
+      where: filter as FindOptionsWhere<T>,
+      select: this.excludeColumns(select) as FindOptionsSelectByString<T>
+    });
   }
 
-  findAllWithExcludeFields(excludeProperties: (keyof T)[]): Promise<T[]> {
-    throw new Error('Method not implemented.' + excludeProperties);
+  async findAllWithExcludeFields<TQuery = Partial<T>>(excludeProperties: (keyof T)[], filter?: TQuery): Promise<T[]> {
+    const select = excludeProperties.map((e) => `${e.toString()}`);
+    return this.repository.find({
+      where: { deletedAt: null, ...filter } as FindOptionsWhere<T>,
+      select: this.excludeColumns(select) as FindOptionsSelectByString<T>
+    });
   }
+
+  private excludeColumns = (columnsToExclude: string[]): string[] =>
+    this.repository.metadata.columns
+      .map((column) => column.databaseName)
+      .filter((columnName) => !columnsToExclude.includes(columnName));
 }

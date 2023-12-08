@@ -6,6 +6,9 @@ const exception_1 = require("../../../utils/exception");
 class PostgresRepository {
     constructor(repository) {
         this.repository = repository;
+        this.excludeColumns = (columnsToExclude) => this.repository.metadata.columns
+            .map(column => column.databaseName)
+            .filter(columnName => !columnsToExclude.includes(columnName));
     }
     async create(document, saveOptions) {
         const entity = this.repository.create(document);
@@ -131,14 +134,37 @@ class PostgresRepository {
             select: select
         });
     }
-    seed(entityList) {
-        throw new Error('Method not implemented.' + entityList);
+    async seed(entityList) {
+        try {
+            const someHasNoID = entityList.some((e) => !e.id);
+            if (someHasNoID) {
+                throw new exception_1.ApiInternalServerException('seed id is required');
+            }
+            for (const model of entityList) {
+                const data = await this.findById(model.id);
+                if (!data) {
+                    await this.create(model);
+                }
+            }
+        }
+        catch (error) {
+            console.error('MongoRepository:Error', error);
+        }
     }
-    findOneWithExcludeFields(filter, excludeProperties) {
-        throw new Error('Method not implemented.' + filter + excludeProperties);
+    async findOneWithExcludeFields(filter, excludeProperties) {
+        Object.assign(filter, { deletedAt: null });
+        const select = excludeProperties.map((e) => `${e.toString()}`);
+        return this.repository.findOne({
+            where: filter,
+            select: this.excludeColumns(select)
+        });
     }
-    findAllWithExcludeFields(excludeProperties) {
-        throw new Error('Method not implemented.' + excludeProperties);
+    async findAllWithExcludeFields(excludeProperties, filter) {
+        const select = excludeProperties.map((e) => `${e.toString()}`);
+        return this.repository.find({
+            where: Object.assign({ deletedAt: null }, filter),
+            select: this.excludeColumns(select)
+        });
     }
 }
 exports.PostgresRepository = PostgresRepository;
