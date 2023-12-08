@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { ICatsRepository } from '@/core/cats/repository/cats';
-import { DatabaseOptionsType } from '@/utils/database/sequelize';
 import { ValidateSchema } from '@/utils/decorators/validate-schema.decorator';
 import { ApiNotFoundException } from '@/utils/exception';
 import { ApiTrancingInput } from '@/utils/request';
@@ -20,7 +19,7 @@ export class CatsDeleteUsecase {
 
   @ValidateSchema(CatsDeleteSchema)
   async execute({ id }: CatsDeleteInput, { tracing, user }: ApiTrancingInput): Promise<CatsDeleteOutput> {
-    const model = await this.catsRepository.findById<DatabaseOptionsType>(id);
+    const model = await this.catsRepository.findById(id);
 
     if (!model) {
       throw new ApiNotFoundException();

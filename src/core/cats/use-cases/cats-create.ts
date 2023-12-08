@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { CreatedModel } from '@/infra/repository';
-import { DatabaseOptionsType } from '@/utils/database/sequelize';
 import { ValidateSchema } from '@/utils/decorators/validate-schema.decorator';
 import { ApiTrancingInput } from '@/utils/request';
 
@@ -24,7 +23,7 @@ export class CatsCreateUsecase {
   async execute(input: CatsCreateInput, { tracing, user }: ApiTrancingInput): Promise<CatsCreateOutput> {
     const entity = new CatsEntity(input);
 
-    const cats = await this.catsRepository.create<DatabaseOptionsType>(entity);
+    const cats = await this.catsRepository.create(entity);
 
     tracing.logEvent('cats-created', `cats created by: ${user.login}`);
 
