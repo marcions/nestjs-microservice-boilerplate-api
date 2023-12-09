@@ -6,8 +6,10 @@ import { ApiBadRequestException, ApiInternalServerException, ApiNotFoundExceptio
 import { IRepository } from '../adapter';
 import { CreatedModel, CreatedOrUpdateModel, DatabaseOperationCommand, RemovedModel, UpdatedModel } from '../types';
 
-export class PostgresRepository<T extends BaseEntity & IEntity> implements IRepository<T> {
-  constructor(readonly repository: Repository<T & IEntity>) {}
+type Model = BaseEntity & IEntity
+
+export class PostgresRepository<T extends Model> implements IRepository<T> {
+  constructor(readonly repository: Repository<T>) {}
 
   async create<TOptions = unknown>(document: T, saveOptions?: TOptions): Promise<CreatedModel> {
     const entity = this.repository.create(document);

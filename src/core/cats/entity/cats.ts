@@ -22,7 +22,7 @@ export const CatsEntitySchema = z.object({
 
 type Cat = z.infer<typeof CatsEntitySchema>;
 
-export class CatsEntity extends BaseEntity<CatsEntity>(CatsEntitySchema) implements IEntity {
+export class CatsEntity extends BaseEntity<CatsEntity>(CatsEntitySchema) {
   name: string;
 
   breed: string;
