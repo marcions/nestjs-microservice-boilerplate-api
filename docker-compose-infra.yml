@@ -55,6 +55,20 @@ services:
     networks:
       mongo-network:
         ipv4_address: 10.5.0.7
+  mongo-express:
+    container_name: nestjs-microservice-mongo-express
+    image: mongo-express:0.49.0
+    depends_on:
+      - nestjs-microservice-primary
+      - nestjs-microservice-secondary
+      - nestjs-microservice-tertiary
+    restart: always
+    ports:
+      - 8081:8081
+    env_file:
+      - .env
+    networks:
+      mongo-network:
   postgres:
     container_name: nestjs-microservice-postgres
     image: postgres
