@@ -51,8 +51,18 @@ async function bootstrap() {
 
   app.use(helmet());
 
-  const { ENV, MONGO_URL, MONGO_EXPRESS_URL, POSTGRES_URL, ADMINER_URL, PORT, HOST, ZIPKIN_URL, PROMETHUES_URL, RATE_LIMIT_BY_USER } =
-    app.get(ISecretsAdapter);
+  const {
+    ENV,
+    MONGO_URL,
+    MONGO_EXPRESS_URL,
+    POSTGRES_URL,
+    ADMINER_URL,
+    PORT,
+    HOST,
+    ZIPKIN_URL,
+    PROMETHUES_URL,
+    RATE_LIMIT_BY_USER
+  } = app.get(ISecretsAdapter);
 
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,

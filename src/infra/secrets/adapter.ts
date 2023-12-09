@@ -13,9 +13,9 @@ export abstract class ISecretsAdapter {
 
   REDIS_URL: string;
 
-  ADMINER_URL: string
+  ADMINER_URL: string;
 
-  MONGO_EXPRESS_URL: string
+  MONGO_EXPRESS_URL: string;
 
   ZIPKIN_URL: string;
 
