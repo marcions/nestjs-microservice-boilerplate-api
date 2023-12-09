@@ -14,7 +14,7 @@ import { calucaleSkip } from '@/utils/pagination';
 type Model = CatsSchema & CatsEntity;
 
 @Injectable()
-export class CatsRepository extends PostgresRepository<Model> implements ICatsRepository {
+export class CatsRepository extends PostgresRepository<CatsEntity & CatsSchema> implements ICatsRepository {
   constructor(readonly repository: Repository<Model>) {
     super(repository);
   }
