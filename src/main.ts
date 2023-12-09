@@ -54,9 +54,9 @@ async function bootstrap() {
   const {
     ENV,
     MONGO_URL,
-    MONGO_EXPRESS_URL,
     POSTGRES_URL,
-    ADMINER_URL,
+    PGADMIN_URL,
+    MONGO_EXPRESS_URL,
     PORT,
     HOST,
     ZIPKIN_URL,
@@ -72,7 +72,7 @@ async function bootstrap() {
   });
 
   app.use(limiter);
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded());
 
   app.enableVersioning({ type: VersioningType.URI });
 
@@ -96,15 +96,15 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  loggerService.log(`🟢 ${name} listening at ${bold(PORT)} on ${bold(ENV?.toUpperCase())} 🟢\n`);
-  loggerService.log(`🟢 Swagger listening at ${bold(`${HOST}/docs`)} 🟢\n`);
-
-  await app.listen(PORT);
+  await app.listen(PORT, () => {
+    loggerService.log(`🟢 ${name} listening at ${bold(PORT)} on ${bold(ENV?.toUpperCase())} 🟢\n`);
+    loggerService.log(`🟢 Swagger listening at ${bold(`${HOST}/docs`)} 🟢\n`);
+  });
 
   loggerService.log(`🔵 Postgres listening at ${bold(POSTGRES_URL)}`);
-  loggerService.log(`🟢 adminer listening at ${bold(ADMINER_URL)}`);
+  loggerService.log(`✴️  PgAdmin listening at ${bold(PGADMIN_URL)}\n`);
   loggerService.log(`🔵 Mongo listening at ${bold(MONGO_URL)}`);
-  loggerService.log(`🟢 Mongo express listening at ${bold(MONGO_EXPRESS_URL)}\n`);
+  loggerService.log(`✴️  Mongo express listening at ${bold(MONGO_EXPRESS_URL)}\n`);
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
   loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
 

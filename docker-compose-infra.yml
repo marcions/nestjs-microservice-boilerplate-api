@@ -80,16 +80,19 @@ services:
       - nestjs-microservice-postgres:/data/postgres
       - ./scripts/postgres/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql
     restart: always
-  adminer:
-    container_name: nestjs-microservice-adminer
-    image: adminer
-    restart: unless-stopped
-    depends_on:
-      - postgres
-    ports:
-      - 8080:8080
+    networks:
+      - postgres-network
+  pgadmin:
+    container_name: nestjs-microservice-pgadmin
+    image: dpage/pgadmin4
     env_file:
       - .env
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
   redis:
     container_name: nestjs-microservice-redis
     image: 'redis:alpine'
@@ -142,3 +145,5 @@ networks:
     ipam:
       config:
         - subnet: 10.5.0.0/16
+  postgres-network:
+    driver: bridge

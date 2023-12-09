@@ -23,11 +23,11 @@ export class SecretsService implements ISecretsAdapter {
 
   MONGO_URL = this.config.get('MONGO_URL');
 
-  ZIPKIN_URL = this.config.get('ZIPKIN_URL');
-
-  ADMINER_URL = this.config.get('ADMINER_URL');
-
   MONGO_EXPRESS_URL = this.config.get('MONGO_EXPRESS_URL');
+
+  PGADMIN_URL = this.config.get('PGADMIN_URL');
+
+  ZIPKIN_URL = this.config.get('ZIPKIN_URL');
 
   PROMETHUES_URL = this.config.get('PROMETHUES_URL');
 
