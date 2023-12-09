@@ -6,7 +6,7 @@ import { ApiBadRequestException, ApiInternalServerException, ApiNotFoundExceptio
 import { IRepository } from '../adapter';
 import { CreatedModel, CreatedOrUpdateModel, DatabaseOperationCommand, RemovedModel, UpdatedModel } from '../types';
 
-type Model = BaseEntity & IEntity
+type Model = BaseEntity & IEntity;
 
 export class PostgresRepository<T extends Model> implements IRepository<T> {
   constructor(readonly repository: Repository<T>) {}
