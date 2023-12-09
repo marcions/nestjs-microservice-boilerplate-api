@@ -51,7 +51,7 @@ async function bootstrap() {
 
   app.use(helmet());
 
-  const { ENV, MONGO_URL, POSTGRES_URL, PORT, HOST, ZIPKIN_URL, PROMETHUES_URL, RATE_LIMIT_BY_USER } =
+  const { ENV, MONGO_URL, MONGO_EXPRESS_URL, POSTGRES_URL, ADMINER_URL, PORT, HOST, ZIPKIN_URL, PROMETHUES_URL, RATE_LIMIT_BY_USER } =
     app.get(ISecretsAdapter);
 
   const limiter = rateLimit({
@@ -92,7 +92,9 @@ async function bootstrap() {
   await app.listen(PORT);
 
   loggerService.log(`🔵 Postgres listening at ${bold(POSTGRES_URL)}`);
-  loggerService.log(`🔵 Mongo listening at ${bold(MONGO_URL)}\n`);
+  loggerService.log(`🟢 adminer listening at ${bold(ADMINER_URL)}`);
+  loggerService.log(`🔵 Mongo listening at ${bold(MONGO_URL)}`);
+  loggerService.log(`🟢 Mongo express listening at ${bold(MONGO_EXPRESS_URL)}\n`);
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
   loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
 

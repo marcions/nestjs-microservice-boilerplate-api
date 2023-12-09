@@ -25,6 +25,10 @@ export class SecretsService implements ISecretsAdapter {
 
   ZIPKIN_URL = this.config.get('ZIPKIN_URL');
 
+  ADMINER_URL = this.config.get('ADMINER_URL');
+
+  MONGO_EXPRESS_URL = this.config.get('MONGO_EXPRESS_URL');
+
   PROMETHUES_URL = this.config.get('PROMETHUES_URL');
 
   TOKEN_EXPIRATION = this.config.get<number>('TOKEN_EXPIRATION');

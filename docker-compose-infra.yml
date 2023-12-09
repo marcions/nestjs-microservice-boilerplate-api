@@ -80,6 +80,16 @@ services:
       - nestjs-microservice-postgres:/data/postgres
       - ./scripts/postgres/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql
     restart: always
+  adminer:
+    container_name: nestjs-microservice-adminer
+    image: adminer
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
   redis:
     container_name: nestjs-microservice-redis
     image: 'redis:alpine'
