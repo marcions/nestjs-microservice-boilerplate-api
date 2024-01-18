@@ -116,7 +116,7 @@ async function bootstrap() {
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
   loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
   loggerService.log(`🔵 RabbitMQ listening at ${bold(RABBITMQ_URL)}\n`);
-  
+
   const userRepository = app.get(IUserRepository);
 
   await userRepository.seed([UserAdminSeed]);
