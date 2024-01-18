@@ -15,7 +15,7 @@ services:
       - '27017:27017'
     volumes:
       - mongo-data:/data/db
-      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+      - ./mongo/mongo-init.sh:/docker-entrypoint/initdb.d/mongo-init.sh
       # - ./mongo/rs-init.sh:/scripts/mongo/rs-init.sh
     command: --auth
     networks:
@@ -61,6 +61,7 @@ services:
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
+    #restart: always
     env_file:
       - ../.env
     ports:
