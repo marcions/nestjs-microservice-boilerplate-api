@@ -1,0 +1,362 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    #restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_USERNAME: admin
+      MONGO_INITDB_PASSWORD: admin
+      MONGO_INITDB_DATABASE: db
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+      - ./mongo/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+      # - ./mongo/rs-init.sh:/scripts/mongo/rs-init.sh
+    command: --auth
+    networks:
+      - internal
+
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    ##restart: always
+    ports:
+      - '8081:8081'
+    environment:
+      # ME_CONFIG_MONGODB_SERVER: mongo
+      # ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/?authSource=admin
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - internal
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    #restart: always
+    env_file:
+      - ../.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/data/postgres
+      - ./postgres/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql
+    networks:
+      - internal
+
+  adminer:
+    container_name: adminer
+    image: adminer:latest
+    #restart: always
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: pgsql
+      ADMINER_DEFAULT_DB_HOST: postgres
+      ADMINER_DEFAULT_DB_NAME: db
+      ADMINER_DEFAULT_SERVER: postgres
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    networks:
+      - internal
+
+  mysql:
+    container_name: mysql
+    image: mysql:8
+    #restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: admin
+    networks:
+      - internal
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    #restart: always
+    ports:
+      - 8181:80
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MEMORY_LIMIT: 1024M
+      UPLOAD_LIMIT: 100M
+      MAX_EXECUTION_TIME: 600
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: db
+    depends_on:
+      - mysql
+    networks:
+      - internal
+
+  redis:
+    container_name: redis
+    image: 'redis:alpine'
+    #restart: always
+    volumes:
+      - redis-data:/data
+    ports:
+      - 6379:6379
+    networks:
+      - internal
+
+  redis-commander:
+    container_name: redis-commander
+    image: rediscommander/redis-commander:latest
+    #restart: always
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - 8082:8081
+    networks:
+      - internal
+
+  jaeger:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:latest
+    #restart: always
+    environment:
+      - METRICS_STORAGE_TYPE=prometheus
+      - PROMETHEUS_SERVER_URL=http://prometheus:9090
+    ports:
+      - '14250:14250'
+      - '14268:14268'
+      - '6831:6831/udp'
+      - '16686:16686'
+      - '16685:16685'
+    networks:
+      - internal
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin:latest
+    #restart: always
+    ports:
+      - '9411:9411'
+    env_file:
+      - ../.env
+    networks:
+      - internal
+
+  collector:
+    container_name: collector
+    image: otel/opentelemetry-collector-contrib:latest
+    #restart: always
+    command: ['--config=/conf/collector-config.yaml']
+    volumes:
+      - ./prometheus/collector-config.yaml:/conf/collector-config.yaml
+    ports:
+      - '9464:9464'
+      - '4317:4317'
+      - '4318:4318'
+    depends_on:
+      - zipkin
+    networks:
+      - internal
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    #restart: always
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--enable-feature=otlp-write-receiver'
+      - '--enable-feature=exemplar-storage'
+    env_file:
+      - ../.env
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - internal
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
+    #restart: always
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    environment:
+      RABBITMQ_ERLANG_COOKIE: 'SWQOKODSQALRPCLNMEQG'
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+      RABBITMQ_DEFAULT_VHOST: '/'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - internal
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    #restart: always
+    tty: true
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - internal
+
+  sonarqube:
+    container_name: sonarqube
+    image: sonarqube:community
+    #restart: always
+    ports:
+      - '9000:9000'
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonarqube
+      SONAR_JDBC_USERNAME: admin
+      SONAR_JDBC_PASSWORD: admin
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      #- sonarqube_extensions:/opt/sonarqube/extensions
+      #- sonarqube_logs:/opt/sonarqube/logs
+      #- sonarqube_temp:/opt/sonarqube/temp
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  kong-migrations:
+    container_name: kong-migrations
+    image: kong:latest
+    ##restart: on-failure
+    command: kong migrations bootstrap
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_DATABASE: kong
+      KONG_PG_USER: admin
+      KONG_PG_PASSWORD: admin
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  kong-migrations-up:
+    container_name: kong-migrations-up
+    image: kong:latest
+    ##restart: on-failure
+    command: kong migrations up && kong migrations finish
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_DATABASE: kong
+      KONG_PG_USER: admin
+      KONG_PG_PASSWORD: admin
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  kong:
+    container_name: kong
+    #build:
+    #  context: ./kong
+    #  dockerfile: Dockerfile
+    image: kong:latest
+    #restart: on-failure
+    user: kong
+    ports:
+      - '8002:8000'
+      - '8001:8001'
+      - '8443:8443'
+      - '8444:8444'
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: postgres
+      KONG_PG_PORT: 5432
+      KONG_PG_DATABASE: kong
+      KONG_PG_USER: admin
+      KONG_PG_PASSWORD: admin
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_PROXY_LISTEN: 0.0.0.0:8000, 0.0.0.0:8443 ssl
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+      #KONG_PLUGINS: bundled,oidc
+      KONG_PLUGINS: bundled
+      KONG_LOG_LEVEL: debug
+    healthcheck:
+      test: ['CMD', 'kong', 'health']
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  konga-prepare:
+    container_name: konga-prepare
+    image: pantsel/konga:latest
+    ##restart: on-failure
+    command: '-c prepare -a postgres -u postgresql://admin:admin@postgres:5432/konga'
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+  konga:
+    container_name: konga
+    image: pantsel/konga:latest
+    #restart: always
+    ports:
+      - '1337:1337'
+    environment:
+      TOKEN_SECRET: km1GUr4RkcQD7DewhJPNXrCuZwcKmqjb
+      DB_URI: postgresql://admin:admin@postgres:5432/konga
+      NODE_ENV: development
+      #NODE_ENV: production
+    depends_on:
+      - postgres
+    networks:
+      - internal
+
+volumes:
+  postgres-data:
+    external: true
+  redis-data:
+    external: true
+  mongo-data:
+    external: true
+  rabbitmq-data:
+    external: true
+  mysql-data:
+    external: true
+  sonarqube-data:
+    external: true
+
+networks:
+  internal:
+    driver: bridge
+    external: true

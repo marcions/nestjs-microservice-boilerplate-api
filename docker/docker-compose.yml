@@ -1,0 +1,35 @@
+version: '2'
+services:
+  #microservice-api:
+  #  container_name: microservice-api
+  #  build:
+  #    context: .
+  #    dockerfile: ./Dockerfile
+  #  env_file:
+  #    - ../.env
+  #  ports:
+  #    - '3000:3000'
+  #  volumes:
+  #    - ./microservices:/app/src
+
+  microservice-auth:
+    container_name: microservice-auth
+    #image: node:20-alpine
+    build:
+      context: .
+      dockerfile: ./Dockerfile-auth
+    #restart: always
+    env_file:
+      - ../.env
+    ports:
+      - '3001:3001'
+    volumes:
+      - ../dist/src/microservices/auth/src:/app
+    command: node /app/main
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    external: true

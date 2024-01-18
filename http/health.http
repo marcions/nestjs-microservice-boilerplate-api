@@ -1,0 +1,4 @@
+@baseurl = {{$dotenv HOST}}
+
+GET {{baseurl}}/health
+###

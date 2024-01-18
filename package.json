@@ -1,8 +1,8 @@
 {
-  "name": "nestjs-boilerplate-microservice-api",
-  "version": "1.14.0",
-  "description": "Nestjs boilerplate api",
-  "author": "mike.rodrigues.lima@gmail.com",
+  "name": "nestjs-boilerplate-microservice",
+  "version": "1.0.0",
+  "description": "Nestjs Boilerplate Microservices",
+  "author": "marcionsales@hotmail.com",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -16,11 +16,22 @@
     "test": "jest --config=\"./jest.config.ts\" --detectOpenHandles",
     "test:cov": "jest --coverage --detectOpenHandles && yarn make-badges",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "infra": "./scripts/mongo/start-replicaset.sh",
+    "infra": "docker-compose -f docker/docker-compose-infra.yml down && docker-compose -f docker/docker-compose-infra.yml up -d --build --remove-orphans",
+    "infra:down": "docker-compose -f docker/docker-compose-infra.yml down",
+    "infra:clean:volumes": "docker volume prune --all --force",
+    "infra:clean:images": "docker image prune --all --force",
+    "infra:repl-set": "./scripts/mongo/start-replicaset.sh",
+    "microservices": "docker-compose -f docker/docker-compose.yml down && docker-compose -f docker/docker-compose.yml up -d --build",
+    "microservices:down": "docker-compose -f docker/docker-compose.yml down",
     "scaffold": "./node_modules/@mikemajesty/microservice-crud/bin/microservice-crud",
     "migration:create": "npx sequelize-cli migration:generate --name migration-skeleton",
     "migration:run": "npx sequelize-cli db:migrate",
-    "make-badges": "istanbul-badges-readme"
+    "make-badges": "istanbul-badges-readme",
+    "pm2:start": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
+    "build:dev": "nest build && pm2 start pm2.yaml",
+    "build:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
+    "build-docker:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env production",
+    "build-docker:dev": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env development"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.10",

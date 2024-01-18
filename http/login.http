@@ -1,0 +1,22 @@
+@baseurl = {{$dotenv HOST}}/api
+@token = {{login.response.body.token}}
+
+# @name login
+POST {{baseurl}}/v1/login
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "admin"
+}
+
+###
+
+# @name logout
+POST {{baseurl}}/v1/logout
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "token": "{{token}}"
+}
