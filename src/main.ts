@@ -12,6 +12,7 @@ import { description, name, version } from '../package.json';
 import { AppModule } from './app.module';
 import { IUserRepository } from './core/user/repository/user';
 import { UserAdminSeed } from './infra/database/mongo/seed/create-user-admin';
+import { UserHubcontrolSeed } from './infra/database/mongo/seed/create-user-hub';
 import { ILoggerAdapter } from './infra/logger/adapter';
 import { ISecretsAdapter } from './infra/secrets';
 import { ApiInternalServerException } from './utils/exception';
@@ -61,7 +62,8 @@ async function bootstrap() {
     PROMETHUES_URL,
     RATE_LIMIT_BY_USER,
     PGADMIN_URL,
-    MONGO_EXPRESS_URL
+    MONGO_EXPRESS_URL,
+    RABBITMQ_URL
   } = app.get(ISecretsAdapter);
 
   /**
@@ -102,6 +104,7 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(PORT, () => {
+    loggerService.log(`Application Successfully Started\n`);
     loggerService.log(`🟢 ${name} listening at ${bold(PORT)} on ${bold(ENV?.toUpperCase())} 🟢\n`);
     loggerService.log(`🟢 Swagger listening at ${bold(`${HOST}/docs`)} 🟢\n`);
   });
@@ -112,9 +115,11 @@ async function bootstrap() {
   loggerService.log(`🔶 Mongo express listening at ${bold(MONGO_EXPRESS_URL)}\n`);
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
   loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
-
+  loggerService.log(`🔵 RabbitMQ listening at ${bold(RABBITMQ_URL)}\n`);
+  
   const userRepository = app.get(IUserRepository);
 
   await userRepository.seed([UserAdminSeed]);
+  await userRepository.seed([UserHubcontrolSeed]);
 }
 bootstrap();

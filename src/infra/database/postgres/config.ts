@@ -37,7 +37,7 @@ const databaseConfigMap = {
 const postgresConfig = sequelizeConfig.config.dialectOptions;
 
 writeFileSync(
-  'database.json',
+  './src/infra/database/postgres/database.json',
   JSON.stringify({
     [databaseConfigMap]: { ...postgresConfig, username: postgresConfig['user'], user: undefined, dialect: 'postgres' }
   })

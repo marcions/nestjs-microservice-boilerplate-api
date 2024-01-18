@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('database.json'),
+  'config': path.resolve('./src/infra/database/postgres/database.json'),
   'migrations-path': path.resolve('./src/infra/database/postgres', 'migrations')
 };
 
