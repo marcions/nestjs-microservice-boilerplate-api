@@ -1,0 +1,48 @@
+@baseUrl = {{$dotenv HOST}}/api
+@requestUrl = {{baseUrl}}/v1/dogs
+@token = {{login.response.body.token}}
+@id = {{post.response.body.id}}
+
+# @name login
+POST {{baseUrl}}/v1/login
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "admin"
+}
+
+###
+GET {{requestUrl}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+GET {{requestUrl}}/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+# @name post
+POST {{requestUrl}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "tiffany",
+  "breed": "tiffany",
+  "age": 10
+}
+###
+PUT {{requestUrl}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "{{id}}",
+  "name": "tiffany",
+  "breed": "tiffany",
+  "age": 18
+}
+###
+DELETE {{requestUrl}}/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
