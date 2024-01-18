@@ -8,12 +8,17 @@ module.exports = {
       "name" text NOT NULL,
       breed text NOT NULL,
       age int4 NOT NULL,
+      status boolean NOT NULL DEFAULT true,
+      deleted boolean NULL,
+      userId uuid NOT NULL,
       "createdAt" timestamp NOT NULL DEFAULT now(),
-      "updatedAt" timestamp NOT NULL DEFAULT now(),
+      "createdBy" uuid NOT NULL,
+      "updatedAt" timestamp NULL,
+      "updatedBy" uuid NULL,
       "deletedAt" timestamp NULL,
+      "deletedBy" uuid NULL,
       CONSTRAINT "PK_CATS_KEY" PRIMARY KEY (id)
   );`);
-
   },
 
   async down(queryInterface, Sequelize) {

@@ -15,17 +15,35 @@ export class User {
   @Prop({ type: String })
   _id: string;
 
-  @Prop({ min: 0, max: 200, required: true, type: String })
+  @Prop({ type: String, min: 0, max: 200, required: true })
   login: string;
 
-  @Prop({ min: 0, max: 200, required: true, type: String })
+  @Prop({ type: String, min: 0, max: 200, required: true })
   password: string;
 
-  @Prop({ enum: UserRole, type: Array, required: true })
+  @Prop({ type: Array, enum: UserRole, required: true })
   roles: UserRole[];
 
+  @Prop({ type: Boolean, default: true })
+  status: boolean;
+
+  @Prop({ type: Boolean, default: null })
+  deleted: boolean;
+
+  @Prop({ type: String, required: true })
+  userId: string;
+
+  @Prop({ type: String, required: true })
+  createdBy: string;
+
+  @Prop({ type: String, default: null })
+  updatedBy: string;
+
   @Prop({ type: Date, default: null })
-  deletedAt: Date;
+  deletedAt?: Date;
+
+  @Prop({ type: String, default: null })
+  deletedBy: string;
 }
 
 const UserSchema = SchemaFactory.createForClass(User);

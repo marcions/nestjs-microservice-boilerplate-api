@@ -29,6 +29,8 @@ export class CatsUpdateUsecase {
 
     const entity = new CatsEntity({ ...cats, ...input });
 
+    entity.setUpdated(user);
+
     await this.catsRepository.updateOne({ id: entity.id }, entity);
 
     this.loggerService.info({ message: 'cats updated.', obj: { cats: input } });

@@ -28,6 +28,8 @@ export class UserUpdateUsecase {
 
     const entity = new UserEntity({ ...user, ...input });
 
+    entity.setUpdated(user);
+
     const userExists = await this.userRepository.existsOnUpdate(
       { login: entity.login, password: entity.password },
       { id: entity.id }

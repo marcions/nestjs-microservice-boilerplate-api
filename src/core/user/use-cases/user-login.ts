@@ -33,6 +33,7 @@ export class LoginUsecase {
     tracing.logEvent('user-login', `${login.login}`);
 
     return this.tokenService.sign({
+      id: login.id,
       login: login.login,
       roles: login.roles
     });

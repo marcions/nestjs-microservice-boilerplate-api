@@ -27,7 +27,7 @@ export class UserDeleteUsecase {
 
     const user = new UserEntity(entity);
 
-    user.setDeleted();
+    user.setDeleted(user);
 
     await this.userRepository.updateOne({ id: user.id }, user);
 

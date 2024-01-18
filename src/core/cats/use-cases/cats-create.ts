@@ -23,6 +23,7 @@ export class CatsCreateUsecase {
   @ValidateSchema(CatsCreateSchema)
   async execute(input: CatsCreateInput, { tracing, user }: ApiTrancingInput): Promise<CatsCreateOutput> {
     const entity = new CatsEntity(input);
+    entity.setCreated(user);
 
     const transaction = await this.catsRepository.startSession();
     try {

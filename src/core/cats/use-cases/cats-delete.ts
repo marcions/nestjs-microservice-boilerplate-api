@@ -28,7 +28,7 @@ export class CatsDeleteUsecase {
 
     const cats = new CatsEntity(model);
 
-    cats.setDeleted();
+    cats.setDeleted(user);
 
     await this.catsRepository.updateOne({ id: cats.id }, cats);
     tracing.logEvent('cats-deleted', `cats deleted by: ${user.login}`);
