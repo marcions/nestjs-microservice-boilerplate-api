@@ -31,6 +31,7 @@ export class CatsDeleteUsecase {
     cats.setDeleted(user);
 
     await this.catsRepository.updateOne({ id: cats.id }, cats);
+
     tracing.logEvent('cats-deleted', `cats deleted by: ${user.login}`);
 
     return cats;
