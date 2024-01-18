@@ -31,8 +31,8 @@
     "pm2:start": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
     "build:dev": "nest build && pm2 start pm2.yaml",
     "build:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
-    "build-docker:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env production",
-    "build-docker:dev": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env development"
+    "build-docker:dev": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env development",
+    "build-docker:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env production"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.10",
