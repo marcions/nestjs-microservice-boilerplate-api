@@ -27,14 +27,16 @@ services:
     ##restart: always
     ports:
       - '8081:8081'
-    environment:
+    #environment:
       # ME_CONFIG_MONGODB_SERVER: mongo
       # ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
-      ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/?authSource=admin
+      #ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      #ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      #ME_CONFIG_BASICAUTH_USERNAME: admin
+      #ME_CONFIG_BASICAUTH_PASSWORD: admin
+      #ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/?authSource=admin
+    env_file:
+      - ../.env
     links:
       - mongo
     depends_on:
@@ -53,6 +55,18 @@ services:
     volumes:
       - postgres-data:/data/postgres
       - ./postgres/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql
+    networks:
+      - internal
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    env_file:
+      - ../.env
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
     networks:
       - internal
 
