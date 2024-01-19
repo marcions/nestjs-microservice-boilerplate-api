@@ -35,31 +35,22 @@
         "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
-    "cat": {
+    "users": {
       "type": "application",
-      "root": "apps/cat",
+      "root": "apps/users",
       "entryFile": "main",
-      "sourceRoot": "apps/cat/src",
+      "sourceRoot": "apps/users/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/cat/tsconfig.app.json"
+        "tsConfigPath": "apps/users/tsconfig.app.json"
       }
     },
-    "dog": {
+    "cats": {
       "type": "application",
-      "root": "apps/dog",
+      "root": "apps/cats",
       "entryFile": "main",
-      "sourceRoot": "apps/dog/src",
+      "sourceRoot": "apps/cats/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/dog/tsconfig.app.json"
-      }
-    },
-    "user": {
-      "type": "application",
-      "root": "apps/user",
-      "entryFile": "main",
-      "sourceRoot": "apps/user/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/user/tsconfig.app.json"
+        "tsConfigPath": "apps/cats/tsconfig.app.json"
       }
     }
   }
