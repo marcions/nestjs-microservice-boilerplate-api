@@ -12,7 +12,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./apps/common/src/*"],
+      "@/*": ["apps/common-old/src/*"],
       "@@/*": ["./*"],
       "apps/*": ["./apps/*"],
       "libs/*": ["./libs/*"],

@@ -1,4 +1,5 @@
 @baseurl = {{$dotenv HOST}}
+# @baseurl=http://localhost:3000
 
 GET {{baseurl}}/health
 ###
