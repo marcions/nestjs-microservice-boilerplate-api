@@ -42,15 +42,6 @@
       "sourceRoot": "apps/common/src",
       "type": "application"
     },
-    "dogs": {
-      "compilerOptions": {
-        "tsConfigPath": "apps/dogs/tsconfig.app.json"
-      },
-      "entryFile": "main",
-      "root": "apps/dogs",
-      "sourceRoot": "apps/dogs/src",
-      "type": "application"
-    },
     "health": {
       "compilerOptions": {
         "tsConfigPath": "apps/health/tsconfig.app.json"
