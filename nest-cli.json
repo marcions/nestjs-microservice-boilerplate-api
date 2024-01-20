@@ -1,66 +1,75 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/common/src",
   "compilerOptions": {
-    "deleteOutDir": true,
     "builder": {
-      "type": "swc",
       "options": {
         "copyFiles": true,
         "sync": true
-      }
+      },
+      "type": "swc"
     },
-    "webpack": true,
-    "tsConfigPath": "apps/common/tsconfig.app.json"
+    "deleteOutDir": true,
+    "tsConfigPath": "apps/common/tsconfig.app.json",
+    "webpack": true
   },
   "monorepo": true,
-  "root": "apps/common",
   "projects": {
-    "common": {
-      "type": "application",
-      "root": "apps/common",
-      "entryFile": "main",
-      "sourceRoot": "apps/common/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/common/tsconfig.app.json"
-      }
-    },
     "auth": {
-      "type": "application",
-      "root": "apps/auth",
-      "entryFile": "main",
-      "sourceRoot": "apps/auth/src",
       "compilerOptions": {
         "tsConfigPath": "apps/auth/tsconfig.app.json"
-      }
-    },
-    "users": {
-      "type": "application",
-      "root": "apps/users",
+      },
       "entryFile": "main",
-      "sourceRoot": "apps/users/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/users/tsconfig.app.json"
-      }
+      "root": "apps/auth",
+      "sourceRoot": "apps/auth/src",
+      "type": "application"
     },
     "cats": {
-      "type": "application",
-      "root": "apps/cats",
-      "entryFile": "main",
-      "sourceRoot": "apps/cats/src",
       "compilerOptions": {
         "tsConfigPath": "apps/cats/tsconfig.app.json"
-      }
+      },
+      "entryFile": "main",
+      "root": "apps/cats",
+      "sourceRoot": "apps/cats/src",
+      "type": "application"
+    },
+    "common": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/common/tsconfig.app.json"
+      },
+      "entryFile": "main",
+      "root": "apps/common",
+      "sourceRoot": "apps/common/src",
+      "type": "application"
+    },
+    "dogs": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/dogs/tsconfig.app.json"
+      },
+      "entryFile": "main",
+      "root": "apps/dogs",
+      "sourceRoot": "apps/dogs/src",
+      "type": "application"
     },
     "health": {
-      "type": "application",
-      "root": "apps/health",
-      "entryFile": "main",
-      "sourceRoot": "apps/health/src",
       "compilerOptions": {
         "tsConfigPath": "apps/health/tsconfig.app.json"
-      }
+      },
+      "entryFile": "main",
+      "root": "apps/health",
+      "sourceRoot": "apps/health/src",
+      "type": "application"
+    },
+    "users": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/users/tsconfig.app.json"
+      },
+      "entryFile": "main",
+      "root": "apps/users",
+      "sourceRoot": "apps/users/src",
+      "type": "application"
     }
-  }
+  },
+  "root": "apps/common",
+  "sourceRoot": "apps/common/src"
 }

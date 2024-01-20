@@ -13,10 +13,10 @@
     "name": "Marcio Sales",
     "email": "marcionsales@hotmail.com"
   },
-  "homepage": "https://github.com/marcions/nestjs-monorepo#readme",
+  "homepage": "https://github.com/marcions/nestjs-boilerplate-microservice#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/marcions/nestjs-monorepo.git"
+    "url": "https://github.com/marcions/nestjs-boilerplate-microservice.git"
   },
   "engines": {
     "node": ">=18"
