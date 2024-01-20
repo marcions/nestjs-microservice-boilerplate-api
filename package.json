@@ -2,21 +2,39 @@
   "name": "nestjs-boilerplate-microservice",
   "version": "1.0.0",
   "description": "Nestjs Boilerplate Microservices",
-  "author": "marcionsales@hotmail.com",
+  "workspaces": {
+    "packages": [
+      "./apps/*",
+      "./libs/*",
+      "./tools/*"
+    ]
+  },
+  "author": {
+    "name": "Marcio Sales",
+    "email": "marcionsales@hotmail.com"
+  },
+  "homepage": "https://github.com/marcions/nestjs-monorepo#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcions/nestjs-monorepo.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "private": true,
   "license": "MIT",
   "scripts": {
+    "prebuild": "rimraf dist",
     "prepare": "husky install",
     "build": "nest build",
     "dev": "nest start --watch",
     "start": "node dist/src/main",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "lint": "eslint \"{src,test}/**/*.{ts,js}\" --fix",
-    "test": "jest --config=\"./jest.config.ts\" --detectOpenHandles",
-    "test:cov": "jest --coverage --detectOpenHandles && yarn make-badges",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "start:dev": "clear && nest start --watch",
+    "start:debug": "clear && nest start --debug --watch",
+    "start:cats-api:dev": "nest start @app/cats-api --debug --watch",
+    "start:auth-api:dev": "nest start @app/auth-api --debug --watch",
+    "start:cats-api:prd": "node dist/apps/cats-api/main.js",
+    "start:auth-api:prd": "node dist/apps/auth-api/main.js",
     "infra": "docker-compose -f docker/docker-compose-infra.yml down && docker-compose -f docker/docker-compose-infra.yml up -d --build --remove-orphans",
     "infra:down": "docker-compose -f docker/docker-compose-infra.yml down",
     "infra:clean:volumes": "docker volume prune --all --force",
@@ -24,15 +42,27 @@
     "infra:repl-set": "./scripts/mongo/start-replicaset.sh",
     "microservices": "docker-compose -f docker/docker-compose.yml down && docker-compose -f docker/docker-compose.yml up -d --build",
     "microservices:down": "docker-compose -f docker/docker-compose.yml down",
-    "scaffold": "./node_modules/@mikemajesty/microservice-crud/bin/microservice-crud",
+    "monorepo:install": "yarn && yarn workspace @tools/eslint.config install && yarn workspace @libs/modules install && yarn workspace @libs/utils install && yarn workspace @libs/core install && yarn workspace @app/cats.api install && yarn workspace @app/auth.api install",
     "migration:create": "npx sequelize-cli migration:generate --name migration-skeleton",
     "migration:run": "npx sequelize-cli db:migrate",
-    "make-badges": "istanbul-badges-readme",
     "pm2:start": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
     "build:dev": "nest build && pm2 start pm2.yaml",
     "build:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
     "build-docker:dev": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env development",
-    "build-docker:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env production"
+    "build-docker:prod": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --no-daemon --env production",
+    "scaffold": "./node_modules/@mikemajesty/microservice-crud/bin/microservice-crud",
+    "add:module": "monorepo-nestjs-cli --module",
+    "add:test": "monorepo-nestjs-cli --test",
+    "add:app": "monorepo-nestjs-cli --app",
+    "make-badges": "istanbul-badges-readme",
+    "prettier": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,test}/**/*.{ts,js}\" --fix",
+    "format": "prettier --write \"apps/**/*.{ts, js, json}\" \"libs/**/*.{ts, js, json}\" ",
+    "commit": "cz",
+    "tag:production": "changelog generate && bash ./update-version.sh && cd deploy && bash ./production-version.sh && cd ..",
+    "test": "jest --config=\"./jest.config.ts\" --detectOpenHandles",
+    "test:cov": "jest --coverage --detectOpenHandles && yarn make-badges",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@nestjs/common": "^10.2.10",
@@ -78,6 +108,7 @@
     "pino-pretty": "^9.1.0",
     "redis": "^4.6.4",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^5.0.5",
     "rxjs": "^7.8.0",
     "sequelize": "^6.35.0",
     "sequelize-typescript": "^2.1.5",

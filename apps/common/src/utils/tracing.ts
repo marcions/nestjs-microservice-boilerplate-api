@@ -13,7 +13,8 @@ import { NodeSDK } from '@opentelemetry/sdk-node';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
 import { v4 as uuidv4 } from 'uuid';
 
-import { name, version } from '../../package.json';
+import { name, version } from '@@/package.json';
+
 import { getPathWithoutUUID } from './request';
 
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ERROR);

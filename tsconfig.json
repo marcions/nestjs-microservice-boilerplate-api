@@ -12,9 +12,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./apps/common/src/*"],
+      "@@/*": ["./*"],
+      "apps/*": ["./apps/*"],
+      "libs/*": ["./libs/*"],
+      "tools/*": ["./tools/*"]
     },
     "baseUrl": "./",
     "incremental": true,

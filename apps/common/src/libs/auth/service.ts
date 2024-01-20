@@ -13,6 +13,7 @@ type DecodeOutput = {
 };
 
 const Schema = UserEntitySchema.pick({
+  id: true,
   login: true,
   password: true,
   roles: true

@@ -8,7 +8,8 @@ import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 
-import { description, name, version } from '../package.json';
+import { description, name, version } from '@@/package.json';
+
 import { AppModule } from './app.module';
 import { IUserRepository } from './core/user/repository/user';
 import { UserAdminSeed } from './infra/database/mongo/seed/create-user-admin';
