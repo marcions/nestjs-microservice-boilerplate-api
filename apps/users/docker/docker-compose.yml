@@ -1,0 +1,22 @@
+version: '3'
+services:
+  users:
+    container_name: users
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    #restart: always
+    env_file:
+      - ../.env
+    ports:
+      - '3100:3100'
+    #volumes:
+    #  - ../dist/src/microservices/auth/src:/app
+    #command: node /app/main
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    external: true
