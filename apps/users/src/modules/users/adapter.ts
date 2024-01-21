@@ -1,8 +1,8 @@
-import { UserCreateInput, UserCreateOutput } from 'apps/users/src/core/user/use-cases/user-create';
-import { UserDeleteInput, UserDeleteOutput } from 'apps/users/src/core/user/use-cases/user-delete';
-import { UserGetByIDInput, UserGetByIDOutput } from 'apps/users/src/core/user/use-cases/user-getByID';
-import { UserListInput, UserListOutput } from 'apps/users/src/core/user/use-cases/user-list';
-import { UserUpdateInput, UserUpdateOutput } from 'apps/users/src/core/user/use-cases/user-update';
+import { UserCreateInput, UserCreateOutput } from 'libs/core/user/use-cases/user-create';
+import { UserDeleteInput, UserDeleteOutput } from 'libs/core/user/use-cases/user-delete';
+import { UserGetByIDInput, UserGetByIDOutput } from 'libs/core/user/use-cases/user-getByID';
+import { UserListInput, UserListOutput } from 'libs/core/user/use-cases/user-list';
+import { UserUpdateInput, UserUpdateOutput } from 'libs/core/user/use-cases/user-update';
 import { ApiTrancingInput } from 'libs/utils/request';
 
 export abstract class IUserCreateAdapter {

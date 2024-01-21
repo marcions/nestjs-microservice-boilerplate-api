@@ -1,6 +1,6 @@
 import { AttributeValue, Context, Span, SpanStatus, TimeInput, Tracer } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
-import { UserEntity } from 'apps/users/src/core/user/entity/user';
+import { UserEntity } from 'libs/core/user/entity/user';
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export type TracingType = {

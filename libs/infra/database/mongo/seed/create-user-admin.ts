@@ -1,5 +1,5 @@
-import { UserRole } from 'apps/users/src/core/user/entity/user';
-import { UserEntity } from 'apps/users/src/core/user/entity/user';
+import { UserRole } from 'libs/core/user/entity/user';
+import { UserEntity } from 'libs/core/user/entity/user';
 
 export const UserAdminSeed = {
   id: 'b23fd7b8-b1eb-44df-b99e-297bf346e88e',

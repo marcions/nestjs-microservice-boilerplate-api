@@ -1,5 +1,5 @@
-import { UserRole } from 'apps/users/src/core/user/entity/user';
-import { UserEntity } from 'apps/users/src/core/user/entity/user';
+import { UserRole } from 'libs/core/user/entity/user';
+import { UserEntity } from 'libs/core/user/entity/user';
 
 export const UserHubcontrolSeed = {
   id: '9269248e-54cc-46f9-80c0-7029c989c0e3',

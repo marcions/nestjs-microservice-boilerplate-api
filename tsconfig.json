@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["./*"],
       "apps/*": ["./apps/*"],
-      "core/*": ["./core/*"],
+      "core/*": ["libs/core/*"],
       "libs/*": ["./libs/*"],
       "tools/*": ["./tools/*"]
     },

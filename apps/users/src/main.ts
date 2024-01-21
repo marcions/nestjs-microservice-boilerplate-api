@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
+import { IUserRepository } from 'libs/core/user/repository/user';
 import { UserAdminSeed } from 'libs/infra/database/mongo/seed/create-user-admin';
 import { UserHubcontrolSeed } from 'libs/infra/database/mongo/seed/create-user-hub';
 import { ILoggerAdapter } from 'libs/infra/logger/adapter';
@@ -19,7 +20,6 @@ import { HttpLoggerInterceptor } from 'libs/utils/interceptors/http-logger.inter
 import { MetricsInterceptor } from 'libs/utils/interceptors/metrics.interceptor';
 import { TracingInterceptor } from 'libs/utils/interceptors/tracing.interceptor';
 
-import { IUserRepository } from './core/user/repository/user';
 import { MainModule } from './modules/module';
 
 async function bootstrap() {

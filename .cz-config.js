@@ -14,7 +14,7 @@ for (const path of getDirectories('./microservices').map((p) => `./microservices
   scopes.push(...files.filter((item) => item.isDirectory()).map((item) => item.name));
 }
 
-for (const path of getDirectories('./core').map((p) => `./core/${p}`)) {
+for (const path of getDirectories('libs/core').map((p) => `libs/core/${p}`)) {
   const files = readdirSync(path, { withFileTypes: true });
   scopes.push(...files.filter((item) => item.isDirectory()).map((item) => item.name));
 }
