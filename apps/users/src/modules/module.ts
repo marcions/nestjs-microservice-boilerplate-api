@@ -1,15 +1,18 @@
 import { Module } from '@nestjs/common';
-import { CommonModule } from 'libs/modules/common/module';
-import { GlobalModule } from 'libs/modules/global/module';
+import { APP_GUARD } from '@nestjs/core';
+import { TokenModule } from 'libs/auth';
+import { InfraModule } from 'libs/infra/module';
+import { RolesGuardInterceptor } from 'libs/utils/interceptors/auth-guard.interceptor';
 
 import { HealthModule } from './health/module';
 
 @Module({
-  imports: [
-    HealthModule,
-    GlobalModule,
-    CommonModule
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuardInterceptor
+    }
   ],
+  imports: [HealthModule, InfraModule, TokenModule]
 })
 export class MainModule {}
-  

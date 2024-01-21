@@ -28,4 +28,9 @@ export abstract class ISecretsAdapter {
   RATE_LIMIT_BY_USER: number;
 
   JWT_SECRET_KEY: string;
+
+  USERS: {
+    PORT: number;
+    HOST: string;
+  };
 }
