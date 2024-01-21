@@ -29,6 +29,11 @@ export abstract class ISecretsAdapter {
 
   JWT_SECRET_KEY: string;
 
+  AUTH: {
+    PORT: number;
+    HOST: string;
+  };
+
   USERS: {
     PORT: number;
     HOST: string;

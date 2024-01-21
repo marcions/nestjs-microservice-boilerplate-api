@@ -1,0 +1,20 @@
+{
+  "author": {
+    "email": "marcionsales@hotmail.com",
+    "name": "Marcio Sales"
+  },
+  "dependencies": {},
+  "description": "Auth",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18 <=20"
+  },
+  "license": "MIT",
+  "name": "@app/auth",
+  "scripts": {
+    "format": "../../tools/eslint/node_modules/.bin/prettier --write '**/*.{ts, js, json}'",
+    "lint": "yarn format && ../../tools/eslint/node_modules/.bin/eslint 'src/**/*.{ts, js, json}' --fix",
+    "test": "../../node_modules/jest/bin/jest.js --maxWorkers=50%"
+  },
+  "version": "v0.0.1"
+}

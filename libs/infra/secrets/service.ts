@@ -40,8 +40,13 @@ export class SecretsService implements ISecretsAdapter {
 
   PGADMIN_URL = this.config.get('PGADMIN_URL');
 
+  AUTH = {
+    PORT: this.config.get<number>('AUTH_PORT'),
+    HOST: this.config.get('HOST')
+  };
+
   USERS = {
-    PORT: this.config.get<number>('PORT'),
+    PORT: this.config.get<number>('USERS_PORT'),
     HOST: this.config.get('HOST')
   };
 }

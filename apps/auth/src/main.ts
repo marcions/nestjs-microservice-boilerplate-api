@@ -3,7 +3,7 @@ import 'libs/utils/tracing';
 import { HttpStatus, RequestMethod, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { description, name, version } from 'apps/users/package.json';
+import { description, name, version } from 'apps/auth/package.json';
 import bodyParser from 'body-parser';
 import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
@@ -52,7 +52,7 @@ async function bootstrap() {
   app.use(helmet());
 
   const {
-    USERS: { PORT, HOST },
+    AUTH: { PORT, HOST },
     ENV,
     MONGO_URL,
     POSTGRES_URL,
@@ -118,6 +118,6 @@ async function bootstrap() {
   loggerService.log(`🔵 RabbitMQ listening at ${bold(RABBITMQ_URL)}\n`);
 
   const userRepository = app.get(IUserRepository);
-  await userRepository.seed([UserHubcontrolSeed]);
+  await userRepository.seed([UserAdminSeed]);
 }
 bootstrap();
