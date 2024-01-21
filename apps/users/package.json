@@ -1,20 +1,20 @@
 {
-  "name": "@app/users",
-  "version": "v0.0.1",
-  "description": "monorepo users",
-  "scripts": {
-    "format": "../../tools/eslint/node_modules/.bin/prettier --write '**/*.{ts, js, json}'",
-    "test": "../../node_modules/jest/bin/jest.js --maxWorkers=50%",
-    "lint": "yarn format && ../../tools/eslint/node_modules/.bin/eslint 'src/**/*.{ts, js, json}' --fix"
-  },
   "author": {
-    "name": "Mike Lima",
-    "email": "mike.rodrigues.lima@gmail.com"
+    "email": "marcionsales@hotmail.com",
+    "name": "Marcio Sales"
   },
+  "dependencies": {},
+  "description": "Users",
+  "devDependencies": {},
   "engines": {
-    "node": ">=14 <=16"
+    "node": ">=18 <=20"
   },
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "name": "@app/users",
+  "scripts": {
+    "format": "../../tools/eslint/node_modules/.bin/prettier --write '**/*.{ts, js, json}'",
+    "lint": "yarn format && ../../tools/eslint/node_modules/.bin/eslint 'src/**/*.{ts, js, json}' --fix",
+    "test": "../../node_modules/jest/bin/jest.js --maxWorkers=50%"
+  },
+  "version": "v0.0.1"
 }
