@@ -3,7 +3,7 @@
 - Import the HTTP adapter in usecase adapter.
 
   ```
-  import { IHttpAdapter } from '@/infra/http';
+  import { IHttpAdapter } from 'libs/infra/http';
   import { UserCreateInput, UserCreateOutput } from './types';
 
   export abstract class IUserCreateAdapter {
@@ -15,7 +15,7 @@
 
   ```
   import { Controller, Post, Req } from '@nestjs/common';
-  import { ApiRequest } from '@/utils/request';
+  import { ApiRequest } from 'libs/utils/request';
   import { IUserCreateAdapter } from './adapter';
   import { UserListOutput } from './types';
 

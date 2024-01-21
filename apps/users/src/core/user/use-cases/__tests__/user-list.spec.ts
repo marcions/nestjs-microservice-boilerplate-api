@@ -1,7 +1,6 @@
 import { Test } from '@nestjs/testing';
-
-import { IUserListAdapter } from '@/modules/user/adapter';
-import { expectZodError, getMockUUID } from '@/utils/tests/tests';
+import { IUserListAdapter } from 'apps/users/src/modules/user/adapter';
+import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 
 import { UserEntity, UserRole } from '../../entity/user';
 import { IUserRepository } from '../../repository/user';

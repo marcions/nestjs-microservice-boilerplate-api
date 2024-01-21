@@ -1,4 +1,4 @@
-import { UserEntity, UserRole } from '@@/apps/common-old/src/core/user/entity/user';
+import { UserEntity, UserRole } from 'apps/users/src/core/user/entity/user';
 import { UserCreateOutput } from '@@/apps/common-old/src/core/user/use-cases/user-create';
 import { UserDeleteOutput } from '@@/apps/common-old/src/core/user/use-cases/user-delete';
 import { UserGetByIDOutput } from '@@/apps/common-old/src/core/user/use-cases/user-getByID';

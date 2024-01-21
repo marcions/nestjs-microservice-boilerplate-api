@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
+import { ICacheAdapter } from 'libs/infra/cache';
+import { ISecretsAdapter, SecretsModule } from 'libs/infra/secrets';
+import { RequestMock } from 'libs/utils/tests/mocks/request';
+import { expectZodError } from 'libs/utils/tests/tests';
 
-import { ICacheAdapter } from '@/infra/cache';
-import { ISecretsAdapter, SecretsModule } from '@/infra/secrets';
 import { TokenModule } from '@/libs/auth';
 import { ILogoutAdapter } from '@/modules/logout/adapter';
-import { RequestMock } from '@/utils/tests/mocks/request';
-import { expectZodError } from '@/utils/tests/tests';
 
 import { LogoutUsecase } from '../user-logout';
 

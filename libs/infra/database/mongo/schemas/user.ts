@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import paginate from 'mongoose-paginate-v2';
 
-import { UserEntity, UserRole } from '@@/apps/common-old/src/core/user/entity/user';
+import { UserEntity, UserRole } from 'apps/users/src/core/user/entity/user';
 
 export type UserDocument = Document & UserEntity;
 

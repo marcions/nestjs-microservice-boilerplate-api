@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import jwt from 'jsonwebtoken';
 import { z } from 'zod';
 
-import { UserEntitySchema } from '@@/apps/common-old/src/core/user/entity/user';
+import { UserEntitySchema } from 'apps/users/src/core/user/entity/user';
 import { ISecretsAdapter } from '@@/libs/infra/secrets';
 import { ApiUnauthorizedException } from '@@/libs/utils/exception';
 

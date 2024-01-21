@@ -5,6 +5,7 @@ import { InfraModule } from 'libs/infra/module';
 import { RolesGuardInterceptor } from 'libs/utils/interceptors/auth-guard.interceptor';
 
 import { HealthModule } from './health/module';
+import { UserModule } from './user/module';
 
 @Module({
   providers: [
@@ -13,6 +14,6 @@ import { HealthModule } from './health/module';
       useClass: RolesGuardInterceptor
     }
   ],
-  imports: [HealthModule, InfraModule, TokenModule]
+  imports: [UserModule, HealthModule, InfraModule, TokenModule]
 })
 export class MainModule {}

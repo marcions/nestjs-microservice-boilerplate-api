@@ -1,4 +1,4 @@
-import { UserEntity } from '@@/apps/common-old/src/core/user/entity/user';
+import { UserEntity } from 'apps/users/src/core/user/entity/user';
 import { ApiTrancingInput, TracingType } from '@@/libs/utils/request';
 
 export class RequestMock {
