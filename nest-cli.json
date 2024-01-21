@@ -7,6 +7,48 @@
   },
   "monorepo": true,
   "projects": {
+    "@libs/auth": {
+      "compilerOptions": {
+        "tsConfigPath": "libs/auth/tsconfig.json"
+      },
+      "entryFile": "index",
+      "root": "libs/auth",
+      "sourceRoot": "libs/auth",
+      "type": "library"
+    },
+    "@libs/core": {
+      "compilerOptions": {
+        "tsConfigPath": "libs/core/tsconfig.json"
+      },
+      "entryFile": "index",
+      "root": "libs/core",
+      "sourceRoot": "libs/core",
+      "type": "library"
+    },
+    "@libs/infra": {
+      "compilerOptions": {
+        "tsConfigPath": "libs/infra/tsconfig.json"
+      },
+      "entryFile": "index",
+      "root": "libs/infra",
+      "sourceRoot": "libs/infra",
+      "type": "library"
+    },
+    "@libs/utils": {
+      "compilerOptions": {
+        "tsConfigPath": "libs/utils/tsconfig.json"
+      },
+      "entryFile": "index",
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils",
+      "type": "library"
+    },
+    "@tools/eslint.config": {
+      "entryFile": ".eslintrc.json",
+      "root": "tools/eslint",
+      "sourceRoot": "tools/eslint",
+      "type": "library"
+    },
     "auth": {
       "compilerOptions": {
         "tsConfigPath": "apps/auth/tsconfig.json"
@@ -34,7 +76,5 @@
       "sourceRoot": "apps/users/src",
       "type": "application"
     }
-  },
-  "root": "apps/users",
-  "sourceRoot": "apps/users/src"
+  }
 }

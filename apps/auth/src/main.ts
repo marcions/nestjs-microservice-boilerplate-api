@@ -1,6 +1,6 @@
 import 'libs/utils/tracing';
 
-import { HttpStatus, RequestMethod, ValidationPipe, VersioningType } from '@nestjs/common';
+import { HttpStatus, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { description, name, version } from 'apps/auth/package.json';
@@ -10,7 +10,6 @@ import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 import { IUserRepository } from 'libs/core/user/repository/user';
 import { UserAdminSeed } from 'libs/infra/database/mongo/seed/create-user-admin';
-import { UserHubcontrolSeed } from 'libs/infra/database/mongo/seed/create-user-hub';
 import { ILoggerAdapter } from 'libs/infra/logger/adapter';
 import { ISecretsAdapter } from 'libs/infra/secrets';
 import { ApiInternalServerException } from 'libs/utils/exception';
