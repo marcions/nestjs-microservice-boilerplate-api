@@ -1,6 +1,5 @@
 import { Axios } from 'axios';
-
-import { TracingType } from '@@/libs/utils/request';
+import { TracingType } from 'libs/utils/request';
 
 export abstract class IHttpAdapter<T = Axios> {
   abstract instance(): T;

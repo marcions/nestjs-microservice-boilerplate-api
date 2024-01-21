@@ -2,9 +2,8 @@ import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import axiosBetterStacktrace from 'axios-better-stacktrace';
 import https from 'https';
-
-import { interceptAxiosResponseError, requestRetry } from '@@/libs/utils/axios';
-import { TracingType } from '@@/libs/utils/request';
+import { interceptAxiosResponseError, requestRetry } from 'libs/utils/axios';
+import { TracingType } from 'libs/utils/request';
 
 import { ILoggerAdapter } from '../logger';
 import { IHttpAdapter } from './adapter';

@@ -1,8 +1,7 @@
+import { PaginationSchema } from 'libs/utils/pagination';
+import { SearchSchema } from 'libs/utils/search';
+import { SortSchema } from 'libs/utils/sort';
 import { z } from 'zod';
-
-import { PaginationSchema } from '@@/libs/utils/pagination';
-import { SearchSchema } from '@@/libs/utils/search';
-import { SortSchema } from '@@/libs/utils/sort';
 
 import { ApiBadRequestException } from '../../exception';
 

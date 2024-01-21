@@ -1,4 +1,4 @@
-import { ApiBadRequestException } from '@@/libs/utils/exception';
+import { ApiBadRequestException } from 'libs/utils/exception';
 
 import { skipParentheses } from '../../../database/mongoose';
 import { AllowedFilter, SearchTypeEnum } from '../../types';

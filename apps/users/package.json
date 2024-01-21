@@ -1,7 +1,7 @@
 {
-  "name": "@app/users.api",
+  "name": "@app/users",
   "version": "v0.0.1",
-  "description": "monorepo users-api",
+  "description": "monorepo users",
   "scripts": {
     "format": "../../tools/eslint/node_modules/.bin/prettier --write '**/*.{ts, js, json}'",
     "test": "../../node_modules/jest/bin/jest.js --maxWorkers=50%",

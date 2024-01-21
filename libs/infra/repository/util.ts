@@ -1,5 +1,5 @@
-import { CollectionUtil } from '@@/libs/utils/collection';
-import { ApiBadRequestException } from '@@/libs/utils/exception';
+import { CollectionUtil } from 'libs/utils/collection';
+import { ApiBadRequestException } from 'libs/utils/exception';
 
 import { DatabaseOperationCommand, DatabaseOperationEnum } from './types';
 

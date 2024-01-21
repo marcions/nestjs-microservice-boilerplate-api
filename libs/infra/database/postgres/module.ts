@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-
-import { ILoggerAdapter, LoggerModule } from '@@/libs/infra/logger';
+import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 
 import { IDataBaseAdapter } from '../adapter';
 import { sequelizeConfig } from './config';

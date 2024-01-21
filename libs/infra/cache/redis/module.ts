@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
-
-import { ILoggerAdapter, LoggerModule } from '@@/libs/infra/logger';
-import { ISecretsAdapter, SecretsModule } from '@@/libs/infra/secrets';
+import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
+import { ISecretsAdapter, SecretsModule } from 'libs/infra/secrets';
 
 import { ICacheAdapter } from '../adapter';
 import { RedisService } from './service';

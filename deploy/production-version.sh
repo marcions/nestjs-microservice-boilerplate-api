@@ -1,13 +1,11 @@
-
-  
 export ENVIROMENT=prd
 
 export WORKING_DIR=../
 
 git checkout main
 
-NODE_VERSION=$(node -p -e "require('@@/package.json').version")
-NAME=$(node -p -e "require('@@/package.json').name")
+NODE_VERSION=$(node -p -e "require('@/package.json').version")
+NAME=$(node -p -e "require('@/package.json').name")
 
 TAG_NAME=$NAME-$ENVIROMENT-v$NODE_VERSION
 

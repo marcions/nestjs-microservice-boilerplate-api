@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-
-import { ISecretsAdapter, SecretsModule } from '@@/libs/infra/secrets';
+import { ISecretsAdapter, SecretsModule } from 'libs/infra/secrets';
 
 import { ITokenAdapter } from './adapter';
 import { TokenService } from './service';

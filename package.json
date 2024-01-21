@@ -93,6 +93,7 @@
     "axios-better-stacktrace": "^2.1.5",
     "axios-retry": "^3.9.0",
     "body-parser": "^1.20.2",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "colorette": "^2.0.19",
     "convert-pino-request-to-curl": "^0.0.29",

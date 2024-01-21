@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-
-import { ISecretsAdapter, SecretsModule } from '@@/libs/infra/secrets';
+import { ISecretsAdapter, SecretsModule } from 'libs/infra/secrets';
 
 import { ConnectionName } from '../enum';
 import { MongoService } from './service';

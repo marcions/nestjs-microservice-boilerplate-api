@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-
-import { LoggerModule } from '@@/libs/infra/logger';
+import { LoggerModule } from 'libs/infra/logger';
 
 import { IHttpAdapter } from './adapter';
 import { HttpService } from './service';

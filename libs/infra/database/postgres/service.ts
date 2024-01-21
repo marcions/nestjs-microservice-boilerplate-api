@@ -1,7 +1,7 @@
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { Sequelize } from 'sequelize-typescript';
 
-import { ILoggerAdapter } from '@@/libs/infra/logger';
-import { name } from '@@/package.json';
+import { name } from '@/package.json';
 
 import { IDataBaseAdapter } from '../adapter';
 import { ConnectionType } from '../types';

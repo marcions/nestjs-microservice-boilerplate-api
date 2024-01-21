@@ -39,4 +39,9 @@ export class SecretsService implements ISecretsAdapter {
   MONGO_EXPRESS_URL = this.config.get('MONGO_EXPRESS_URL');
 
   PGADMIN_URL = this.config.get('PGADMIN_URL');
+
+  USERS = {
+    PORT: this.config.get<number>('PORT'),
+    HOST: this.config.get('HOST')
+  };
 }

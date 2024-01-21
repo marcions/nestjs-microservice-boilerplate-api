@@ -1,8 +1,7 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
-
-import { ILoggerAdapter } from '@@/libs/infra/logger';
 
 @Injectable()
 export class HttpLoggerInterceptor implements NestInterceptor {

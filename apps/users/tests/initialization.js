@@ -1,4 +1,4 @@
-// users-api env and mocks initialization
+// users env and mocks initialization
 
 
 

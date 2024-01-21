@@ -1,8 +1,7 @@
 import { AxiosInstance } from 'axios';
 import axiosRetry from 'axios-retry';
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { AxiosConverter } from 'nestjs-convert-to-curl';
-
-import { ILoggerAdapter } from '@@/libs/infra/logger';
 
 import { BaseException } from './exception';
 

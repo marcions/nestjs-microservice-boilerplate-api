@@ -2,9 +2,8 @@ import { ConfigService } from '@nestjs/config';
 import { blue, bold, gray } from 'colorette';
 import { config } from 'dotenv';
 import { writeFileSync } from 'fs';
+import { CatsSchema } from 'libs/infra/database/postgres/schemas/cats';
 import { Sequelize } from 'sequelize-typescript';
-
-import { CatsSchema } from '@@/libs/infra/database/postgres/schemas/cats';
 
 config();
 

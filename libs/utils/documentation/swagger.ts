@@ -1,7 +1,7 @@
 import { ApiResponseOptions } from '@nestjs/swagger';
 
 import { ErrorModel } from '../exception';
-import * as htttpStatus from '../static/htttp-status.json';
+import * as htttpStatus from '../static/http-status.json';
 
 type SwaggerError = {
   status: number;
@@ -32,12 +32,12 @@ export const Swagger = {
             traceid: '<traceid>',
             message: [message, htttpStatus[String(status)]].find(Boolean),
             timestamp: '<timestamp>',
-            path: route,
-          },
-        } as ErrorModel,
+            path: route
+          }
+        } as ErrorModel
       },
       description,
-      status,
+      status
     };
   },
 
@@ -46,12 +46,12 @@ export const Swagger = {
       content: {
         'text/plain': {
           schema: {
-            example: text,
-          },
-        },
+            example: text
+          }
+        }
       },
       description,
-      status,
+      status
     };
   },
 
@@ -60,20 +60,20 @@ export const Swagger = {
       content: {
         'application/json': {
           schema: {
-            example: json,
-          },
-        },
+            example: json
+          }
+        }
       },
       description,
-      status,
+      status
     };
   },
 
   defaultRequestJSON(json: unknown): ApiResponseOptions {
     return {
       schema: {
-        example: json,
-      },
+        example: json
+      }
     };
-  },
+  }
 };

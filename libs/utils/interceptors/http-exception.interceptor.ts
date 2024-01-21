@@ -1,11 +1,10 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { SpanStatusCode } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ZodError } from 'zod';
-
-import { ILoggerAdapter } from '@@/libs/infra/logger';
 
 @Injectable()
 export class ExceptionInterceptor implements NestInterceptor {

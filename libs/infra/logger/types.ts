@@ -1,4 +1,4 @@
-import { BaseException } from '@@/libs/utils/exception';
+import { BaseException } from 'libs/utils/exception';
 
 export type MessageType = {
   message: string;

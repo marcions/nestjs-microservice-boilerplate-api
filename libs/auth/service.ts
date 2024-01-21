@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import jwt from 'jsonwebtoken';
-import { z } from 'zod';
-
 import { UserEntitySchema } from 'apps/users/src/core/user/entity/user';
-import { ISecretsAdapter } from '@@/libs/infra/secrets';
-import { ApiUnauthorizedException } from '@@/libs/utils/exception';
+import jwt from 'jsonwebtoken';
+import { ISecretsAdapter } from 'libs/infra/secrets';
+import { ApiUnauthorizedException } from 'libs/utils/exception';
+import { z } from 'zod';
 
 import { ITokenAdapter } from './adapter';
 
