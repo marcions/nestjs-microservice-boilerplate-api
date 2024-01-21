@@ -5,7 +5,7 @@ import { InfraModule } from 'libs/infra/module';
 import { RolesGuardInterceptor } from 'libs/utils/interceptors/auth-guard.interceptor';
 
 import { HealthModule } from './health/module';
-import { UserModule } from './user/module';
+import { UserModule } from './users/module';
 
 @Module({
   providers: [

@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { IUserGetByIDAdapter } from 'apps/users/src/modules/user/adapter';
+import { IUserGetByIDAdapter } from 'apps/users/src/modules/users/adapter';
 import { ApiNotFoundException } from 'libs/utils/exception';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 

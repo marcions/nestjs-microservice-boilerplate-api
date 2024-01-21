@@ -78,12 +78,7 @@ async function bootstrap() {
 
   app.enableVersioning({ type: VersioningType.URI });
 
-  app.setGlobalPrefix('users', {
-    exclude: [
-      { path: 'health', method: RequestMethod.GET },
-      { path: '/', method: RequestMethod.GET }
-    ]
-  });
+  app.setGlobalPrefix('users');
 
   process.on('uncaughtException', (error) => {
     loggerService.error(new ApiInternalServerException(error.message));

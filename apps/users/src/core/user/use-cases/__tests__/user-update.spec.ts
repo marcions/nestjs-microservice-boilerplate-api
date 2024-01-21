@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { IUserUpdateAdapter } from 'apps/users/src/modules/user/adapter';
+import { IUserUpdateAdapter } from 'apps/users/src/modules/users/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiConflictException, ApiNotFoundException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';

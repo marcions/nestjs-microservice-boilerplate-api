@@ -3,7 +3,7 @@ import { ApiNotFoundException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 
-import { IUserDeleteAdapter } from 'apps/users/src/modules/user/adapter';
+import { IUserDeleteAdapter } from 'apps/users/src/modules/users/adapter';
 
 import { UserEntity, UserRole } from '../../entity/user';
 import { IUserRepository } from '../../repository/user';

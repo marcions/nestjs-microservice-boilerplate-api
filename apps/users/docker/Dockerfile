@@ -12,12 +12,13 @@ COPY apps/users/package.json dist/apps/users/
 COPY apps/users/tsconfig.build.json dist/apps/users/
 COPY apps/users/tsconfig.json dist/apps/users/
 
-EXPOSE 4000
+EXPOSE 3101
 
 RUN yarn --cwd dist/apps/users
-RUN yarn --cwd dist/apps/libs/modules
-RUN yarn --cwd dist/apps/libs/utils
+RUN yarn --cwd dist/apps/libs/auth
 RUN yarn --cwd dist/apps/libs/core
+RUN yarn --cwd dist/apps/libs/infra
+RUN yarn --cwd dist/apps/libs/utils
 
 RUN ls dist/apps/users -al
 

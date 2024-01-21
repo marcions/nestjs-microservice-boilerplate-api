@@ -1,8 +1,7 @@
 import { AttributeValue, Context, Span, SpanStatus, TimeInput, Tracer } from '@opentelemetry/api';
 import { SemanticAttributes } from '@opentelemetry/semantic-conventions';
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
-
 import { UserEntity } from 'apps/users/src/core/user/entity/user';
+import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export type TracingType = {
   span: Span;
@@ -21,7 +20,6 @@ export interface ApiRequest {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly body: any;
   readonly tracing: TracingType;
-  // readonly user: Pick<UserEntity, 'login'>;
   readonly user: UserEntity;
   readonly params: { [key: string]: string };
   readonly query: { [key: string]: string };
