@@ -7,6 +7,33 @@
   },
   "monorepo": true,
   "projects": {
+    "@app/auth": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.json"
+      },
+      "entryFile": "main",
+      "root": "apps/auth",
+      "sourceRoot": "apps/auth/src",
+      "type": "application"
+    },
+    "@app/cats": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/cats/tsconfig.json"
+      },
+      "entryFile": "main",
+      "root": "apps/cats",
+      "sourceRoot": "apps/cats/src",
+      "type": "application"
+    },
+    "@app/users": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/users/tsconfig.json"
+      },
+      "entryFile": "main",
+      "root": "apps/users",
+      "sourceRoot": "apps/users/src",
+      "type": "application"
+    },
     "@libs/auth": {
       "compilerOptions": {
         "tsConfigPath": "libs/auth/tsconfig.json"
@@ -48,33 +75,6 @@
       "root": "tools/eslint",
       "sourceRoot": "tools/eslint",
       "type": "library"
-    },
-    "auth": {
-      "compilerOptions": {
-        "tsConfigPath": "apps/auth/tsconfig.json"
-      },
-      "entryFile": "main",
-      "root": "apps/auth",
-      "sourceRoot": "apps/auth/src",
-      "type": "application"
-    },
-    "cats": {
-      "compilerOptions": {
-        "tsConfigPath": "apps/cats/tsconfig.json"
-      },
-      "entryFile": "main",
-      "root": "apps/cats",
-      "sourceRoot": "apps/cats/src",
-      "type": "application"
-    },
-    "users": {
-      "compilerOptions": {
-        "tsConfigPath": "apps/users/tsconfig.json"
-      },
-      "entryFile": "main",
-      "root": "apps/users",
-      "sourceRoot": "apps/users/src",
-      "type": "application"
     }
   }
 }
