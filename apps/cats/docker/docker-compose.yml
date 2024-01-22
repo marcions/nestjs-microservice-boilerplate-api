@@ -1,53 +1,13 @@
 version: '3'
 
 volumes:
-  cats-mongo-data:
+  cats-postgres-data:
 
 networks:
   cats-network:
     driver: bridge
 
 services:
-  cats-mongo:
-    container_name: cats-mongo
-    image: mongo:latest
-    #restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: db
-      MONGO_INITDB_USERNAME: admin
-      MONGO_INITDB_PASSWORD: admin
-    # ports:
-    #   - '27017:27017'
-    volumes:
-      - cats-mongo-data:/data/db
-      - ./mongo/mongo-init.sh:/docker-entrypoint/initdb.d/mongo-init.sh
-    command: --auth
-    networks:
-      - cats-network
-
-  cats-mongo-express:
-    container_name: cats-mongo-express
-    image: mongo-express
-    ##restart: always
-    ports:
-      - '8081:8081'
-    environment:
-      #ME_CONFIG_MONGODB_SERVER: cats-mongo
-      #ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
-      ME_CONFIG_MONGODB_URL: mongodb://root:admin@cats-mongo:27017/?authSource=admin
-    links:
-      - cats-mongo
-    depends_on:
-      - cats-mongo
-    networks:
-      - cats-network
-
   cats:
     container_name: cats
     build:
