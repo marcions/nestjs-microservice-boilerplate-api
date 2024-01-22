@@ -4,6 +4,7 @@
 @token = {{login.response.body.token}}
 @id = {{post.response.body.id}}
 
+###
 # @name login
 POST {{loginUrl}}
 Content-Type: application/json

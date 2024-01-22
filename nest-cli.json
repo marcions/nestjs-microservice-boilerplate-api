@@ -2,36 +2,36 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "compilerOptions": {
-    "tsConfigPath": "apps/users/tsconfig.json",
+    "tsConfigPath": "apps/api/users/tsconfig.json",
     "webpack": true
   },
   "monorepo": true,
   "projects": {
     "@app/auth": {
       "compilerOptions": {
-        "tsConfigPath": "apps/auth/tsconfig.json"
+        "tsConfigPath": "apps/api/auth/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/auth",
-      "sourceRoot": "apps/auth/src",
+      "root": "apps/api/auth",
+      "sourceRoot": "apps/api/auth/src",
       "type": "application"
     },
     "@app/cats": {
       "compilerOptions": {
-        "tsConfigPath": "apps/cats/tsconfig.json"
+        "tsConfigPath": "apps/api/cats/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/cats",
-      "sourceRoot": "apps/cats/src",
+      "root": "apps/api/cats",
+      "sourceRoot": "apps/api/cats/src",
       "type": "application"
     },
     "@app/users": {
       "compilerOptions": {
-        "tsConfigPath": "apps/users/tsconfig.json"
+        "tsConfigPath": "apps/api/users/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/users",
-      "sourceRoot": "apps/users/src",
+      "root": "apps/api/users",
+      "sourceRoot": "apps/api/users/src",
       "type": "application"
     },
     "@libs/auth": {

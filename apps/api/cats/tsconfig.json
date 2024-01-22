@@ -1,8 +1,8 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../dist/apps/cats"
+    "outDir": "../../../dist/apps/api/cats"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

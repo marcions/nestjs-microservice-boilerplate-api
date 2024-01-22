@@ -9,7 +9,7 @@ GET {{baseUrl}}/health
 
 ###
 # @name login
-POST {{loginUrl}
+POST {{loginUrl}}
 Content-Type: application/json
 
 {
@@ -26,6 +26,7 @@ Authorization: Bearer {{token}}
 GET {{requestUrl}}/{{id}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
 ###
 # @name post
 POST {{requestUrl}}
