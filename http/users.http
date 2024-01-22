@@ -1,14 +1,15 @@
-@baseUrl = {{$dotenv HOST}}:{{$dotenv PORT}}/users
+@loginUrl = {{$dotenv HOST}}:{{$dotenv AUTH_PORT}}/auth/v1/login
+@baseUrl = {{$dotenv HOST}}:{{$dotenv USERS_PORT}}/users
 @requestUrl = {{baseUrl}}/v1
 @token = {{login.response.body.token}}
 @id = {{post.response.body.id}}
 
 ###
-GET {{baseurl}}/health
+GET {{baseUrl}}/health
 
 ###
 # @name login
-POST {{baseUrl}}/v1/login
+POST {{loginUrl}
 Content-Type: application/json
 
 {
@@ -20,6 +21,7 @@ Content-Type: application/json
 GET {{requestUrl}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
 ###
 GET {{requestUrl}}/{{id}}
 Content-Type: application/json
