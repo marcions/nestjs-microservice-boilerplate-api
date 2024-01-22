@@ -1,9 +1,10 @@
 import { Test } from '@nestjs/testing';
-import { ICatsCreateAdapter } from 'apps/cats/adapter';
 import { LoggerModule } from 'libs/infra/logger';
 import { ApiInternalServerException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
+
+import { ICatsCreateAdapter } from '@/apps/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';

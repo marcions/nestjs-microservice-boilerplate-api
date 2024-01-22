@@ -100,9 +100,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
-  loggerService.log(`🟢 ${name}-api listening at ${bold(PORT)} on ${bold(ENV.toUpperCase())} 🟢
-`);
-
   await app.listen(PORT, () => {
     loggerService.log(`Application Successfully Started\n`);
     loggerService.log(`🟢 ${name} listening at ${bold(PORT)} on ${bold(ENV?.toUpperCase())} 🟢\n`);

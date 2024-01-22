@@ -1,12 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { ICatsGetByIDAdapter } from 'apps/cats/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiNotFoundException } from 'libs/utils/exception';
+import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
+
+import { ICatsUpdateAdapter } from '@/apps/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';
-import { CatsGetByIdUsecase } from '../cats-getByID';
+import { CatsUpdateUsecase } from '../cats-update';
 
 const catMock = new CatsEntity({
   id: getMockUUID(),
@@ -15,8 +17,8 @@ const catMock = new CatsEntity({
   name: 'dummy'
 });
 
-describe('CatsGetByIdUsecase', () => {
-  let usecase: ICatsGetByIDAdapter;
+describe('CatsUpdateUsecase', () => {
+  let usecase: ICatsUpdateAdapter;
   let repository: ICatsRepository;
 
   beforeEach(async () => {
@@ -28,22 +30,22 @@ describe('CatsGetByIdUsecase', () => {
           useValue: {}
         },
         {
-          provide: ICatsGetByIDAdapter,
-          useFactory: (catsRepository: ICatsRepository) => {
-            return new CatsGetByIdUsecase(catsRepository);
+          provide: ICatsUpdateAdapter,
+          useFactory: (catsRepository: ICatsRepository, logger: ILoggerAdapter) => {
+            return new CatsUpdateUsecase(catsRepository, logger);
           },
           inject: [ICatsRepository, ILoggerAdapter]
         }
       ]
     }).compile();
 
-    usecase = app.get(ICatsGetByIDAdapter);
+    usecase = app.get(ICatsUpdateAdapter);
     repository = app.get(ICatsRepository);
   });
 
   test('when no input is specified, should expect an error', async () => {
     await expectZodError(
-      () => usecase.execute({}),
+      () => usecase.execute({}, RequestMock.trancingMock),
       (issues) => {
         expect(issues).toEqual([{ message: 'Required', path: CatsEntity.nameOf('id') }]);
       }
@@ -52,11 +54,14 @@ describe('CatsGetByIdUsecase', () => {
 
   test('when cats not found, should expect an error', async () => {
     repository.findById = jest.fn().mockResolvedValue(null);
-    await expect(usecase.execute({ id: getMockUUID() })).rejects.toThrowError(ApiNotFoundException);
+    await expect(usecase.execute({ id: getMockUUID() }, RequestMock.trancingMock)).rejects.toThrowError(
+      ApiNotFoundException
+    );
   });
 
-  test('when cats found, should expect a cats that has been found', async () => {
+  test('when cats updated successfully, should expect an cats that has been updated', async () => {
     repository.findById = jest.fn().mockResolvedValue(catMock);
-    await expect(usecase.execute({ id: getMockUUID() })).resolves.toEqual(catMock);
+    repository.updateOne = jest.fn().mockResolvedValue(null);
+    await expect(usecase.execute({ id: getMockUUID() }, RequestMock.trancingMock)).resolves.toEqual(catMock);
   });
 });

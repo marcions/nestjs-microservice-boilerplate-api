@@ -4,8 +4,8 @@ import { ValidateSchema } from 'libs/utils/decorators/validate-schema.decorator'
 import { ApiTrancingInput } from 'libs/utils/request';
 import { z } from 'zod';
 
+import { CatsEntity, CatsEntitySchema } from '../entity/cats';
 import { ICatsRepository } from '../repository/cats';
-import { CatsEntity, CatsEntitySchema } from './../entity/cats';
 
 export const CatsCreateSchema = CatsEntitySchema.pick({
   name: true,

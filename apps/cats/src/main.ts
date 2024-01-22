@@ -1,16 +1,13 @@
 import 'libs/utils/tracing';
 
-import { HttpStatus, RequestMethod, ValidationPipe, VersioningType } from '@nestjs/common';
+import { HttpStatus, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { description, name, version } from 'apps/users/package.json';
+import { description, name, version } from 'apps/cats/package.json';
 import bodyParser from 'body-parser';
 import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
-import { IUserRepository } from 'libs/core/user/repository/user';
-import { UserAdminSeed } from 'libs/infra/database/mongo/seed/create-user-admin';
-import { UserHubcontrolSeed } from 'libs/infra/database/mongo/seed/create-user-hub';
 import { ILoggerAdapter } from 'libs/infra/logger/adapter';
 import { ISecretsAdapter } from 'libs/infra/secrets';
 import { ApiInternalServerException } from 'libs/utils/exception';
@@ -52,7 +49,7 @@ async function bootstrap() {
   app.use(helmet());
 
   const {
-    USERS: { PORT, HOST },
+    CATS: { PORT, HOST },
     ENV,
     MONGO_URL,
     POSTGRES_URL,
@@ -78,7 +75,7 @@ async function bootstrap() {
 
   app.enableVersioning({ type: VersioningType.URI });
 
-  app.setGlobalPrefix('users');
+  app.setGlobalPrefix('cats');
 
   process.on('uncaughtException', (error) => {
     loggerService.error(new ApiInternalServerException(error.message));
@@ -113,8 +110,5 @@ async function bootstrap() {
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
   loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
   loggerService.log(`🔵 RabbitMQ listening at ${bold(RABBITMQ_URL)}\n`);
-
-  const userRepository = app.get(IUserRepository);
-  await userRepository.seed([UserHubcontrolSeed]);
 }
 bootstrap();

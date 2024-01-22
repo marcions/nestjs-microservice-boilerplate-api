@@ -6,6 +6,11 @@ import { ApiRequest } from 'libs/utils/request';
 import { SearchHttpSchema } from 'libs/utils/search';
 import { SortHttpSchema } from 'libs/utils/sort';
 
+import { CatsCreateInput, CatsCreateOutput } from '../../core/use-cases/cats-create';
+import { CatsDeleteInput, CatsDeleteOutput } from '../../core/use-cases/cats-delete';
+import { CatsGetByIDInput, CatsGetByIDOutput } from '../../core/use-cases/cats-getByID';
+import { CatsListInput, CatsListOutput } from '../../core/use-cases/cats-list';
+import { CatsUpdateInput, CatsUpdateOutput } from '../../core/use-cases/cats-update';
 import {
   ICatsCreateAdapter,
   ICatsDeleteAdapter,
@@ -13,14 +18,9 @@ import {
   ICatsListAdapter,
   ICatsUpdateAdapter
 } from './adapter';
-import { CatsCreateInput, CatsCreateOutput } from './core/use-cases/cats-create';
-import { CatsDeleteInput, CatsDeleteOutput } from './core/use-cases/cats-delete';
-import { CatsGetByIDInput, CatsGetByIDOutput } from './core/use-cases/cats-getByID';
-import { CatsListInput, CatsListOutput } from './core/use-cases/cats-list';
-import { CatsUpdateInput, CatsUpdateOutput } from './core/use-cases/cats-update';
 import { SwagggerRequest, SwagggerResponse } from './swagger';
 
-@Controller('cats')
+@Controller()
 @ApiTags('cats')
 @ApiBearerAuth()
 @Roles(UserRole.USER)

@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "App: @app/users",
+      "name": "App: @app/cats",
       "type": "node",
       "request": "launch",
       "localRoot": "${workspaceFolder}/../../",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["start:users:dev"],
+      "runtimeArgs": ["start:cats:dev"],
       "console": "integratedTerminal",
       "smartStep": true,
       "sourceMaps": true,
@@ -15,7 +15,7 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "Test: @app/users",
+      "name": "Test: @app/cats",
       "type": "node",
       "args": ["--runInBand", "--config=${workspaceFolder}/jest.config.js"],
       "request": "launch",

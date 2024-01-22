@@ -8,9 +8,9 @@ import { SearchTypeEnum } from 'libs/utils/decorators/types';
 import { Transaction } from 'sequelize';
 import { ModelCtor } from 'sequelize-typescript';
 
-import { CatsEntity } from './core/entity/cats';
-import { ICatsRepository } from './core/repository/cats';
-import { CatsListInput, CatsListOutput } from './core/use-cases/cats-list';
+import { CatsEntity } from '../../core/entity/cats';
+import { ICatsRepository } from '../../core/repository/cats';
+import { CatsListInput, CatsListOutput } from '../../core/use-cases/cats-list';
 
 type Model = ModelCtor<CatsSchema> & CatsEntity;
 
