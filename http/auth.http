@@ -1,8 +1,13 @@
-@baseurl = {{$dotenv HOST}}/api
+@baseUrl = {{$dotenv HOST}}:{{$dotenv AUTH_PORT}}/auth
+@requestUrl = {{baseUrl}}/v1
 @token = {{login.response.body.token}}
 
+###
+GET {{baseUrl}}/health
+
+###
 # @name login
-POST {{baseurl}}/v1/login
+POST {{requestUrl}}/login
 Content-Type: application/json
 
 {
@@ -13,7 +18,7 @@ Content-Type: application/json
 ###
 
 # @name logout
-POST {{baseurl}}/v1/logout
+POST {{requestUrl}}/logout
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

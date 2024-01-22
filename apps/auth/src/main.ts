@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import 'libs/utils/tracing';
 
 import { HttpStatus, ValidationPipe, VersioningType } from '@nestjs/common';
@@ -77,7 +78,7 @@ async function bootstrap() {
 
   app.enableVersioning({ type: VersioningType.URI });
 
-  app.setGlobalPrefix('users');
+  app.setGlobalPrefix('auth');
 
   process.on('uncaughtException', (error) => {
     loggerService.error(new ApiInternalServerException(error.message));

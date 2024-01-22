@@ -1,4 +1,4 @@
-@baseUrl = {{$dotenv HOST}}/users
+@baseUrl = {{$dotenv HOST}}:{{$dotenv PORT}}/users
 @requestUrl = {{baseUrl}}/v1
 @token = {{login.response.body.token}}
 @id = {{post.response.body.id}}

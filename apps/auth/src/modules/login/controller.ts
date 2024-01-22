@@ -11,7 +11,7 @@ import { SwagggerRequest, SwagggerResponse } from './swagger';
 export class LoginController {
   constructor(private readonly loginService: ILoginAdapter) {}
 
-  @Post('/login')
+  @Post('login')
   @ApiResponse(SwagggerResponse.login[200])
   @ApiResponse(SwagggerResponse.login[404])
   @ApiBody(SwagggerRequest.body)

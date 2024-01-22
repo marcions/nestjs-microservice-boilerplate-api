@@ -20,7 +20,7 @@ import {
 } from './adapter';
 import { SwaggerRequest, SwaggerResponse } from './swagger';
 
-@Controller()
+@Controller('users')
 @ApiTags('users')
 @ApiBearerAuth()
 @Roles(UserRole.BACKOFFICE)

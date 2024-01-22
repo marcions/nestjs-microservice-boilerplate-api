@@ -1,4 +1,4 @@
-import { Swagger } from '@/utils/docs/swagger';
+import { Swagger } from 'libs/utils/docs/swagger';
 
 export const SwagggerResponse = {
   logout: {

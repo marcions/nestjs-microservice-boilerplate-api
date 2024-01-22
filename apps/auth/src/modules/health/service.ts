@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { name, version } from 'apps/users/package.json';
+import { name, version } from 'apps/auth/package.json';
 import { ILoggerAdapter } from 'libs/infra/logger/adapter';
 
 import { IHealthService } from './adapter';
