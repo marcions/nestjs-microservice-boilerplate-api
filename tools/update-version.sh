@@ -9,7 +9,7 @@ path=$(pwd)
 git add $path/package.json
 
 for package in $PACKAGES; do
-  echo "`jq '.version="'$nextVersion'"' $path/$package/package.json`" > $path/$package/package.json
+  echo "$(jq '.version="'$nextVersion'"' $path/$package/package.json)" >$path/$package/package.json
   git add $path/$package/package.json
   echo $nextVersion-$(node -p -e "'$package'.substring('$package'.lastIndexOf('/') + 1, '$package'.length)")
 done

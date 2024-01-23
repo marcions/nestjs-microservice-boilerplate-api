@@ -5,14 +5,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint/eslint-plugin",
-    "simple-import-sort",
-    "security",
-    "sonarjs",
-    "jest",
-    "unicorn"
-  ],
+  "plugins": ["@typescript-eslint/eslint-plugin", "simple-import-sort", "security", "sonarjs", "jest", "unicorn"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
@@ -29,23 +22,15 @@
     "jest/globals": true,
     "es2022": true
   },
-  "ignorePatterns": [
-    ".eslintrc.json"
-  ],
+  "ignorePatterns": [".eslintrc.json"],
   "rules": {
     "unicorn/prevent-abbreviations": "off",
     "jest/expect-expect": "off",
     "unicorn/prefer-top-level-await": "off",
     "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error"
-    ],
-    "@typescript-eslint/no-explicit-any": [
-      "error"
-    ],
-    "security/detect-object-injection": [
-      "error"
-    ],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "security/detect-object-injection": ["error"],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "max-len": [
@@ -58,16 +43,8 @@
         "ignoreUrls": true
       }
     ],
-    "no-console": [
-      "error"
-    ],
-    "complexity": [
-      "error",
-      5
-    ],
-    "spaced-comment": [
-      2,
-      "always"
-    ]
+    "no-console": ["error"],
+    "complexity": ["error", 5],
+    "spaced-comment": [2, "always"]
   }
 }
