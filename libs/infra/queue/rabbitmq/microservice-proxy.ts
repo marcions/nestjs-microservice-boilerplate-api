@@ -1,7 +1,7 @@
-import { Microservice } from '@libs/utils/enum/index';
-import { MicroserviceType } from '@libs/utils/type/index';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { Microservice } from 'libs/utils/enum/index';
+import { MicroservicePattern, MicroserviceType } from 'libs/utils/type/index';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -10,17 +10,14 @@ export class MicroserviceProxy {
 
   constructor(
     @Inject(Microservice.PRODUCT) private readonly microserviceProduct: ClientProxy,
-    @Inject(Microservice.PRODUCT_PRICE) private readonly microserviceProductPrice: ClientProxy,
-    @Inject(Microservice.USER) private readonly microserviceUser: ClientProxy,
-    @Inject(Microservice.CART) private readonly microserviceCart: ClientProxy,
-    @Inject(Microservice.CHECKOUT) private readonly microserviceCheckout: ClientProxy
+    @Inject(Microservice.USER) private readonly microserviceUser: ClientProxy
   ) {}
 
   public async message(
     microserviceName: MicroserviceType,
     pattern: MicroservicePattern,
-    message: any | any[]
-  ): Promise<any> {
+    message: unknown | unknown[]
+  ): Promise<unknown> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
 
     return lastValueFrom(microservice.send(pattern, message));
@@ -29,8 +26,8 @@ export class MicroserviceProxy {
   public async event(
     microserviceName: MicroserviceType,
     pattern: MicroservicePattern,
-    message: any | any[]
-  ): Promise<any> {
+    message: unknown | unknown[]
+  ): Promise<unknown> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
 
     return lastValueFrom(microservice.emit(pattern, message));
@@ -39,10 +36,7 @@ export class MicroserviceProxy {
   public getClientProxyByMicroservice(name: MicroserviceType): ClientProxy {
     const microservice = {
       [Microservice.PRODUCT]: () => this.microserviceProduct,
-      [Microservice.PRODUCT_PRICE]: () => this.microserviceProductPrice,
-      [Microservice.USER]: () => this.microserviceUser,
-      [Microservice.CART]: () => this.microserviceCart,
-      [Microservice.CHECKOUT]: () => this.microserviceCheckout
+      [Microservice.USER]: () => this.microserviceUser
     };
 
     return microservice[name]();

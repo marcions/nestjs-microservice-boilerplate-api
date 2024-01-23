@@ -1,9 +1,3 @@
-import { Microservice } from '@lib/enum/index';
+import { Microservice } from 'libs/utils/enum/index';
 
-export type MicroserviceType =
-	| Microservice.API
-	| Microservice.PRODUCT
-	| Microservice.PRODUCT_PRICE
-	| Microservice.USER
-	| Microservice.CART
-	| Microservice.CHECKOUT;
+export type MicroserviceType = Microservice.API | Microservice.PRODUCT | Microservice.USER;

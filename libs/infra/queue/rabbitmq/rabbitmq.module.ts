@@ -1,6 +1,6 @@
-import { Microservice } from '@libs/utils/enum/index';
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory } from '@nestjs/microservices';
+import { Microservice } from 'libs/utils/enum/index';
 
 import { MicroserviceProxy } from './microservice-proxy';
 import { RabbitMQConfig } from './rabbitmq.config';
@@ -16,31 +16,10 @@ import { RabbitMQConfig } from './rabbitmq.config';
       }
     },
     {
-      provide: Microservice.PRODUCT_PRICE,
-      useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-        rabbitMqConfig = new RabbitMQConfig();
-        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.PRODUCT_PRICE));
-      }
-    },
-    {
       provide: Microservice.USER,
       useFactory: (rabbitMqConfig: RabbitMQConfig) => {
         rabbitMqConfig = new RabbitMQConfig();
         return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.USER));
-      }
-    },
-    {
-      provide: Microservice.CART,
-      useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-        rabbitMqConfig = new RabbitMQConfig();
-        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.CART));
-      }
-    },
-    {
-      provide: Microservice.CHECKOUT,
-      useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-        rabbitMqConfig = new RabbitMQConfig();
-        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.CHECKOUT));
       }
     },
     {

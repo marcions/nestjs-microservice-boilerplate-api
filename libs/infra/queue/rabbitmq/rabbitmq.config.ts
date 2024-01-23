@@ -1,7 +1,7 @@
-import { Microservice } from '@libs/utils/enum/index';
-import { MicroserviceType } from '@libs/utils/type/index';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
+import { Microservice } from 'libs/utils/enum/index';
+import { MicroserviceType } from 'libs/utils/type/index';
 
 export class RabbitMQConfig {
   private scheme = 'amqp';
@@ -38,22 +38,13 @@ export class RabbitMQConfig {
     this.url = `${this.scheme}://${this.username}:${this.password}@${this.host}:${this.port}${this.vhost}`;
   }
 
-  public getOptions(microservice: MicroserviceType): any {
+  public getOptions(microservice: MicroserviceType): unknown {
     const queueOptions = {
       [Microservice.PRODUCT]: () => {
         this.queue = Microservice.PRODUCT;
       },
-      [Microservice.PRODUCT_PRICE]: () => {
-        this.queue = Microservice.PRODUCT_PRICE;
-      },
       [Microservice.USER]: () => {
         this.queue = Microservice.USER;
-      },
-      [Microservice.CART]: () => {
-        this.queue = Microservice.CART;
-      },
-      [Microservice.CHECKOUT]: () => {
-        this.queue = Microservice.CHECKOUT;
       }
     };
 
