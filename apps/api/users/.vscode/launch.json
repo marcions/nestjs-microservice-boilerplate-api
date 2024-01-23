@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "App: @app/auth",
+      "name": "App: @app/users",
       "type": "node",
       "request": "launch",
       "localRoot": "${workspaceFolder}/../../",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["start:auth:dev"],
+      "runtimeArgs": ["start:users:dev"],
       "console": "integratedTerminal",
       "smartStep": true,
       "sourceMaps": true,
@@ -15,7 +15,7 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "Test: @app/auth",
+      "name": "Test: @app/users",
       "type": "node",
       "args": ["--runInBand", "--config=${workspaceFolder}/jest.config.js"],
       "request": "launch",
