@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 
-import { ICatsListAdapter } from '@/apps/cats/src/modules/cats/adapter';
+import { ICatsListAdapter } from '@/api/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';

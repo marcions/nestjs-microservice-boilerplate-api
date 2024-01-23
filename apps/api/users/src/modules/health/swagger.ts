@@ -1,4 +1,4 @@
-import { name } from 'apps/users/package.json';
+import { name } from 'api/users/package.json';
 import { Swagger } from 'libs/utils/documentation/swagger';
 
 export const SwagggerResponse = {

@@ -4,7 +4,7 @@ import { ApiInternalServerException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 
-import { ICatsCreateAdapter } from '@/apps/cats/src/modules/cats/adapter';
+import { ICatsCreateAdapter } from '@/api/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';

@@ -3,7 +3,7 @@ import 'libs/utils/tracing';
 import { HttpStatus, RequestMethod, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { description, name, version } from 'apps/users/package.json';
+import { description, name, version } from 'api/users/package.json';
 import bodyParser from 'body-parser';
 import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
