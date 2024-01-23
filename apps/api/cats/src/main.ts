@@ -100,7 +100,7 @@ async function bootstrap() {
   await app.listen(PORT, () => {
     loggerService.log(`Application Successfully Started\n`);
     loggerService.log(`🟢 ${name} listening at ${bold(PORT)} on ${bold(ENV?.toUpperCase())} 🟢\n`);
-    loggerService.log(`🟢 Swagger listening at ${bold(`${HOST}/docs`)} 🟢\n`);
+    loggerService.log(`🟢 Swagger listening at ${bold(`${HOST}:${bold(PORT)}/docs`)} 🟢\n`);
   });
 
   loggerService.log(`🔵 Postgres listening at ${bold(POSTGRES_URL)}`);
