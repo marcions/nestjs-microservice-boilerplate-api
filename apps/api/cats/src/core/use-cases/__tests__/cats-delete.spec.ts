@@ -4,7 +4,7 @@ import { ApiNotFoundException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 
-import { ICatsDeleteAdapter } from '@/api/cats/src/modules/cats/adapter';
+import { ICatsDeleteAdapter } from 'api/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';
