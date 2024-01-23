@@ -13,7 +13,10 @@
     "outDir": "./dist",
     "paths": {
       "@/*": ["./*"],
-      "apps/*": ["./apps/api/*"],
+      "apps/*": ["./apps/*"],
+      "api/*": ["./apps/api/*"],
+      "integrators/*": ["./apps/integrators/*"],
+      "workers/*": ["./apps/workers/*"],
       "core/*": ["libs/core/*"],
       "libs/*": ["./libs/*"],
       "tools/*": ["./tools/*"]
