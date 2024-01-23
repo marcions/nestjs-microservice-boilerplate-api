@@ -7,7 +7,7 @@
   },
   "monorepo": true,
   "projects": {
-    "@app/auth": {
+    "@api/auth": {
       "compilerOptions": {
         "tsConfigPath": "apps/api/auth/tsconfig.json"
       },
@@ -16,7 +16,7 @@
       "sourceRoot": "apps/api/auth/src",
       "type": "application"
     },
-    "@app/cats": {
+    "@api/cats": {
       "compilerOptions": {
         "tsConfigPath": "apps/api/cats/tsconfig.json"
       },
@@ -25,7 +25,7 @@
       "sourceRoot": "apps/api/cats/src",
       "type": "application"
     },
-    "@app/users": {
+    "@api/users": {
       "compilerOptions": {
         "tsConfigPath": "apps/api/users/tsconfig.json"
       },

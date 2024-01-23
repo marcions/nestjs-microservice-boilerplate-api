@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "App: @app/users",
+      "name": "App: @api/users",
       "type": "node",
       "request": "launch",
       "localRoot": "${workspaceFolder}/../../",
@@ -15,7 +15,7 @@
       "skipFiles": ["<node_internals>/**"]
     },
     {
-      "name": "Test: @app/users",
+      "name": "Test: @api/users",
       "type": "node",
       "args": ["--runInBand", "--config=${workspaceFolder}/jest.config.js"],
       "request": "launch",

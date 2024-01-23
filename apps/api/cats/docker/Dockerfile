@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN ls /app -al
 
-RUN yarn && yarn build @app/cats
+RUN yarn && yarn build @api/cats
 
 COPY api/cats/package.json dist/api/cats/
 COPY api/cats/tsconfig.build.json dist/api/cats/

@@ -6,7 +6,7 @@ WORKDIR /app
 
 RUN ls /app -al
 
-RUN yarn && yarn build @app/users
+RUN yarn && yarn build @api/users
 
 COPY api/users/package.json dist/api/users/
 COPY api/users/tsconfig.build.json dist/api/users/
