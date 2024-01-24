@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { ICatsDeleteAdapter } from 'api/cats/src/modules/cats/adapter';
+import { ICatsDeleteAdapter } from 'apps/api/cats/src/modules/cats/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiNotFoundException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';

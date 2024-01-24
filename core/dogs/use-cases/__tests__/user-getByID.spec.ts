@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { IDogsGetByIDAdapter } from 'api/dogs/src/modules/dogs/adapter';
+import { IDogsGetByIDAdapter } from 'apps/api/dogs/src/modules/dogs/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiNotFoundException } from 'libs/utils/exception';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';

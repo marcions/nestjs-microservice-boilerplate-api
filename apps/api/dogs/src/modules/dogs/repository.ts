@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { DogsEntity } from 'core/dogs/entity/dogs';
+import { IDogsRepository } from 'core/dogs/repository/dogs';
+import { DogsListInput, DogsListOutput } from 'core/dogs/use-cases/dogs-list';
 import { DogsSchema } from 'libs/infra/database/postgres/schemas/dogs';
 import { SequelizeRepository } from 'libs/infra/repository/postgres/repository';
 import { DatabaseOptionsSchema, DatabaseOptionsType } from 'libs/utils/database/sequelize';
@@ -7,10 +10,6 @@ import { ValidateDatabaseSortAllowed } from 'libs/utils/decorators/database/vali
 import { SearchTypeEnum } from 'libs/utils/decorators/types';
 import { Transaction } from 'sequelize';
 import { ModelCtor } from 'sequelize-typescript';
-
-import { DogsEntity } from '../../../../../../core/dogs/entity/dogs';
-import { IDogsRepository } from '../../../../../../core/dogs/repository/dogs';
-import { DogsListInput, DogsListOutput } from '../../../../../../core/dogs/use-cases/dogs-list';
 
 type Model = ModelCtor<DogsSchema> & DogsEntity;
 

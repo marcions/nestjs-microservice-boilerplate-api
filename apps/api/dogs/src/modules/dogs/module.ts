@@ -1,4 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { DogsEntity } from 'core/dogs/entity/dogs';
+import { IDogsRepository } from 'core/dogs/repository/dogs';
+import { DogsCreateUsecase } from 'core/dogs/use-cases/dogs-create';
+import { DogsDeleteUsecase } from 'core/dogs/use-cases/dogs-delete';
+import { DogsGetByIdUsecase } from 'core/dogs/use-cases/dogs-getByID';
+import { DogsListUsecase } from 'core/dogs/use-cases/dogs-list';
+import { DogsUpdateUsecase } from 'core/dogs/use-cases/dogs-update';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { IDataBaseAdapter } from 'libs/infra/database';
@@ -8,13 +15,6 @@ import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
-import { DogsEntity } from '../../../../../../core/dogs/entity/dogs';
-import { IDogsRepository } from '../../../../../../core/dogs/repository/dogs';
-import { DogsCreateUsecase } from '../../../../../../core/dogs/use-cases/dogs-create';
-import { DogsDeleteUsecase } from '../../../../../../core/dogs/use-cases/dogs-delete';
-import { DogsGetByIdUsecase } from '../../../../../../core/dogs/use-cases/dogs-getByID';
-import { DogsListUsecase } from '../../../../../../core/dogs/use-cases/dogs-list';
-import { DogsUpdateUsecase } from '../../../../../../core/dogs/use-cases/dogs-update';
 import {
   IDogsCreateAdapter,
   IDogsDeleteAdapter,

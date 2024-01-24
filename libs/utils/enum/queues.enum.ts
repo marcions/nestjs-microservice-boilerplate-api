@@ -1,5 +1,7 @@
 export enum Microservice {
   API = 'api',
-  PRODUCT = 'product',
-  USER = 'user'
+  USER = 'user',
+  CATS = 'cats',
+  DOGS = 'dogs',
+  OTHERS = 'others'
 }

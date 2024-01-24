@@ -1,16 +1,16 @@
 import { Controller, Delete, Get, Post, Put, Req, Version } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { DogsCreateInput, DogsCreateOutput } from 'core/dogs/use-cases/dogs-create';
+import { DogsDeleteInput, DogsDeleteOutput } from 'core/dogs/use-cases/dogs-delete';
+import { DogsGetByIDInput, DogsGetByIDOutput } from 'core/dogs/use-cases/dogs-getByID';
+import { DogsListInput, DogsListOutput } from 'core/dogs/use-cases/dogs-list';
+import { DogsUpdateInput, DogsUpdateOutput } from 'core/dogs/use-cases/dogs-update';
 import { UserRole } from 'core/user/entity/user';
 import { Roles } from 'libs/utils/decorators/role.decorator';
 import { ApiRequest } from 'libs/utils/request';
 import { SearchHttpSchema } from 'libs/utils/search';
 import { SortHttpSchema } from 'libs/utils/sort';
 
-import { DogsCreateInput, DogsCreateOutput } from '../../../../../../core/dogs/use-cases/dogs-create';
-import { DogsDeleteInput, DogsDeleteOutput } from '../../../../../../core/dogs/use-cases/dogs-delete';
-import { DogsGetByIDInput, DogsGetByIDOutput } from '../../../../../../core/dogs/use-cases/dogs-getByID';
-import { DogsListInput, DogsListOutput } from '../../../../../../core/dogs/use-cases/dogs-list';
-import { DogsUpdateInput, DogsUpdateOutput } from '../../../../../../core/dogs/use-cases/dogs-update';
 import {
   IDogsCreateAdapter,
   IDogsDeleteAdapter,

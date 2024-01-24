@@ -1,10 +1,9 @@
+import { DogsCreateInput, DogsCreateOutput } from 'core/dogs/use-cases/dogs-create';
+import { DogsDeleteInput, DogsDeleteOutput } from 'core/dogs/use-cases/dogs-delete';
+import { DogsGetByIDInput, DogsGetByIDOutput } from 'core/dogs/use-cases/dogs-getByID';
+import { DogsListInput, DogsListOutput } from 'core/dogs/use-cases/dogs-list';
+import { DogsUpdateInput, DogsUpdateOutput } from 'core/dogs/use-cases/dogs-update';
 import { ApiTrancingInput } from 'libs/utils/request';
-
-import { DogsCreateInput, DogsCreateOutput } from '../../../../../../core/dogs/use-cases/dogs-create';
-import { DogsDeleteInput, DogsDeleteOutput } from '../../../../../../core/dogs/use-cases/dogs-delete';
-import { DogsGetByIDInput, DogsGetByIDOutput } from '../../../../../../core/dogs/use-cases/dogs-getByID';
-import { DogsListInput, DogsListOutput } from '../../../../../../core/dogs/use-cases/dogs-list';
-import { DogsUpdateInput, DogsUpdateOutput } from '../../../../../../core/dogs/use-cases/dogs-update';
 
 export abstract class IDogsCreateAdapter {
   abstract execute(input: DogsCreateInput, trace: ApiTrancingInput): Promise<DogsCreateOutput>;
