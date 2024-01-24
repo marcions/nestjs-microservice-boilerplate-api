@@ -48,7 +48,7 @@ export class DogsCreateUsecase {
 export class DogsCreateUsecaseQueue {
   constructor(@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy) {}
 
-  @ValidateSchema(DogsCreateSchema)
+  // @ValidateSchema(DogsCreateSchema)
   async execute(input: DogsCreateInput, { tracing, user }: ApiTrancingInput): Promise<unknown> {
     try {
       // const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, input);

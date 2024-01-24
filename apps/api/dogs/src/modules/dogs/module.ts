@@ -12,6 +12,7 @@ import { IDataBaseAdapter } from 'libs/infra/database';
 import { PostgresDatabaseModule } from 'libs/infra/database/postgres/module';
 import { DogsSchema } from 'libs/infra/database/postgres/schemas/dogs';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
+import { MicroserviceProxy, RabbitMQModule } from 'libs/infra/queue';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
@@ -26,7 +27,7 @@ import { DogsController } from './controller';
 import { DogsRepository } from './repository';
 
 @Module({
-  imports: [TokenModule, LoggerModule, RedisCacheModule, PostgresDatabaseModule],
+  imports: [TokenModule, LoggerModule, RedisCacheModule, PostgresDatabaseModule, RabbitMQModule],
   controllers: [DogsController],
   providers: [
     {
@@ -40,7 +41,7 @@ import { DogsRepository } from './repository';
     {
       provide: IDogsCreateAdapter,
       // useFactory: (repository: IDogsRepository) => new DogsCreateUsecase(repository),
-      useFactory: (repository: IDogsRepository) => new DogsCreateUsecaseQueue(null),
+      useFactory: (publish: MicroserviceProxy) => new DogsCreateUsecaseQueue(publish),
       inject: [IDogsRepository]
     },
     {
@@ -64,7 +65,7 @@ import { DogsRepository } from './repository';
       inject: [IDogsRepository]
     }
   ],
-  exports: []
+  exports: [RabbitMQModule]
 })
 export class DogsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

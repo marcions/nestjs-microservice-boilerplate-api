@@ -40,8 +40,8 @@ export class RabbitMQConfig {
 
   public getOptions(microservice: MicroserviceType): unknown {
     const queueOptions = {
-      [Microservice.PRODUCT]: () => {
-        this.queue = Microservice.PRODUCT;
+      [Microservice.DOGS]: () => {
+        this.queue = Microservice.DOGS;
       },
       [Microservice.USER]: () => {
         this.queue = Microservice.USER;

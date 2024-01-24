@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Microservice } from 'libs/utils/enum/index';
@@ -16,8 +17,8 @@ export class MicroserviceProxy {
   public async message(
     microserviceName: MicroserviceType,
     pattern: MicroservicePattern,
-    message: unknown | unknown[]
-  ): Promise<unknown> {
+    message: any | any[]
+  ): Promise<any> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
 
     return lastValueFrom(microservice.send(pattern, message));

@@ -1,4 +1,5 @@
 import { Controller, Delete, Get, Post, Put, Req, Version } from '@nestjs/common';
+import { Payload } from '@nestjs/microservices';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DogsCreateInput, DogsCreateOutput } from 'core/dogs/use-cases/dogs-create';
 import { DogsDeleteInput, DogsDeleteOutput } from 'core/dogs/use-cases/dogs-delete';
@@ -37,7 +38,7 @@ export class DogsController {
   @ApiResponse(SwagggerResponse.create[200])
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')
-  async create(@Req() { body, user, tracing }: ApiRequest): Promise<DogsCreateOutput> {
+  async create(@Payload() { body, user, tracing }: ApiRequest): Promise<DogsCreateOutput> {
     return await this.dogsCreate.execute(body as DogsCreateInput, { user, tracing });
   }
 

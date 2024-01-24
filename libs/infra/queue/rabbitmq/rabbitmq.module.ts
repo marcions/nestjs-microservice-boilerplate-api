@@ -9,10 +9,10 @@ import { RabbitMQConfig } from './rabbitmq.config';
   imports: [],
   providers: [
     {
-      provide: Microservice.PRODUCT,
+      provide: Microservice.DOGS,
       useFactory: (rabbitMqConfig: RabbitMQConfig) => {
         rabbitMqConfig = new RabbitMQConfig();
-        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.PRODUCT));
+        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.DOGS));
       }
     },
     {

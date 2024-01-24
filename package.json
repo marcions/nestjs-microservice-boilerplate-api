@@ -67,6 +67,7 @@
     "@nestjs/core": "^10.2.10",
     "@nestjs/microservices": "^10.3.0",
     "@nestjs/mongoose": "^10.0.2",
+    "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.2.10",
     "@nestjs/swagger": "^7.1.16",
     "@opentelemetry/api": "^1.7.0",
