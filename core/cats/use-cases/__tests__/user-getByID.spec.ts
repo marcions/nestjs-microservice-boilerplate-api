@@ -1,9 +1,8 @@
 import { Test } from '@nestjs/testing';
+import { ICatsGetByIDAdapter } from 'api/cats/src/modules/cats/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiNotFoundException } from 'libs/utils/exception';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
-
-import { ICatsGetByIDAdapter } from 'api/cats/src/modules/cats/adapter';
 
 import { CatsEntity } from '../../entity/cats';
 import { ICatsRepository } from '../../repository/cats';

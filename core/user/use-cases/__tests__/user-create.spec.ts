@@ -1,10 +1,9 @@
 import { Test } from '@nestjs/testing';
+import { IUserCreateAdapter } from 'apps/users/src/modules/users/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { ApiConflictException } from 'libs/utils/exception';
 import { RequestMock } from 'libs/utils/tests/mocks/request';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
-
-import { IUserCreateAdapter } from 'apps/users/src/modules/users/adapter';
 
 import { UserEntity, UserRole } from '../../entity/user';
 import { IUserRepository } from '../../repository/user';

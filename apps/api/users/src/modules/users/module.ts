@@ -1,11 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { getConnectionToken } from '@nestjs/mongoose';
-import { IUserRepository } from '@/core/user/repository/user';
-import { UserCreateUsecase } from '@/core/user/use-cases/user-create';
-import { UserDeleteUsecase } from '@/core/user/use-cases/user-delete';
-import { UserGetByIdUsecase } from '@/core/user/use-cases/user-getByID';
-import { UserListUsecase } from '@/core/user/use-cases/user-list';
-import { UserUpdateUsecase } from '@/core/user/use-cases/user-update';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { ConnectionName } from 'libs/infra/database/enum';
@@ -15,6 +9,13 @@ import { SecretsModule } from 'libs/infra/secrets';
 import { MongoRepositoryModelSessionType } from 'libs/utils/database/mongoose';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 import mongoose, { Connection, PaginateModel, Schema } from 'mongoose';
+
+import { IUserRepository } from '@/core/user/repository/user';
+import { UserCreateUsecase } from '@/core/user/use-cases/user-create';
+import { UserDeleteUsecase } from '@/core/user/use-cases/user-delete';
+import { UserGetByIdUsecase } from '@/core/user/use-cases/user-getByID';
+import { UserListUsecase } from '@/core/user/use-cases/user-list';
+import { UserUpdateUsecase } from '@/core/user/use-cases/user-update';
 
 import {
   IUserCreateAdapter,

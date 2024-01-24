@@ -22,6 +22,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.sequelize.query(`DROP TABLE IF EXISTS cats`)
+    return queryInterface.sequelize.query(`DROP TABLE IF EXISTS cats`);
   }
 };

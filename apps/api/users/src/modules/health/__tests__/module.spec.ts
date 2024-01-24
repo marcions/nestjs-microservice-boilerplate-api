@@ -7,7 +7,7 @@ describe('HealthModule', () => {
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      providers: [HealthModule],
+      providers: [HealthModule]
     }).compile();
 
     healthModule = app.get<HealthModule>(HealthModule);

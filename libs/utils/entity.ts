@@ -1,6 +1,7 @@
-import { UserEntity } from '@/core/user/entity/user';
 import { v4 as uuidv4 } from 'uuid';
 import { ZodSchema, ZodType } from 'zod';
+
+import { UserEntity } from '@/core/user/entity/user';
 
 export const withID = (entity: { _id?: string; id?: string }) => {
   entity.id = [entity?.id, entity?._id, uuidv4()].find(Boolean);

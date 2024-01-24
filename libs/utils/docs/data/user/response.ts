@@ -1,6 +1,6 @@
-import { UserEntity, UserRole } from '@/core/user/entity/user';
 import { getMockUUID } from 'libs/utils/tests/tests';
 
+import { UserEntity, UserRole } from '@/core/user/entity/user';
 import { UserCreateOutput } from '@/core/user/use-cases/user-create';
 import { UserDeleteOutput } from '@/core/user/use-cases/user-delete';
 import { UserGetByIDOutput } from '@/core/user/use-cases/user-getByID';
