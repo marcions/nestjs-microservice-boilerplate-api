@@ -7,11 +7,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'simple-import-sort', pluginSecurity.configs.recommended.plugins[0]],
+  plugins: ['@typescript-eslint/eslint-plugin', 'simple-import-sort', pluginSecurity.configs.recommended.plugins[0], 'sonarjs'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'plugin:you-dont-need-lodash-underscore/compatible'
+    'plugin:you-dont-need-lodash-underscore/compatible',
+    "plugin:sonarjs/recommended"
   ],
   root: true,
   env: {
