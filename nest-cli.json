@@ -34,6 +34,15 @@
       "sourceRoot": "apps/api/users/src",
       "type": "application"
     },
+    "@core": {
+      "compilerOptions": {
+        "tsConfigPath": "core/tsconfig.json"
+      },
+      "entryFile": "index",
+      "root": "core",
+      "sourceRoot": "core",
+      "type": "library"
+    },
     "@libs/auth": {
       "compilerOptions": {
         "tsConfigPath": "libs/auth/tsconfig.json"
@@ -41,15 +50,6 @@
       "entryFile": "index",
       "root": "libs/auth",
       "sourceRoot": "libs/auth",
-      "type": "library"
-    },
-    "@libs/core": {
-      "compilerOptions": {
-        "tsConfigPath": "libs/core/tsconfig.json"
-      },
-      "entryFile": "index",
-      "root": "libs/core",
-      "sourceRoot": "libs/core",
       "type": "library"
     },
     "@libs/infra": {

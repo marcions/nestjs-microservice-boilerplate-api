@@ -4,6 +4,7 @@
   "description": "Nestjs Boilerplate Microservices",
   "workspaces": {
     "packages": [
+      "./core/*",
       "./apps/*",
       "./libs/*",
       "./tools/*"
@@ -41,7 +42,7 @@
     "infra:clean:images": "docker image prune --all --force",
     "microservices": "docker-compose -f docker/docker-compose.yml down && docker-compose -f docker/docker-compose.yml up -d --build",
     "microservices:down": "docker-compose -f docker/docker-compose.yml down",
-    "monorepo:install": "yarn && yarn workspace @tools/eslint.config install && yarn workspace @libs/infra install && yarn workspace @libs/utils install && yarn workspace @libs/core install && yarn workspace @api/cats install && yarn workspace @api/auth install && yarn workspace @api/users install",
+    "monorepo:install": "yarn && yarn workspace @tools/eslint.config install && yarn workspace @libs/infra install && yarn workspace @libs/utils install && yarn workspace @core install && yarn workspace @api/cats install && yarn workspace @api/auth install && yarn workspace @api/users install",
     "migration:create": "npx sequelize-cli migration:generate --name migration-skeleton",
     "migration:run": "npx sequelize-cli db:migrate",
     "pm2:start": "nest build && NODE_PORT=3000 pm2 start pm2.yaml --env production",
@@ -151,8 +152,5 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.1",
     "typescript": "5.1.6"
-  },
-  "prisma": {
-    "schema": "libs/utils/database/schema.prisma"
   }
 }
