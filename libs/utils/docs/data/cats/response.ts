@@ -1,9 +1,9 @@
-import { CatsEntity } from 'api/cats/src/core/entity/cats';
-import { CatsCreateOutput } from 'api/cats/src/core/use-cases/cats-create';
-import { CatsDeleteOutput } from 'api/cats/src/core/use-cases/cats-delete';
-import { CatsGetByIDOutput } from 'api/cats/src/core/use-cases/cats-getByID';
-import { CatsListOutput } from 'api/cats/src/core/use-cases/cats-list';
-import { CatsUpdateOutput } from 'api/cats/src/core/use-cases/cats-update';
+import { CatsEntity } from '@/core/cats/entity/cats';
+import { CatsCreateOutput } from '@/core/cats/use-cases/cats-create';
+import { CatsDeleteOutput } from '@/core/cats/use-cases/cats-delete';
+import { CatsGetByIDOutput } from '@/core/cats/use-cases/cats-getByID';
+import { CatsListOutput } from '@/core/cats/use-cases/cats-list';
+import { CatsUpdateOutput } from '@/core/cats/use-cases/cats-update';
 import { getMockUUID } from 'libs/utils/tests/tests';
 
 const entity = new CatsEntity({

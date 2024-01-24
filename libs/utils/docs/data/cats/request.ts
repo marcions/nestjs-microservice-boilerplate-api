@@ -1,5 +1,5 @@
-import { CatsCreateInput } from 'api/cats/src/core/use-cases/cats-create';
-import { CatsUpdateInput } from 'api/cats/src/core/use-cases/cats-update';
+import { CatsCreateInput } from '@/core/cats/use-cases/cats-create';
+import { CatsUpdateInput } from '@/core/cats/use-cases/cats-update';
 import { getMockUUID } from 'libs/utils/tests/tests';
 
 export const CatsRequest = {

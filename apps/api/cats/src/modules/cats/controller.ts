@@ -6,11 +6,11 @@ import { ApiRequest } from 'libs/utils/request';
 import { SearchHttpSchema } from 'libs/utils/search';
 import { SortHttpSchema } from 'libs/utils/sort';
 
-import { CatsCreateInput, CatsCreateOutput } from '../../core/use-cases/cats-create';
-import { CatsDeleteInput, CatsDeleteOutput } from '../../core/use-cases/cats-delete';
-import { CatsGetByIDInput, CatsGetByIDOutput } from '../../core/use-cases/cats-getByID';
-import { CatsListInput, CatsListOutput } from '../../core/use-cases/cats-list';
-import { CatsUpdateInput, CatsUpdateOutput } from '../../core/use-cases/cats-update';
+import { CatsCreateInput, CatsCreateOutput } from '../../../../../../core/cats/use-cases/cats-create';
+import { CatsDeleteInput, CatsDeleteOutput } from '../../../../../../core/cats/use-cases/cats-delete';
+import { CatsGetByIDInput, CatsGetByIDOutput } from '../../../../../../core/cats/use-cases/cats-getByID';
+import { CatsListInput, CatsListOutput } from '../../../../../../core/cats/use-cases/cats-list';
+import { CatsUpdateInput, CatsUpdateOutput } from '../../../../../../core/cats/use-cases/cats-update';
 import {
   ICatsCreateAdapter,
   ICatsDeleteAdapter,

@@ -8,13 +8,13 @@ import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
 
-import { CatsEntity } from '../../core/entity/cats';
-import { ICatsRepository } from '../../core/repository/cats';
-import { CatsCreateUsecase } from '../../core/use-cases/cats-create';
-import { CatsDeleteUsecase } from '../../core/use-cases/cats-delete';
-import { CatsGetByIdUsecase } from '../../core/use-cases/cats-getByID';
-import { CatsListUsecase } from '../../core/use-cases/cats-list';
-import { CatsUpdateUsecase } from '../../core/use-cases/cats-update';
+import { CatsEntity } from '../../../../../../core/cats/entity/cats';
+import { ICatsRepository } from '../../../../../../core/cats/repository/cats';
+import { CatsCreateUsecase } from '../../../../../../core/cats/use-cases/cats-create';
+import { CatsDeleteUsecase } from '../../../../../../core/cats/use-cases/cats-delete';
+import { CatsGetByIdUsecase } from '../../../../../../core/cats/use-cases/cats-getByID';
+import { CatsListUsecase } from '../../../../../../core/cats/use-cases/cats-list';
+import { CatsUpdateUsecase } from '../../../../../../core/cats/use-cases/cats-update';
 import {
   ICatsCreateAdapter,
   ICatsDeleteAdapter,
