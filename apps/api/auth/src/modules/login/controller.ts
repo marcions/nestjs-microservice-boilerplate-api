@@ -1,8 +1,7 @@
 import { Controller, Post, Req, Version } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LoginInput, LoginOutput } from 'core/user/use-cases/user-login';
 import { ApiRequest } from 'libs/utils/request';
-
-import { LoginInput, LoginOutput } from '@/core/user/use-cases/user-login';
 
 import { ILoginAdapter } from './adapter';
 import { SwagggerRequest, SwagggerResponse } from './swagger';

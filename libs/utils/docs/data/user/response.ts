@@ -1,11 +1,10 @@
+import { UserEntity, UserRole } from 'core/user/entity/user';
+import { UserCreateOutput } from 'core/user/use-cases/user-create';
+import { UserDeleteOutput } from 'core/user/use-cases/user-delete';
+import { UserGetByIDOutput } from 'core/user/use-cases/user-getByID';
+import { UserListOutput } from 'core/user/use-cases/user-list';
+import { UserUpdateOutput } from 'core/user/use-cases/user-update';
 import { getMockUUID } from 'libs/utils/tests/tests';
-
-import { UserEntity, UserRole } from '@/core/user/entity/user';
-import { UserCreateOutput } from '@/core/user/use-cases/user-create';
-import { UserDeleteOutput } from '@/core/user/use-cases/user-delete';
-import { UserGetByIDOutput } from '@/core/user/use-cases/user-getByID';
-import { UserListOutput } from '@/core/user/use-cases/user-list';
-import { UserUpdateOutput } from '@/core/user/use-cases/user-update';
 
 const entity = new UserEntity({
   login: 'login',

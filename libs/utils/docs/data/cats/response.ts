@@ -1,11 +1,10 @@
+import { CatsEntity } from 'core/cats/entity/cats';
+import { CatsCreateOutput } from 'core/cats/use-cases/cats-create';
+import { CatsDeleteOutput } from 'core/cats/use-cases/cats-delete';
+import { CatsGetByIDOutput } from 'core/cats/use-cases/cats-getByID';
+import { CatsListOutput } from 'core/cats/use-cases/cats-list';
+import { CatsUpdateOutput } from 'core/cats/use-cases/cats-update';
 import { getMockUUID } from 'libs/utils/tests/tests';
-
-import { CatsEntity } from '@/core/cats/entity/cats';
-import { CatsCreateOutput } from '@/core/cats/use-cases/cats-create';
-import { CatsDeleteOutput } from '@/core/cats/use-cases/cats-delete';
-import { CatsGetByIDOutput } from '@/core/cats/use-cases/cats-getByID';
-import { CatsListOutput } from '@/core/cats/use-cases/cats-list';
-import { CatsUpdateOutput } from '@/core/cats/use-cases/cats-update';
 
 const entity = new CatsEntity({
   name: 'Miau',

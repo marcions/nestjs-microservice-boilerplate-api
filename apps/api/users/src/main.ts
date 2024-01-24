@@ -6,6 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { description, name, version } from 'api/users/package.json';
 import bodyParser from 'body-parser';
 import { bold } from 'colorette';
+import { IUserRepository } from 'core/user/repository/user';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 import { UserHubcontrolSeed } from 'libs/infra/database/mongo/seed/create-user-hub';
@@ -17,8 +18,6 @@ import { ExceptionInterceptor } from 'libs/utils/interceptors/http-exception.int
 import { HttpLoggerInterceptor } from 'libs/utils/interceptors/http-logger.interceptor';
 import { MetricsInterceptor } from 'libs/utils/interceptors/metrics.interceptor';
 import { TracingInterceptor } from 'libs/utils/interceptors/tracing.interceptor';
-
-import { IUserRepository } from '@/core/user/repository/user';
 
 import { MainModule } from './modules/module';
 
