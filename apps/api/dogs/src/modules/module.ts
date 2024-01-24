@@ -4,6 +4,8 @@ import { TokenModule } from 'libs/auth';
 import { InfraModule } from 'libs/infra/module';
 import { RolesGuardInterceptor } from 'libs/utils/interceptors/auth-guard.interceptor';
 
+import { RabbitMQModule } from '@/libs/infra/queue';
+
 import { DogsModule } from './dogs/module';
 import { HealthModule } from './health/module';
 
@@ -14,6 +16,7 @@ import { HealthModule } from './health/module';
       useClass: RolesGuardInterceptor
     }
   ],
-  imports: [DogsModule, HealthModule, InfraModule, TokenModule]
+  imports: [DogsModule, HealthModule, InfraModule, TokenModule, RabbitMQModule],
+  exports: [RabbitMQModule]
 })
 export class MainModule {}

@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ClientProxyFactory } from '@nestjs/microservices';
 import { DogsEntity } from 'core/dogs/entity/dogs';
 import { IDogsRepository } from 'core/dogs/repository/dogs';
 import { DogsCreateUsecaseQueue } from 'core/dogs/use-cases/dogs-create';
@@ -15,6 +16,8 @@ import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { MicroserviceProxy, RabbitMQModule } from 'libs/infra/queue';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
+
+import { Microservice } from '@/libs/utils/enum';
 
 import {
   IDogsCreateAdapter,
@@ -42,7 +45,7 @@ import { DogsRepository } from './repository';
       provide: IDogsCreateAdapter,
       // useFactory: (repository: IDogsRepository) => new DogsCreateUsecase(repository),
       useFactory: (publish: MicroserviceProxy) => new DogsCreateUsecaseQueue(publish),
-      inject: [IDogsRepository]
+      inject: [MicroserviceProxy]
     },
     {
       provide: IDogsUpdateAdapter,

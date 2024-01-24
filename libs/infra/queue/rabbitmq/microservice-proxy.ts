@@ -27,8 +27,8 @@ export class MicroserviceProxy {
   public async event(
     microserviceName: MicroserviceType,
     pattern: MicroservicePattern,
-    message: unknown | unknown[]
-  ): Promise<unknown> {
+    message: any | any[]
+  ): Promise<any> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
 
     return lastValueFrom(microservice.emit(pattern, message));
