@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     return queryInterface.sequelize.query(`CREATE TABLE IF NOT EXISTS cats (
       id uuid NOT NULL,
       "name" text NOT NULL,
@@ -21,7 +21,7 @@ module.exports = {
   );`);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     return queryInterface.sequelize.query(`DROP TABLE IF EXISTS cats`);
   }
 };

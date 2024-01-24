@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 import { ApiBadRequestException } from './exception';
 
 export class CollectionUtil {

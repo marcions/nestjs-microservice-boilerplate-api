@@ -48,6 +48,7 @@ export class RabbitMQConfig {
       }
     };
 
+    // eslint-disable-next-line security/detect-object-injection
     queueOptions[microservice] && queueOptions[microservice]();
 
     return {
