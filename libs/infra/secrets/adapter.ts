@@ -43,4 +43,9 @@ export abstract class ISecretsAdapter {
     PORT: number;
     HOST: string;
   };
+
+  DOGS: {
+    PORT: number;
+    HOST: string;
+  };
 }

@@ -3,6 +3,7 @@ import { blue, bold, gray } from 'colorette';
 import { config } from 'dotenv';
 import { writeFileSync } from 'fs';
 import { CatsSchema } from 'libs/infra/database/postgres/schemas/cats';
+import { DogsSchema } from 'libs/infra/database/postgres/schemas/dogs';
 import { Sequelize } from 'sequelize-typescript';
 
 config();
@@ -24,6 +25,7 @@ const sequelizeConfig = new Sequelize(connection, {
 });
 
 sequelizeConfig.addModels([CatsSchema]);
+sequelizeConfig.addModels([DogsSchema]);
 
 export { sequelizeConfig };
 

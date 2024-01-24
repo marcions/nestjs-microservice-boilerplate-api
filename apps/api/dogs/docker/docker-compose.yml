@@ -1,0 +1,25 @@
+version: '3'
+
+volumes:
+  dogs-postgres-data:
+
+networks:
+  dogs-network:
+    driver: bridge
+
+services:
+  dogs:
+    container_name: dogs
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    #restart: always
+    env_file:
+      - ../.env
+    ports:
+      - '3101:3101'
+    #volumes:
+    #  - ../dist/src/microservices/auth/src:/app
+    #command: node /app/main
+    networks:
+      - dogs-network

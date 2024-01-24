@@ -25,6 +25,15 @@
       "sourceRoot": "apps/api/cats/src",
       "type": "application"
     },
+    "@api/dogs": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/api/dogs/tsconfig.json"
+      },
+      "entryFile": "main",
+      "root": "apps/api/dogs",
+      "sourceRoot": "apps/api/dogs/src",
+      "type": "application"
+    },
     "@api/users": {
       "compilerOptions": {
         "tsConfigPath": "apps/api/users/tsconfig.json"

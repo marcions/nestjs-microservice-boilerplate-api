@@ -54,4 +54,9 @@ export class SecretsService implements ISecretsAdapter {
     PORT: this.config.get<number>('CATS_PORT'),
     HOST: this.config.get('HOST')
   };
+
+  DOGS = {
+    PORT: this.config.get<number>('DOGS_PORT'),
+    HOST: this.config.get('HOST')
+  };
 }
