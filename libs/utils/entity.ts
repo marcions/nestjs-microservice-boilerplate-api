@@ -1,4 +1,4 @@
-import { UserEntity } from 'libs/core/user/entity/user';
+import { UserEntity } from '@/core/user/entity/user';
 import { v4 as uuidv4 } from 'uuid';
 import { ZodSchema, ZodType } from 'zod';
 

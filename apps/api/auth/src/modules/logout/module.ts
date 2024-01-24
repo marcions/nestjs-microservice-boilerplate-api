@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TokenModule } from 'libs/auth/module';
-import { LogoutUsecase } from 'libs/core/user/use-cases/user-logout';
+import { LogoutUsecase } from '@/core/user/use-cases/user-logout';
 import { ICacheAdapter } from 'libs/infra/cache';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { LoggerModule } from 'libs/infra/logger';

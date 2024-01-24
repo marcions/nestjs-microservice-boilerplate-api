@@ -1,6 +1,6 @@
 import { Controller, HttpCode, Post, Req, Version } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { LogoutInput, LogoutOutput } from 'libs/core/user/use-cases/user-logout';
+import { LogoutInput, LogoutOutput } from '@/core/user/use-cases/user-logout';
 import { ApiRequest } from 'libs/utils/request';
 
 import { ILogoutAdapter } from './adapter';

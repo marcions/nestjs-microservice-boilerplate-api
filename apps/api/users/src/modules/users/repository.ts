@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserEntity } from 'libs/core/user/entity/user';
-import { IUserRepository } from 'libs/core/user/repository/user';
-import { UserListInput, UserListOutput } from 'libs/core/user/use-cases/user-list';
+import { UserEntity } from '@/core/user/entity/user';
+import { IUserRepository } from '@/core/user/repository/user';
+import { UserListInput, UserListOutput } from '@/core/user/use-cases/user-list';
 import { User, UserDocument } from 'libs/infra/database/mongo/schemas/user';
 import { MongoRepository } from 'libs/infra/repository';
 import { MongoRepositoryModelSessionType, MongoRepositorySession } from 'libs/utils/database/mongoose';

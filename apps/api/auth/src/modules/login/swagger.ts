@@ -1,4 +1,4 @@
-import { LoginInput } from 'libs/core/user/use-cases/user-login';
+import { LoginInput } from '@/core/user/use-cases/user-login';
 import { Swagger } from 'libs/utils/docs/swagger';
 
 export const SwagggerResponse = {

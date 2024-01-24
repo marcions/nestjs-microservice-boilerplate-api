@@ -1,11 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { getConnectionToken } from '@nestjs/mongoose';
-import { IUserRepository } from 'libs/core/user/repository/user';
-import { UserCreateUsecase } from 'libs/core/user/use-cases/user-create';
-import { UserDeleteUsecase } from 'libs/core/user/use-cases/user-delete';
-import { UserGetByIdUsecase } from 'libs/core/user/use-cases/user-getByID';
-import { UserListUsecase } from 'libs/core/user/use-cases/user-list';
-import { UserUpdateUsecase } from 'libs/core/user/use-cases/user-update';
+import { IUserRepository } from '@/core/user/repository/user';
+import { UserCreateUsecase } from '@/core/user/use-cases/user-create';
+import { UserDeleteUsecase } from '@/core/user/use-cases/user-delete';
+import { UserGetByIdUsecase } from '@/core/user/use-cases/user-getByID';
+import { UserListUsecase } from '@/core/user/use-cases/user-list';
+import { UserUpdateUsecase } from '@/core/user/use-cases/user-update';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { ConnectionName } from 'libs/infra/database/enum';

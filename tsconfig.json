@@ -17,7 +17,7 @@
       "api/*": ["./apps/api/*"],
       "integrators/*": ["./apps/integrators/*"],
       "workers/*": ["./apps/workers/*"],
-      "core/*": ["libs/core/*"],
+      "core/*": ["core/*"],
       "libs/*": ["./libs/*"],
       "tools/*": ["./tools/*"]
     },

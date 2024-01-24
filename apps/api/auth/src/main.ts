@@ -9,7 +9,7 @@ import bodyParser from 'body-parser';
 import { bold } from 'colorette';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
-import { IUserRepository } from 'libs/core/user/repository/user';
+import { IUserRepository } from '@/core/user/repository/user';
 import { UserAdminSeed } from 'libs/infra/database/mongo/seed/create-user-admin';
 import { ILoggerAdapter } from 'libs/infra/logger/adapter';
 import { ISecretsAdapter } from 'libs/infra/secrets';

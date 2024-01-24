@@ -1,11 +1,11 @@
 import { Controller, Delete, Get, Post, Put, Req, Version } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserRole } from 'libs/core/user/entity/user';
-import { UserCreateInput, UserCreateOutput } from 'libs/core/user/use-cases/user-create';
-import { UserDeleteInput, UserDeleteOutput } from 'libs/core/user/use-cases/user-delete';
-import { UserGetByIDInput, UserGetByIDOutput } from 'libs/core/user/use-cases/user-getByID';
-import { UserListInput, UserListOutput } from 'libs/core/user/use-cases/user-list';
-import { UserUpdateInput, UserUpdateOutput } from 'libs/core/user/use-cases/user-update';
+import { UserRole } from '@/core/user/entity/user';
+import { UserCreateInput, UserCreateOutput } from '@/core/user/use-cases/user-create';
+import { UserDeleteInput, UserDeleteOutput } from '@/core/user/use-cases/user-delete';
+import { UserGetByIDInput, UserGetByIDOutput } from '@/core/user/use-cases/user-getByID';
+import { UserListInput, UserListOutput } from '@/core/user/use-cases/user-list';
+import { UserUpdateInput, UserUpdateOutput } from '@/core/user/use-cases/user-update';
 import { Roles } from 'libs/utils/decorators/role.decorator';
 import { ApiRequest } from 'libs/utils/request';
 import { SearchHttpSchema } from 'libs/utils/search';

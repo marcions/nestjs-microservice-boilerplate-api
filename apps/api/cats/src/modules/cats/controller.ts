@@ -1,6 +1,6 @@
 import { Controller, Delete, Get, Post, Put, Req, Version } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserRole } from 'libs/core/user/entity/user';
+import { UserRole } from '@/core/user/entity/user';
 import { Roles } from 'libs/utils/decorators/role.decorator';
 import { ApiRequest } from 'libs/utils/request';
 import { SearchHttpSchema } from 'libs/utils/search';
