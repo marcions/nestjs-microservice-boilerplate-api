@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DogsEntity } from 'core/dogs/entity/dogs';
 import { IDogsRepository } from 'core/dogs/repository/dogs';
-import { DogsCreateUsecase } from 'core/dogs/use-cases/dogs-create';
+import { DogsCreateUsecaseQueue } from 'core/dogs/use-cases/dogs-create';
 import { DogsDeleteUsecase } from 'core/dogs/use-cases/dogs-delete';
 import { DogsGetByIdUsecase } from 'core/dogs/use-cases/dogs-getByID';
 import { DogsListUsecase } from 'core/dogs/use-cases/dogs-list';
@@ -39,7 +39,8 @@ import { DogsRepository } from './repository';
     },
     {
       provide: IDogsCreateAdapter,
-      useFactory: (repository: IDogsRepository) => new DogsCreateUsecase(repository),
+      // useFactory: (repository: IDogsRepository) => new DogsCreateUsecase(repository),
+      useFactory: (repository: IDogsRepository) => new DogsCreateUsecaseQueue(null),
       inject: [IDogsRepository]
     },
     {

@@ -9,7 +9,7 @@ export class MicroserviceProxy {
   public static readonly MICROSERVICE_PROXY_SERVICE = 'MICROSERVICE_PROXY_SERVICE';
 
   constructor(
-    @Inject(Microservice.PRODUCT) private readonly microserviceProduct: ClientProxy,
+    @Inject(Microservice.DOGS) private readonly microserviceDogs: ClientProxy,
     @Inject(Microservice.USER) private readonly microserviceUser: ClientProxy
   ) {}
 
@@ -35,7 +35,7 @@ export class MicroserviceProxy {
 
   public getClientProxyByMicroservice(name: MicroserviceType): ClientProxy {
     const microservice = {
-      [Microservice.PRODUCT]: () => this.microserviceProduct,
+      [Microservice.DOGS]: () => this.microserviceDogs,
       [Microservice.USER]: () => this.microserviceUser
     };
 
