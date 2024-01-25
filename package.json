@@ -159,18 +159,18 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.1",
-    "typescript,": "5.1.6"
+    "typescript": "5.1.6"
   },
   "jest": {
-    "testEnvironment":  "node",
+    "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
-        "/node_modules/"
+      "/node_modules/"
     ],
-    "testResultsProcessor":  "jest-sonar-reporter"
+    "testResultsProcessor": "jest-sonar-reporter"
   },
   "jestSonar": {
-      "reportPath":  "coverage",
-      "reportFile":  "test-reporter.xml",
-      "indent":  4
+    "reportPath": "coverage",
+    "reportFile": "test-reporter.xml",
+    "indent": 4
   }
 }
