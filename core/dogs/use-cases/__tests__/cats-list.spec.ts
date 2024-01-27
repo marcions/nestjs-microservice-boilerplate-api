@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { IDogsListAdapter } from 'apps/api/dogs/src/modules/dogs/adapter';
+import { IDogsListAdapter } from '@/apps/api/dogs/src-old/modules/dogs/adapter';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
 import { expectZodError, getMockUUID } from 'libs/utils/tests/tests';
 

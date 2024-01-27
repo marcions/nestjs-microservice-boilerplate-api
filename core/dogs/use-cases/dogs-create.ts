@@ -51,14 +51,11 @@ export class DogsCreateUsecaseQueue {
   // @ValidateSchema(DogsCreateSchema)
   async execute(input: DogsCreateInput, { tracing, user }: ApiTrancingInput): Promise<unknown> {
     try {
-      // const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, input);
-      await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, input);
-      const data = 'Queued';
-
+      const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, input);
       tracing.logEvent('dogs-send-to-queue', `dogs queued by: ${user.login}`);
-
       return data;
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }

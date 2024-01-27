@@ -12,14 +12,14 @@
     "sourceMap": true,
     "outDir": "./dist",
     "paths": {
-      "@/*": ["./*"],
       "apps/*": ["./apps/*"],
       "api/*": ["./apps/api/*"],
       "integrators/*": ["./apps/integrators/*"],
       "workers/*": ["./apps/workers/*"],
       "core/*": ["core/*"],
       "libs/*": ["./libs/*"],
-      "tools/*": ["./tools/*"]
+      "tools/*": ["./tools/*"],
+      "@/*": ["./*"]
     },
     "baseUrl": "./",
     "incremental": true,

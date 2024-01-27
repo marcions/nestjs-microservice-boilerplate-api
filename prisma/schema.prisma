@@ -1,0 +1,25 @@
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+model dogs {
+  id        Int       @id @default(autoincrement())
+  name      String
+  breed     String?
+  age       Int?
+  status    Boolean
+  deleted   Boolean?
+  userId    String
+  createdBy String
+  updatedBy String?
+  deletedBy String?
+  createdAt DateTime
+  updatedAt DateTime?
+  deletedAt DateTime?
+}

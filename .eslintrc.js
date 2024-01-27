@@ -22,6 +22,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     "no-console": ["error", { "allow": ["error"] }],
+    // 'no-console': 'off',
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',

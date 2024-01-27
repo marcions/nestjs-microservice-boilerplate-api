@@ -1,89 +1,83 @@
-import { Controller, Delete, Get, Post, Put, Req, Version } from '@nestjs/common';
-import { Payload } from '@nestjs/microservices';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { DogsCreateInput, DogsCreateOutput } from 'core/dogs/use-cases/dogs-create';
-import { DogsDeleteInput, DogsDeleteOutput } from 'core/dogs/use-cases/dogs-delete';
-import { DogsGetByIDInput, DogsGetByIDOutput } from 'core/dogs/use-cases/dogs-getByID';
-import { DogsListInput, DogsListOutput } from 'core/dogs/use-cases/dogs-list';
-import { DogsUpdateInput, DogsUpdateOutput } from 'core/dogs/use-cases/dogs-update';
-import { UserRole } from 'core/user/entity/user';
-import { Roles } from 'libs/utils/decorators/role.decorator';
-import { ApiRequest } from 'libs/utils/request';
-import { SearchHttpSchema } from 'libs/utils/search';
-import { SortHttpSchema } from 'libs/utils/sort';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Controller } from '@nestjs/common';
+import { Ctx, MessagePattern, Payload, RmqContext } from '@nestjs/microservices';
+import { CreateDogDto, UpdateDogDto } from 'core/dto';
+import { DogsPattern } from 'libs/utils/enum';
 
-import {
-  IDogsCreateAdapter,
-  IDogsDeleteAdapter,
-  IDogsGetByIDAdapter,
-  IDogsListAdapter,
-  IDogsUpdateAdapter
-} from './adapter';
-import { SwagggerRequest, SwagggerResponse } from './swagger';
+import { DogsService } from './service';
 
 @Controller()
-@ApiTags('dogs')
-@ApiBearerAuth()
-@Roles(UserRole.USER)
 export class DogsController {
-  constructor(
-    private readonly dogsCreate: IDogsCreateAdapter,
-    private readonly dogsUpdate: IDogsUpdateAdapter,
-    private readonly dogsGetByID: IDogsGetByIDAdapter,
-    private readonly dogsList: IDogsListAdapter,
-    private readonly dogsDelete: IDogsDeleteAdapter
-  ) {}
+  constructor(private dogsService: DogsService) {}
 
-  @Post()
-  @ApiResponse(SwagggerResponse.create[200])
-  @ApiBody(SwagggerRequest.createBody)
-  @Version('1')
-  async create(@Payload() { body, user, tracing }: ApiRequest): Promise<DogsCreateOutput> {
-    return await this.dogsCreate.execute(body as DogsCreateInput, { user, tracing });
+  @MessagePattern(DogsPattern.GET_DOGS)
+  async getDogs(@Ctx() context: RmqContext): Promise<any> {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
+
+    try {
+      const result = await this.dogsService.getDogs();
+
+      channel.ack(message);
+
+      return result;
+    } catch (error) {
+      channel.ack(message);
+
+      throw error;
+    }
   }
 
-  @Put()
-  @ApiResponse(SwagggerResponse.update[200])
-  @ApiResponse(SwagggerResponse.update[404])
-  @ApiBody(SwagggerRequest.updateBody)
-  @Version('1')
-  async update(@Req() { body, user, tracing }: ApiRequest): Promise<DogsUpdateOutput> {
-    return await this.dogsUpdate.execute(body as DogsUpdateInput, { user, tracing });
+  @MessagePattern(DogsPattern.POST_DOGS)
+  async createdDogs(@Payload() data: CreateDogDto, @Ctx() context: RmqContext): Promise<any> {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
+
+    try {
+      const result = await this.dogsService.createdDogs(data);
+
+      channel.ack(message);
+
+      return result;
+    } catch (error) {
+      channel.ack(message);
+
+      throw error;
+    }
   }
 
-  @Get('/:id')
-  @ApiParam({ name: 'id', required: true })
-  @ApiResponse(SwagggerResponse.getByID[200])
-  @ApiResponse(SwagggerResponse.getByID[404])
-  @Version('1')
-  async getById(@Req() { params }: ApiRequest): Promise<DogsGetByIDOutput> {
-    return await this.dogsGetByID.execute(params as DogsGetByIDInput);
+  @MessagePattern(DogsPattern.UPDATE_DOGS)
+  async updateDogs(@Payload() data: { id: number; dogs: UpdateDogDto }, @Ctx() context: RmqContext): Promise<any> {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
+    try {
+      const result = await this.dogsService.updateDogs(data.id, data.dogs);
+
+      channel.ack(message);
+
+      return result;
+    } catch (error) {
+      channel.ack(message);
+
+      throw error;
+    }
   }
 
-  @Get()
-  @ApiQuery(SwagggerRequest.listQuery.pagination.limit)
-  @ApiQuery(SwagggerRequest.listQuery.pagination.page)
-  @ApiQuery(SwagggerRequest.listQuery.sort)
-  @ApiQuery(SwagggerRequest.listQuery.search)
-  @ApiResponse(SwagggerResponse.list[200])
-  @Version('1')
-  async list(@Req() { query }: ApiRequest): Promise<DogsListOutput> {
-    const input: DogsListInput = {
-      sort: SortHttpSchema.parse(query.sort),
-      search: SearchHttpSchema.parse(query.search),
-      limit: Number(query.limit),
-      page: Number(query.page)
-    };
+  @MessagePattern(DogsPattern.REMOVE_DOGS)
+  async deleteDogs(@Payload() id: number, @Ctx() context: RmqContext): Promise<any> {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
 
-    return await this.dogsList.execute(input);
-  }
+    try {
+      const result = await this.dogsService.deleteDogs(id);
 
-  @Delete('/:id')
-  @ApiParam({ name: 'id', required: true })
-  @ApiResponse(SwagggerResponse.delete[200])
-  @ApiResponse(SwagggerResponse.delete[404])
-  @Version('1')
-  async delete(@Req() { params, user, tracing }: ApiRequest): Promise<DogsDeleteOutput> {
-    return await this.dogsDelete.execute(params as DogsDeleteInput, { user, tracing });
+      channel.ack(message);
+
+      return result;
+    } catch (error) {
+      channel.ack(message);
+
+      throw error;
+    }
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
@@ -9,10 +10,7 @@ import { lastValueFrom } from 'rxjs';
 export class MicroserviceProxy {
   public static readonly MICROSERVICE_PROXY_SERVICE = 'MICROSERVICE_PROXY_SERVICE';
 
-  constructor(
-    @Inject(Microservice.DOGS) private readonly microserviceDogs: ClientProxy,
-    @Inject(Microservice.USER) private readonly microserviceUser: ClientProxy
-  ) {}
+  constructor(@Inject(Microservice.DOGS) private readonly microserviceDogs: ClientProxy) {}
 
   public async message(
     microserviceName: MicroserviceType,
@@ -36,11 +34,9 @@ export class MicroserviceProxy {
 
   public getClientProxyByMicroservice(name: MicroserviceType): ClientProxy {
     const microservice = {
-      [Microservice.DOGS]: () => this.microserviceDogs,
-      [Microservice.USER]: () => this.microserviceUser
+      [Microservice.DOGS]: () => this.microserviceDogs
     };
 
-    // eslint-disable-next-line security/detect-object-injection
     return microservice[name]();
   }
 }

@@ -28,13 +28,13 @@ services:
     ports:
       - '8081:8081'
     #environment:
-      # ME_CONFIG_MONGODB_SERVER: mongo
-      # ME_CONFIG_MONGODB_PORT: 27017
-      #ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      #ME_CONFIG_MONGODB_ADMINPASSWORD: admin
-      #ME_CONFIG_BASICAUTH_USERNAME: admin
-      #ME_CONFIG_BASICAUTH_PASSWORD: admin
-      #ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/?authSource=admin
+    # ME_CONFIG_MONGODB_SERVER: mongo
+    # ME_CONFIG_MONGODB_PORT: 27017
+    #ME_CONFIG_MONGODB_ADMINUSERNAME: root
+    #ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+    #ME_CONFIG_BASICAUTH_USERNAME: admin
+    #ME_CONFIG_BASICAUTH_PASSWORD: admin
+    #ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017/?authSource=admin
     env_file:
       - ../.env
     links:
@@ -65,7 +65,7 @@ services:
     env_file:
       - ../.env
     ports:
-      - "16543:80"
+      - '16543:80'
     depends_on:
       - postgres
     networks:
@@ -100,7 +100,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: db
-      MYSQL_USER: user
+      MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     networks:
       - internal
