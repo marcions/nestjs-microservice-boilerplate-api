@@ -1,31 +1,98 @@
 {
+  "breadcrumbs.enabled": true,
   "editor.tabSize": 2,
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.rulers": [
+    80,
+    120
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
-    "source.organizeImports": "never"
+    "source.organizeImports": "never",
+    "source.fixAll.eslint": "explicit"
   },
-  "[typescript]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "source.organizeImports": false
-    },
-    "editor.formatOnSave": true,
+  "editor.parameterHints.enabled": false,
+  "editor.renderLineHighlight": "gutter",
+  "editor.suggestSelection": "first",
+  "editor.semanticHighlighting.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.vertical": "hidden",
+  "explorer.sortOrder": "foldersNestsFiles",
+  "explorer.fileNesting.patterns": {
+    ".eslintrc.js": ".eslint*",
+    "package.json": "package*, pnpm-lock*, bun.lockb",
+    "tsconfig.json": "tsconfig*",
+    "yarn.lock": "yarn*",
+    "tailwind.config.js": "tailwind.config*, postcss.config*",
+    ".env.local": ".env*",
+    ".env": ".env*",
+    "pm2.yaml": "pm2*, ecosystem*"
   },
+  "explorer.fileNesting.enabled": true,
+  "explorer.confirmDelete": false,
+  "explorer.compactFolders": false,
+  "files.associations": {
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
+    "*.css": "css"
+  },
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "gitlens.codeLens.recentChange.enabled": false,
+  "symbols.files.associations": {
+    "*.module.ts": "nest",
+    "*.guard.ts": "typescript",
+    "*.spec.ts": "ts-test",
+    "*.e2e-spec.ts": "ts-test",
+    "vitest.config.e2e.ts": "vite",
+    ".env.example": "gear"
+  },
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "[javascript]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": true,
       "source.organizeImports": false
     },
     "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "editor.formatOnSave": true,
-  "editor.detectIndentation": false,
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "[javascript][typescript]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
       "source.organizeImports": "never"
     }
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[prisma]": {
+    "editor.formatOnSave": true
+  },
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": false
+    },
+    "editor.formatOnSave": true
+  },
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "update.showReleaseNotes": false,
+  "window.titleBarStyle": "native",
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.activityBar.location": "hidden",
+  "workbench.statusBar.visible": false
 }
