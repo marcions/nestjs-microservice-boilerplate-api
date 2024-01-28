@@ -4,6 +4,6 @@
     "declaration": false,
     "outDir": "../../../dist/apps/api/dogs"
   },
-  "include": ["src-old/**/*"],
+  "include": ["src-old/**/*", "src/modules/health"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateDogDto {
+export class CreateDogsDto {
   @ApiProperty({ type: 'string' })
   @IsNotEmpty()
   @IsString()
@@ -9,14 +9,13 @@ export class CreateDogDto {
 
   @ApiProperty({ type: 'string' })
   @IsNotEmpty()
-  @IsEmail()
   @IsString()
-  email: string;
+  breed: string;
 
   @ApiProperty({ type: 'number' })
   @IsNotEmpty()
   @IsNumber()
-  user_meli_id: number;
+  age: number;
 
   @ApiProperty({ type: 'boolean' })
   @IsNotEmpty()

@@ -31,7 +31,8 @@ Authorization: Bearer {{token}}
 {
   "name": "titi",
   "breed": "titi",
-  "age": 10
+  "age": 10,
+  "status": true
 }
 ###
 PUT {{requestUrl}}

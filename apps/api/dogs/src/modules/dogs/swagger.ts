@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { DogsRequest } from 'libs/utils/docs/data/dogs/request';
 import { DogsResponse } from 'libs/utils/docs/data/dogs/response';
 import { Swagger } from 'libs/utils/docs/swagger';
@@ -19,8 +20,8 @@ export const SwagggerResponse = {
     404: Swagger.defaultResponseError({
       status: 404,
       route: 'api/dogs',
-      message: 'catNotFound',
-      description: 'cat not found.'
+      message: 'dogNotFound',
+      description: 'dog not found.'
     })
   },
   getByID: {
@@ -32,8 +33,8 @@ export const SwagggerResponse = {
     404: Swagger.defaultResponseError({
       status: 404,
       route: 'api/dogs/:id',
-      message: 'catNotFound',
-      description: 'cat not found.'
+      message: 'dogNotFound',
+      description: 'dog not found.'
     })
   },
   delete: {
@@ -45,8 +46,8 @@ export const SwagggerResponse = {
     404: Swagger.defaultResponseError({
       status: 404,
       route: 'api/dogs/:id',
-      message: 'catNotFound',
-      description: 'cat not found.'
+      message: 'dogNotFound',
+      description: 'dog not found.'
     })
   },
   list: {

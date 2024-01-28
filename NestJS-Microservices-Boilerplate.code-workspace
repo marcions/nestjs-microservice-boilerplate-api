@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": [
+      "NestJS-Microservices-Boilerplate",
+      "users",
+      "auth",
+      "dogs",
+      "NestJS-Microservices-Boilerplate",
+      "cats",
+      "eslint"
+    ]
+  }
+}

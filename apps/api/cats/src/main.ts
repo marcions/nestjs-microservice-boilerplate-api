@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
 import 'libs/utils/tracing';
 
 import { HttpStatus, ValidationPipe, VersioningType } from '@nestjs/common';
