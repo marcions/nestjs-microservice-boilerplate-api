@@ -80,23 +80,9 @@ export class DogsController {
   }
 
   @Post()
-  // @UsePipes(
-  //   new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true })
-  // )
-  // @ApiBody({
-  //   type: CreateDogsDto,
-  //   description: 'The body request is a json.'
-  // })
-  // @ApiCreatedResponse({ type: ResponseTypeDto, description: 'The dogs has been successfully created.' })
-  // @ApiBadRequestResponse({
-  //   type: ResponseTypeDto,
-  //   description: 'An error occurred. A message explaining will be notified.'
-  // })
-  // @ApiInternalServerErrorResponse({
-  //   type: ResponseTypeDto,
-  //   description: 'An error occurred. A message explaining will be notified.'
-  // })
-  // @ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
+  @UsePipes(
+    new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true })
+  )
   @ApiResponse(SwagggerResponse.create[200])
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')

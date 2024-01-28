@@ -34,7 +34,7 @@ export class RabbitMQConfig {
     this.host = this.configService.get('RMQ_HOST');
     this.vhost = this.configService.get('RMQ_VHOST');
     this.port = this.configService.get('RMQ_PORT');
-    this.username = this.configService.get('RMQ_USERNAME');
+    this.username = this.configService.get('RMQ_USER');
     this.password = this.configService.get('RMQ_PASSWORD');
     this.url = `${this.scheme}://${this.username}:${this.password}@${this.host}:${this.port}${this.vhost}`;
   }

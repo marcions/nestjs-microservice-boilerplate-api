@@ -19,7 +19,6 @@ export class MicroserviceProxy {
     message: any | any[]
   ): Promise<any> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
-
     return lastValueFrom(microservice.send(pattern, message));
   }
 
@@ -29,7 +28,6 @@ export class MicroserviceProxy {
     message: any | any[]
   ): Promise<any> {
     const microservice = this.getClientProxyByMicroservice(microserviceName);
-
     return lastValueFrom(microservice.emit(pattern, message));
   }
 
@@ -37,7 +35,6 @@ export class MicroserviceProxy {
     const microservice = {
       [Microservice.DOGS]: () => this.microserviceDogs
     };
-
     return microservice[name]();
   }
 }
