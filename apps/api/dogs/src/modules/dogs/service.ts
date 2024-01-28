@@ -1,12 +1,18 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { CreateDogsDto, ResponseTypeDto, UpdateDogsDto } from 'core/dto';
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { MicroserviceProxy } from 'libs/infra/queue';
 import { DogsPattern, Microservice } from 'libs/utils/enum';
+import { ApiTrancingInput } from 'libs/utils/request';
 
 @Injectable()
 export class DogsService {
-  constructor(@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy) {}
+  constructor(
+    @Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy,
+    private readonly loggerService: ILoggerAdapter
+  ) {}
 
   async getDogs(headers): Promise<ResponseTypeDto> {
     const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.GET_DOGS, { headers: headers });
@@ -20,9 +26,15 @@ export class DogsService {
     return data;
   }
 
-  async createDogs(body: CreateDogsDto): Promise<any> {
-    const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, body);
-    return data;
+  async createDogs(body: CreateDogsDto, { tracing, user }: ApiTrancingInput): Promise<any> {
+    try {
+      this.loggerService.info({ message: 'created', obj: { data: body } });
+      tracing.logEvent('dogs-created', `dogs created by: ${user.login}`);
+      return await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, body);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   async updateDogs(body: UpdateDogsDto, id: number): Promise<any> {

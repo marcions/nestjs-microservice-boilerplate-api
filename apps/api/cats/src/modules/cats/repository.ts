@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { CatsEntity } from 'core/cats/entity/cats';
+import { ICatsRepository } from 'core/cats/repository/cats';
+import { CatsListInput, CatsListOutput } from 'core/cats/use-cases/cats-list';
 import { CatsSchema } from 'libs/infra/database/postgres/schemas/cats';
 import { SequelizeRepository } from 'libs/infra/repository/postgres/repository';
 import { DatabaseOptionsSchema, DatabaseOptionsType } from 'libs/utils/database/sequelize';
@@ -7,10 +10,6 @@ import { ValidateDatabaseSortAllowed } from 'libs/utils/decorators/database/vali
 import { SearchTypeEnum } from 'libs/utils/decorators/types';
 import { Transaction } from 'sequelize';
 import { ModelCtor } from 'sequelize-typescript';
-
-import { CatsEntity } from '../../../../../../core/cats/entity/cats';
-import { ICatsRepository } from '../../../../../../core/cats/repository/cats';
-import { CatsListInput, CatsListOutput } from '../../../../../../core/cats/use-cases/cats-list';
 
 type Model = ModelCtor<CatsSchema> & CatsEntity;
 

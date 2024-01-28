@@ -9,6 +9,7 @@ import {
   Param,
   Post,
   Put,
+  Req,
   UsePipes,
   ValidationPipe,
   Version
@@ -32,6 +33,7 @@ import {
 import { CreateDogsDto, ResponseTypeDto, UpdateDogsDto } from 'core/dto';
 import { UserRole } from 'core/user/entity/user';
 import { Roles } from 'libs/utils/decorators/role.decorator';
+import { ApiRequest } from 'libs/utils/request';
 
 import { DogsService } from './service';
 import { SwagggerRequest, SwagggerResponse } from './swagger';
@@ -86,8 +88,8 @@ export class DogsController {
   @ApiResponse(SwagggerResponse.create[200])
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')
-  async createDogs(@Body() data: CreateDogsDto): Promise<ResponseTypeDto> {
-    return this.dogsService.createDogs(data);
+  async createDogs(@Req() { body, user, tracing }: ApiRequest): Promise<ResponseTypeDto> {
+    return this.dogsService.createDogs(body, { user, tracing });
   }
 
   @Put('/:id')
