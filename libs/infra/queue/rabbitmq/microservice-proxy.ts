@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable security/detect-object-injection */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Injectable } from '@nestjs/common';

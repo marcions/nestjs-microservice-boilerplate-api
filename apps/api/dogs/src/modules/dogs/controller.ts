@@ -1,6 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
-import { Controller, Delete, Get, Headers, Param, Post, Put, UsePipes, ValidationPipe, Version } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Headers,
+  Param,
+  Post,
+  Put,
+  UsePipes,
+  ValidationPipe,
+  Version
+} from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import {
   ApiBadRequestResponse,
@@ -88,7 +100,7 @@ export class DogsController {
   @ApiResponse(SwagggerResponse.create[200])
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')
-  async createDogs(@Payload() data: CreateDogsDto): Promise<ResponseTypeDto> {
+  async createDogs(@Body() data: CreateDogsDto): Promise<ResponseTypeDto> {
     return this.dogsService.createDogs(data);
   }
 

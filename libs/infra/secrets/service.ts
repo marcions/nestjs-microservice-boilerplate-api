@@ -24,7 +24,11 @@ export class SecretsService implements ISecretsAdapter {
   // MONGO_URL = this.config.get('MONGO_URL');
   MONGO_URL = `${this.config.get('MONGO_URL')}/${this.config.get('MONGO_DATABASE')}${this.config.get('MONGO_PARAMS')}`;
 
-  RABBITMQ_URL = this.config.get('RABBITMQ_URL');
+  // RMQ_URL = this.config.get('RMQ_URL');
+  RMQ_URL = `amqp://${this.config.get('RMQ_USER')}:${this.config.get('RMQ_PASSWORD')}@${this.config.get(
+    'RMQ_HOST'
+  )}:${this.config.get('RMQ_PORT')}${this.config.get('RMQ_VHOST')}`;
+  RMQ_MANAGER_URL = `http://${this.config.get('RMQ_HOST')}:${this.config.get('RMQ_MANAGER_PORT')}`;
 
   ZIPKIN_URL = this.config.get('ZIPKIN_URL');
 

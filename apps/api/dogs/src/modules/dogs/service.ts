@@ -20,15 +20,15 @@ export class DogsService {
     return data;
   }
 
-  async createDogs(dogs: CreateDogsDto): Promise<any> {
-    const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, dogs);
+  async createDogs(body: CreateDogsDto): Promise<any> {
+    const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, body);
     return data;
   }
 
-  async updateDogs(dogs: UpdateDogsDto, id: number): Promise<any> {
+  async updateDogs(body: UpdateDogsDto, id: number): Promise<any> {
     const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.UPDATE_DOGS, {
       id,
-      dogs
+      body
     });
     return data;
   }

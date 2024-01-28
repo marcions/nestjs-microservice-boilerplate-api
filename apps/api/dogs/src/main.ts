@@ -59,7 +59,8 @@ async function bootstrap() {
     RATE_LIMIT_BY_USER,
     PGADMIN_URL,
     MONGO_EXPRESS_URL,
-    RABBITMQ_URL
+    RMQ_URL,
+    RMQ_MANAGER_URL
   } = app.get(ISecretsAdapter);
 
   const MINUTES = 15 * 60 * 1000;
@@ -91,7 +92,7 @@ async function bootstrap() {
     .setDescription(description)
     .addBearerAuth()
     .setVersion(version)
-    .addServer(HOST)
+    .addServer(`${HOST}:${PORT}`)
     .addTag('Swagger Documentation')
     .build();
 
@@ -109,7 +110,8 @@ async function bootstrap() {
   loggerService.log(`🔵 Mongo listening at ${bold(MONGO_URL)}`);
   loggerService.log(`🔶 Mongo express listening at ${bold(MONGO_EXPRESS_URL)}\n`);
   loggerService.log(`⚪ Zipkin[${bold('Tracing')}] listening at ${bold(ZIPKIN_URL)}`);
-  loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}`);
-  loggerService.log(`🔵 RabbitMQ listening at ${bold(RABBITMQ_URL)}\n`);
+  loggerService.log(`⚪ Promethues[${bold('Metrics')}] listening at ${bold(PROMETHUES_URL)}\n`);
+  loggerService.log(`🔵 RabbitMQ listening at ${bold(RMQ_URL)}`);
+  loggerService.log(`🔵 RabbitMQ Manager listening at ${bold(RMQ_MANAGER_URL)}\n`);
 }
 bootstrap();

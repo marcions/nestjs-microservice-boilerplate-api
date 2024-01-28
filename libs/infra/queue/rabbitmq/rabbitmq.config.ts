@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
 import { Microservice } from 'libs/utils/enum/index';
@@ -38,7 +39,7 @@ export class RabbitMQConfig {
     this.url = `${this.scheme}://${this.username}:${this.password}@${this.host}:${this.port}${this.vhost}`;
   }
 
-  public getOptions(microservice: MicroserviceType): unknown {
+  public getOptions(microservice: MicroserviceType): any {
     const queueOptions = {
       [Microservice.DOGS]: () => {
         this.queue = Microservice.DOGS;
