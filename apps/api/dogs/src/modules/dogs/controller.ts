@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable sonarjs/no-duplicate-string */
 import {
@@ -85,6 +86,16 @@ export class DogsController {
   @UsePipes(
     new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true })
   )
+  @ApiCreatedResponse({ type: ResponseTypeDto, description: 'The record has been successfully created.' })
+  @ApiBadRequestResponse({
+    type: ResponseTypeDto,
+    description: 'An error occurred. A message explaining will be notified.'
+  })
+  @ApiInternalServerErrorResponse({
+    type: ResponseTypeDto,
+    description: 'An error occurred. A message explaining will be notified.'
+  })
+  @ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
   @ApiResponse(SwagggerResponse.create[200])
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')

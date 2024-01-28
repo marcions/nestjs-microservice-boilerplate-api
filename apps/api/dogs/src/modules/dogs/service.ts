@@ -28,9 +28,14 @@ export class DogsService {
 
   async createDogs(body: CreateDogsDto, { tracing, user }: ApiTrancingInput): Promise<any> {
     try {
-      this.loggerService.info({ message: 'created', obj: { data: body } });
-      tracing.logEvent('dogs-created', `dogs created by: ${user.login}`);
-      return await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, body);
+      const logMsg = { message: 'created', obj: { data: body } };
+      const tracMsg = `dogs created by: ${user.login}`;
+
+      this.loggerService.info(logMsg);
+      tracing.logEvent('dogs-created', tracMsg);
+
+      const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, body);
+      return data;
     } catch (error) {
       console.log(error);
       throw error;
