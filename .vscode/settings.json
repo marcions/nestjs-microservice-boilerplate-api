@@ -92,7 +92,7 @@
   "update.showReleaseNotes": false,
   "window.titleBarStyle": "native",
   "workbench.editor.labelFormat": "short",
-  "workbench.editor.empty.hint": "hidden",
-  "workbench.activityBar.location": "hidden",
-  "workbench.statusBar.visible": false
+  // "workbench.editor.empty.hint": "hidden",
+  // "workbench.activityBar.location": "hidden",
+  "workbench.statusBar.visible": true
 }
