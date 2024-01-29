@@ -21,7 +21,7 @@ export class DogsController {
       const result = data;
       console.log(result);
 
-      channel.ack(message);
+      // channel.ack(message);
 
       return result;
     } catch (error) {

@@ -64,16 +64,17 @@ export class RabbitMQConfig {
       options: {
         urls: [this.url],
         queue: this.queue,
-        noAck: this.noAck,
+        // noAck: this.noAck,
+        noAck: false,
         persistent: this.persistent,
         // prefetchCount: 1,
         queueOptions: {
           durable: this.durable
-        },
-        socketOptions: {
-          heartbeatIntervalInSeconds: 60,
-          reconnectTimeInSeconds: 5
         }
+        // socketOptions: {
+        // heartbeatIntervalInSeconds: 60,
+        // reconnectTimeInSeconds: 5
+        // }
       }
     };
   }
