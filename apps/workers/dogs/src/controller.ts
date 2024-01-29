@@ -10,24 +10,6 @@ import { DogsService } from './service';
 export class DogsController {
   constructor(private dogsService: DogsService) {}
 
-  @MessagePattern(DogsPattern.GET_DOGS)
-  async getDogs(@Ctx() context: RmqContext): Promise<any> {
-    const channel = context.getChannelRef();
-    const message = context.getMessage();
-
-    try {
-      const result = await this.dogsService.getDogs();
-
-      channel.ack(message);
-
-      return result;
-    } catch (error) {
-      channel.ack(message);
-
-      throw error;
-    }
-  }
-
   @MessagePattern(DogsPattern.POST_DOGS)
   async createdDogs(@Payload() data: CreateDogsDto[], @Ctx() context: RmqContext): Promise<any> {
     const channel = context.getChannelRef();

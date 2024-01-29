@@ -16,13 +16,6 @@ import { RabbitMQConfig } from './config';
       }
     },
     {
-      provide: Microservice.USER,
-      useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-        rabbitMqConfig = new RabbitMQConfig();
-        return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.USER));
-      }
-    },
-    {
       provide: MicroserviceProxy.MICROSERVICE_PROXY_SERVICE,
       useClass: MicroserviceProxy
     }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { forwardRef, HttpStatus, Inject, Injectable, Logger } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
 import { CreateDogsDto, ExceptionObjectDto, UpdateDogsDto } from 'core/dto';
 import { PrismaService } from 'prisma';
@@ -7,24 +7,6 @@ import { PrismaService } from 'prisma';
 @Injectable()
 export class DogsService {
   constructor(private prisma: PrismaService) {}
-
-  getOnlyDogs(param: any): Promise<any> {
-    return this.prisma.dogs.findUnique({ where: param });
-  }
-  async getDogs() {
-    return this.prisma.dogs
-      .findMany({
-        where: {}
-      })
-      .then((result) => {
-        return { data: { statusCode: HttpStatus.OK, result: result } };
-      })
-      .catch((error) => {
-        throw new RpcException(
-          ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message)
-        );
-      });
-  }
 
   async createdDogs(data: CreateDogsDto[]): Promise<any> {
     return this.prisma.dogs
