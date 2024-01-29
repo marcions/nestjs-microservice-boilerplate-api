@@ -3,11 +3,21 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateDogsDto, ResponseTypeDto } from 'core/dto';
 import { ILoggerAdapter } from 'libs/infra/logger';
 import { MicroserviceProxy } from 'libs/infra/queue';
+import { CreatedModel } from 'libs/infra/repository';
 import { DogsPattern, Microservice } from 'libs/utils/enum';
 import { ApiTrancingInput } from 'libs/utils/request';
+import { z } from 'zod';
 
-export type DogsCreateInput = CreateDogsDto;
-export type DogsCreateOutput = ResponseTypeDto;
+import { DogsEntitySchema } from '../entity/dogs';
+
+export const DogsCreateSchema = DogsEntitySchema.pick({
+  name: true,
+  breed: true,
+  age: true
+});
+
+export type DogsCreateInput = z.infer<typeof DogsCreateSchema>;
+export type DogsCreateOutput = CreatedModel;
 @Injectable()
 export class DogsCreateUsecase {
   constructor(

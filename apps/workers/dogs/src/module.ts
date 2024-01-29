@@ -7,9 +7,9 @@ import { DogsController } from './controller';
 import { DogsService } from './service';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RabbitMQModule, PrismaModule],
+  imports: [ConfigModule.forRoot(), RabbitMQModule],
   controllers: [DogsController],
-  providers: [DogsService],
-  exports: [DogsService]
+  providers: [],
+  exports: []
 })
 export class DogsModule {}

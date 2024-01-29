@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { RabbitMQConfig } from 'libs/infra/queue';
@@ -12,7 +13,6 @@ async function bootstrap() {
     DogsModule,
     rabbitMqConfig.getOptions(Microservice.DOGS)
   );
-
   await app.listen();
 }
 

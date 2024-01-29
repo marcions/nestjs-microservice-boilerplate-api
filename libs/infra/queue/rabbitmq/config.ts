@@ -53,9 +53,6 @@ export class RabbitMQConfig {
     const queueOptions = {
       [Microservice.DOGS]: () => {
         this.queue = Microservice.DOGS;
-      },
-      [Microservice.USER]: () => {
-        this.queue = Microservice.USER;
       }
     };
 
@@ -69,8 +66,13 @@ export class RabbitMQConfig {
         queue: this.queue,
         noAck: this.noAck,
         persistent: this.persistent,
+        // prefetchCount: 1,
         queueOptions: {
           durable: this.durable
+        },
+        socketOptions: {
+          heartbeatIntervalInSeconds: 60,
+          reconnectTimeInSeconds: 5
         }
       }
     };
