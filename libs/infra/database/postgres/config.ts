@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-nested-template-literals */
 import { ConfigService } from '@nestjs/config';
 import { blue, bold, gray } from 'colorette';
 import { config } from 'dotenv';
@@ -38,7 +39,7 @@ const databaseConfigMap = {
 const postgresConfig = sequelizeConfig.config.dialectOptions;
 
 writeFileSync(
-  './database.json',
+  'libs/infra/database/postgres/database.json',
   JSON.stringify({
     [databaseConfigMap]: { ...postgresConfig, username: postgresConfig['user'], user: undefined, dialect: 'postgres' }
   })
