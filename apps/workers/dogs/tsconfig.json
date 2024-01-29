@@ -2,11 +2,10 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../../dist/apps/api/dogs"
+    "outDir": "../../../dist/apps/workers/dogs"
   },
   "include": [
     "src/**/*",
-    "src/modules/health"
   ],
   "exclude": [
     "node_modules",

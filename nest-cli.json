@@ -84,6 +84,15 @@
       "root": "tools/eslint",
       "sourceRoot": "tools/eslint",
       "type": "library"
+    },
+    "@workers/dogs": {
+      "compilerOptions": {
+        "tsConfigPath": "apps/workers/dogs/tsconfig.json"
+      },
+      "entryFile": "main",
+      "root": "apps/workers/dogs",
+      "sourceRoot": "apps/workers/dogs/src",
+      "type": "application"
     }
   }
 }

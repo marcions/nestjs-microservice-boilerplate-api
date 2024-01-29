@@ -1,5 +1,4 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { DogsCreateUsecase } from 'core/dogs/use-cases/dogs-create';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';

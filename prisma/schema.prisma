@@ -13,13 +13,13 @@ model dogs {
   name      String
   breed     String?
   age       Int?
-  status    Boolean
+  status    Boolean?
   deleted   Boolean?
-  userId    String
-  createdBy String
+  userId    String?
+  createdBy String?
   updatedBy String?
   deletedBy String?
-  createdAt DateTime
+  createdAt DateTime?
   updatedAt DateTime?
   deletedAt DateTime?
 }
