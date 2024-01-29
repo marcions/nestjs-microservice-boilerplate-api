@@ -44,12 +44,12 @@
   "git.openRepositoryInParentFolders": "always",
   "gitlens.codeLens.recentChange.enabled": false,
   "symbols.files.associations": {
-    "*.module.ts": "nest",
+    "*module.ts": "nest",
     "*.guard.ts": "typescript",
     "*.spec.ts": "ts-test",
     "*.e2e-spec.ts": "ts-test",
     "vitest.config.e2e.ts": "vite",
-    ".env.example": "gear"
+    ".env*": "gear"
   },
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
