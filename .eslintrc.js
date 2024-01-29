@@ -31,6 +31,9 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-throw-literal': 'error',
     ...pluginSecurity.configs.recommended.rules,
-    "security/detect-non-literal-regexp": "off"
+    "security/detect-non-literal-regexp": "off",
+    "prettier/prettier": ["error",{
+      "endOfLine": "auto"}
+    ]
   },
 };
