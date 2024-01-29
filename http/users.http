@@ -1,6 +1,6 @@
-@loginUrl = {{$dotenv HOST}}:{{$dotenv AUTH_PORT}}/auth/v1/login
-@baseUrl = {{$dotenv HOST}}:{{$dotenv USERS_PORT}}/users
-@requestUrl = {{baseUrl}}/v1
+@loginUrl = {{baseUrl}}:{{$dotenv AUTH_PORT}}/auth/v1/login
+@requestUrl = {{baseUrl}}:{{$dotenv USERS_PORT}}/users/v1
+
 @token = {{login.response.body.token}}
 @id = {{post.response.body.id}}
 

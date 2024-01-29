@@ -1,5 +1,5 @@
-@baseUrl = {{$dotenv HOST}}:{{$dotenv AUTH_PORT}}/auth
-@requestUrl = {{baseUrl}}/v1
+@loginUrl = {{baseUrl}}:{{$dotenv AUTH_PORT}}/auth/v1/login
+@requestUrl = {{baseUrl}}:{{$dotenv AUTH_PORT}}/auth/v1
 @token = {{login.response.body.token}}
 
 ###

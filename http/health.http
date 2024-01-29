@@ -1,5 +1,6 @@
-@baseurl = {{$dotenv HOST}}
+@loginUrl = {{baseUrl}}:{{$dotenv AUTH_PORT}}/auth/v1/login
+@requestUrl = {{baseUrl}}:{{$dotenv HEALTH_PORT}}/health
 # @baseurl=http://localhost:3000
 
-GET {{baseurl}}/health
+GET {{requestUrl}}
 ###

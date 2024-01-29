@@ -77,6 +77,17 @@
   "[prisma]": {
     "editor.formatOnSave": true
   },
+  "rest-client.environmentVariables": {
+    "local": {
+      "baseUrl": "http://localhost",
+    },
+    "staging": {
+      "baseUrl": "http://localhost",
+    },
+    "production": {
+      "baseUrl": "http://localhost",
+    }
+  },
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "[typescript]": {
