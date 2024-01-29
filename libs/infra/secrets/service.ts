@@ -21,13 +21,30 @@ export class SecretsService implements ISecretsAdapter {
     'POSTGRES_PASSWORD'
   )}@${this.config.get('POSTGRES_HOST')}:${this.config.get('POSTGRES_PORT')}/${this.config.get('POSTGRES_DATABASE')}`;
 
-  // MONGO_URL = this.config.get('MONGO_URL');
   MONGO_URL = `${this.config.get('MONGO_URL')}/${this.config.get('MONGO_DATABASE')}${this.config.get('MONGO_PARAMS')}`;
 
-  // RMQ_URL = this.config.get('RMQ_URL');
+  RMQ_HOST = this.config.get('RMQ_HOST');
+
+  RMQ_USER = this.config.get('RMQ_USER');
+
+  RMQ_PASSWORD = this.config.get('RMQ_PASSWORD');
+
+  RMQ_PORT = this.config.get<number>('RMQ_PORT');
+
+  RMQ_VHOST = this.config.get('RMQ_VHOST');
+
+  RMQ_QUEUE_ACK_CONFIG = this.config.get('RMQ_QUEUE_ACK_CONFIG');
+
+  RMQ_PERSISTENT_CONFIG = this.config.get('RMQ_PERSISTENT_CONFIG');
+
+  RMQ_QUEUE_DURABLE_CONFIG = this.config.get('RMQ_QUEUE_DURABLE_CONFIG');
+
   RMQ_URL = `amqp://${this.config.get('RMQ_USER')}:${this.config.get('RMQ_PASSWORD')}@${this.config.get(
     'RMQ_HOST'
   )}:${this.config.get('RMQ_PORT')}${this.config.get('RMQ_VHOST')}`;
+
+  RMQ_MANAGER_PORT = this.config.get<number>('RMQ_MANAGER_PORT');
+
   RMQ_MANAGER_URL = `http://${this.config.get('RMQ_HOST')}:${this.config.get('RMQ_MANAGER_PORT')}`;
 
   ZIPKIN_URL = this.config.get('ZIPKIN_URL');

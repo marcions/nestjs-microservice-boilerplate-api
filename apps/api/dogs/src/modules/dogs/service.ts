@@ -11,7 +11,7 @@ import { ApiTrancingInput } from 'libs/utils/request';
 export class DogsService {
   constructor(
     @Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy,
-    private readonly loggerService: ILoggerAdapter
+    private loggerService: ILoggerAdapter
   ) {}
 
   async getDogs(headers): Promise<ResponseTypeDto> {
@@ -26,7 +26,7 @@ export class DogsService {
     return data;
   }
 
-  async createDogs(body: CreateDogsDto, { tracing, user }: ApiTrancingInput): Promise<any> {
+  async createDogs(body: CreateDogsDto, { tracing, user }: ApiTrancingInput): Promise<ResponseTypeDto> {
     try {
       const logMsg = { message: 'created', obj: { data: body } };
       const tracMsg = `dogs created by: ${user.login}`;

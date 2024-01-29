@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { ClientProxyFactory } from '@nestjs/microservices';
 import { Microservice } from 'libs/utils/enum/index';
 
-import { MicroserviceProxy } from './microservice-proxy';
-import { RabbitMQConfig } from './rabbitmq.config';
+import { MicroserviceProxy } from '../microservice-proxy';
+import { RabbitMQConfig } from './config';
 
 @Module({
   imports: [],

@@ -100,7 +100,7 @@ export class DogsController {
   @ApiBody(SwagggerRequest.createBody)
   @Version('1')
   async createDogs(@Req() { body, user, tracing }: ApiRequest): Promise<ResponseTypeDto> {
-    return this.dogsService.createDogs(body, { user, tracing });
+    return await this.dogsService.createDogs(body, { user, tracing });
   }
 
   @Put('/:id')

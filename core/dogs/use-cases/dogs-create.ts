@@ -1,61 +1,36 @@
+/* eslint-disable no-console */
 import { Inject, Injectable } from '@nestjs/common';
+import { CreateDogsDto, ResponseTypeDto } from 'core/dto';
+import { ILoggerAdapter } from 'libs/infra/logger';
 import { MicroserviceProxy } from 'libs/infra/queue';
-import { CreatedModel } from 'libs/infra/repository';
-import { DatabaseOptionsType } from 'libs/utils/database/sequelize';
-import { ValidateSchema } from 'libs/utils/decorators/validate-schema.decorator';
+import { DogsPattern, Microservice } from 'libs/utils/enum';
 import { ApiTrancingInput } from 'libs/utils/request';
-import { z } from 'zod';
 
-import { DogsPattern, Microservice } from '@/libs/utils/enum';
-
-import { DogsEntity, DogsEntitySchema } from '../entity/dogs';
-import { IDogsRepository } from '../repository/dogs';
-
-export const DogsCreateSchema = DogsEntitySchema.pick({
-  name: true,
-  breed: true,
-  age: true
-});
-
-export type DogsCreateInput = z.infer<typeof DogsCreateSchema>;
-export type DogsCreateOutput = CreatedModel;
+export type DogsCreateInput = CreateDogsDto;
+export type DogsCreateOutput = ResponseTypeDto;
 @Injectable()
 export class DogsCreateUsecase {
-  constructor(private readonly dogsRepository: IDogsRepository) {}
+  constructor(
+    @Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy,
+    private readonly loggerService: ILoggerAdapter
+  ) {}
 
-  @ValidateSchema(DogsCreateSchema)
   async execute(input: DogsCreateInput, { tracing, user }: ApiTrancingInput): Promise<DogsCreateOutput> {
-    const entity = new DogsEntity(input);
-    entity.setCreated(user);
-
-    const transaction = await this.dogsRepository.startSession();
     try {
-      const dogs = await this.dogsRepository.create<DatabaseOptionsType>(entity, { transaction });
+      const logMsg = { message: 'created', obj: { data: input } };
+      const tracMsg = `dogs created by: ${user.login}`;
 
-      await transaction.commit();
+      this.loggerService.info(logMsg);
 
-      tracing.logEvent('dogs-created', `dogs created by: ${user.login}`);
+      tracing.logEvent('dogs-created', tracMsg);
 
-      return dogs;
-    } catch (error) {
-      await transaction.rollback();
-      throw error;
-    }
-  }
-}
+      console.log(input);
 
-@Injectable()
-export class DogsCreateUsecaseQueue {
-  constructor(@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy) {}
-
-  // @ValidateSchema(DogsCreateSchema)
-  async execute(input: DogsCreateInput, { tracing, user }: ApiTrancingInput): Promise<unknown> {
-    try {
       const { data } = await this.publish.message(Microservice.DOGS, DogsPattern.POST_DOGS, input);
-      tracing.logEvent('dogs-send-to-queue', `dogs queued by: ${user.login}`);
+
       return data;
     } catch (error) {
-      console.error(error);
+      console.log(error);
       throw error;
     }
   }

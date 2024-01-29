@@ -6,6 +6,7 @@ import { MongoDatabaseModule } from './database/mongo';
 import { PostgresDatabaseModule } from './database/postgres/module';
 import { HttpModule } from './http';
 import { LoggerModule } from './logger';
+import { RabbitMQModule } from './queue';
 import { SecretsModule } from './secrets';
 
 @Module({
@@ -16,7 +17,8 @@ import { SecretsModule } from './secrets';
     LoggerModule,
     HttpModule,
     RedisCacheModule,
-    MemoryCacheModule
+    MemoryCacheModule,
+    RabbitMQModule
   ]
 })
 export class InfraModule {}

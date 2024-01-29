@@ -5,7 +5,16 @@ export abstract class ISecretsAdapter {
   LOGER_LEVEL: string;
   MONGO_URL: string;
   POSTGRES_URL: string;
+  RMQ_HOST: string;
+  RMQ_USER: string;
+  RMQ_PASSWORD: string;
+  RMQ_PORT: number;
+  RMQ_VHOST: string;
+  RMQ_QUEUE_ACK_CONFIG: string;
+  RMQ_PERSISTENT_CONFIG: string;
+  RMQ_QUEUE_DURABLE_CONFIG: string;
   RMQ_URL: string;
+  RMQ_MANAGER_PORT: number;
   RMQ_MANAGER_URL: string;
   MONGO_EXPRESS_URL: string;
   PGADMIN_URL: string;

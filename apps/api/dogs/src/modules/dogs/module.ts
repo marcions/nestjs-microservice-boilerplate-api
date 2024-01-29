@@ -1,18 +1,29 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { DogsCreateUsecase } from 'core/dogs/use-cases/dogs-create';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
-import { LoggerModule } from 'libs/infra/logger';
+import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
+import { MicroserviceProxy } from 'libs/infra/queue';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 
 import { PrismaModule } from '@/prisma';
 
+import { IDogsCreateAdapter } from './adapter';
 import { DogsController } from './controller';
 import { DogsService } from './service';
 
 @Module({
   imports: [TokenModule, LoggerModule, RedisCacheModule, PrismaModule],
   controllers: [DogsController],
-  providers: [DogsService]
+  providers: [
+    DogsService,
+    {
+      provide: IDogsCreateAdapter,
+      useFactory: (microserviceProxy: MicroserviceProxy, loggerService: ILoggerAdapter) =>
+        new DogsService(microserviceProxy, loggerService),
+      inject: []
+    }
+  ]
 })
 export class DogsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

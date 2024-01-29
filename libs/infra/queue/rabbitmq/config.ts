@@ -27,15 +27,25 @@ export class RabbitMQConfig {
 
   public setVariables(): void {
     this.transport = Transport.RMQ;
+
     this.noAck = this.configService.get('RMQ_QUEUE_ACK_CONFIG') === 'true' ? true : false;
     this.persistent = this.configService.get('RMQ_PERSISTENT_CONFIG') === 'true' ? true : false;
     this.durable = this.configService.get('RMQ_QUEUE_DURABLE_CONFIG') === 'true' ? true : false;
-
     this.host = this.configService.get('RMQ_HOST');
     this.vhost = this.configService.get('RMQ_VHOST');
     this.port = this.configService.get('RMQ_PORT');
     this.username = this.configService.get('RMQ_USER');
     this.password = this.configService.get('RMQ_PASSWORD');
+
+    // this.noAck = this.secretsService.RMQ_QUEUE_ACK_CONFIG === 'true' ? true : false;
+    // this.persistent = this.secretsService.RMQ_PERSISTENT_CONFIG === 'true' ? true : false;
+    // this.durable = this.secretsService.RMQ_QUEUE_DURABLE_CONFIG === 'true' ? true : false;
+    // this.host = this.secretsService.RMQ_HOST;
+    // this.vhost = this.secretsService.RMQ_VHOST;
+    // this.port = this.secretsService.RMQ_PORT;
+    // this.username = this.secretsService.RMQ_USER;
+    // this.password = this.secretsService.RMQ_PASSWORD;
+
     this.url = `${this.scheme}://${this.username}:${this.password}@${this.host}:${this.port}${this.vhost}`;
   }
 
