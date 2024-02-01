@@ -16,7 +16,7 @@
         "./apps/*"
       ],
       "api/*": [
-        "./apps/api/*"
+        "./apps/apis/*"
       ],
       "integrators/*": [
         "./apps/integrators/*"

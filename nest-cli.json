@@ -2,45 +2,45 @@
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
   "compilerOptions": {
-    "tsConfigPath": "apps/api/users/tsconfig.json",
+    "tsConfigPath": "apps/apis/users/tsconfig.json",
     "webpack": true
   },
   "monorepo": true,
   "projects": {
     "@api/auth": {
       "compilerOptions": {
-        "tsConfigPath": "apps/api/auth/tsconfig.json"
+        "tsConfigPath": "apps/apis/auth/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/api/auth",
-      "sourceRoot": "apps/api/auth/src",
+      "root": "apps/apis/auth",
+      "sourceRoot": "apps/apis/auth/src",
       "type": "application"
     },
     "@api/cats": {
       "compilerOptions": {
-        "tsConfigPath": "apps/api/cats/tsconfig.json"
+        "tsConfigPath": "apps/apis/cats/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/api/cats",
-      "sourceRoot": "apps/api/cats/src",
+      "root": "apps/apis/cats",
+      "sourceRoot": "apps/apis/cats/src",
       "type": "application"
     },
     "@api/dogs": {
       "compilerOptions": {
-        "tsConfigPath": "apps/api/dogs/tsconfig.json"
+        "tsConfigPath": "apps/apis/dogs/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/api/dogs",
-      "sourceRoot": "apps/api/dogs/src",
+      "root": "apps/apis/dogs",
+      "sourceRoot": "apps/apis/dogs/src",
       "type": "application"
     },
     "@api/users": {
       "compilerOptions": {
-        "tsConfigPath": "apps/api/users/tsconfig.json"
+        "tsConfigPath": "apps/apis/users/tsconfig.json"
       },
       "entryFile": "main",
-      "root": "apps/api/users",
-      "sourceRoot": "apps/api/users/src",
+      "root": "apps/apis/users",
+      "sourceRoot": "apps/apis/users/src",
       "type": "application"
     },
     "@core": {

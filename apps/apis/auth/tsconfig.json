@@ -2,11 +2,10 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "declaration": false,
-    "outDir": "../../../dist/apps/api/dogs"
+    "outDir": "../../../dist/apps/apis/auth"
   },
   "include": [
-    "src/**/*",
-    "src/modules/health"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
