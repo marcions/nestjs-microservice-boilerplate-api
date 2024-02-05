@@ -15,4 +15,4 @@ import { Module } from '@nestjs/common';
     })
   ]
 })
-export class RabbitMQModule {}
+export class QueueModule {}

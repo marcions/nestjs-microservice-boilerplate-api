@@ -6,6 +6,8 @@ import { MongoDatabaseModule } from './database/mongo';
 import { PostgresDatabaseModule } from './database/postgres/module';
 import { HttpModule } from './http';
 import { LoggerModule } from './logger';
+import { MailModule } from './mailer/module';
+import { QueueModule } from './queue';
 import { RabbitMQModule } from './rabbitmq';
 import { SecretsModule } from './secrets';
 
@@ -18,7 +20,9 @@ import { SecretsModule } from './secrets';
     HttpModule,
     RedisCacheModule,
     MemoryCacheModule,
-    RabbitMQModule
+    RabbitMQModule,
+    QueueModule,
+    MailModule
   ]
 })
 export class InfraModule {}
