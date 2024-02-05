@@ -56,8 +56,8 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "[javascript]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "source.organizeImports": false
+      "source.fixAll": "always",
+      "source.organizeImports": "never"
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -93,8 +93,8 @@
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "[typescript]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "source.organizeImports": false
+      "source.fixAll": "always",
+      "source.organizeImports": "never"
     },
     "editor.formatOnSave": true
   },
