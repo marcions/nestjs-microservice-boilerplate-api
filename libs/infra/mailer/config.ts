@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ConfigService } from '@nestjs/config';
 
-export class QueueConfig {
+export class MailerConfig {
   private host: string;
   private port: string;
   private username: string;
@@ -15,19 +15,21 @@ export class QueueConfig {
   }
 
   public setVariables(): void {
-    this.host = this.configService.get('REDIS_HOST');
-    this.port = this.configService.get('REDIS_PORT');
-    this.username = this.configService.get('REDIS_USER');
-    this.password = this.configService.get('REDIS_PASSWORD');
+    this.host = this.configService.get('MAILER_HOST');
+    this.port = this.configService.get('MAILER_PORT');
+    this.username = this.configService.get('MAILER_USER');
+    this.password = this.configService.get('MAILER_PASSWORD');
   }
 
   public getOptions(): any {
     return {
-      redis: {
+      transport: {
         host: this.host,
         port: this.port,
-        username: this.username,
-        password: this.password
+        auth: {
+          user: this.username,
+          pass: this.password
+        }
       }
     };
   }
