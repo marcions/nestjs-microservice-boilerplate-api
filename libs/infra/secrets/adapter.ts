@@ -19,6 +19,10 @@ export abstract class ISecretsAdapter {
   MONGO_EXPRESS_URL: string;
   PGADMIN_URL: string;
   REDIS_URL: string;
+  REDIS_HOST: string;
+  REDIS_PORT: number;
+  REDIS_USER: string;
+  REDIS_PASSWORD: string;
   ZIPKIN_URL: string;
   PROMETHUES_URL: string;
   TOKEN_EXPIRATION: number;

@@ -15,7 +15,12 @@ export class SecretsService implements ISecretsAdapter {
 
   LOGER_LEVEL = this.config.get('LOGER_LEVEL');
 
-  REDIS_URL = this.config.get('REDIS_URL');
+  REDIS_HOST = this.config.get('REDIS_HOST');
+  REDIS_PORT = this.config.get('REDIS_PORT');
+  REDIS_USER = this.config.get('REDIS_USER');
+  REDIS_PASSWORD = this.config.get('REDIS_PASSWORD');
+
+  REDIS_URL = `redis://${this.config.get('REDIS_HOST')}:${this.config.get('REDIS_PORT')}`;
 
   POSTGRES_URL = `postgresql://${this.config.get('POSTGRES_USER')}:${this.config.get(
     'POSTGRES_PASSWORD'
