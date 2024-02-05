@@ -5,3 +5,8 @@ export enum Microservice {
   DOGS = 'dogs',
   OTHERS = 'others'
 }
+
+export enum Queues {
+  DOGS = 'dogs',
+  OTHERS = 'others'
+}

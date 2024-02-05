@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { TokenModule } from 'libs/auth';
 import { InfraModule } from 'libs/infra/module';
-import { RabbitMQModule } from 'libs/infra/queue';
+import { RabbitMQModule } from 'libs/infra/rabbitmq';
 import { RolesGuardInterceptor } from 'libs/utils/interceptors/auth-guard.interceptor';
 
 import { DogsModule } from './dogs/module';

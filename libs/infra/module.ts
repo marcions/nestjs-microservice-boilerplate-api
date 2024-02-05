@@ -6,7 +6,7 @@ import { MongoDatabaseModule } from './database/mongo';
 import { PostgresDatabaseModule } from './database/postgres/module';
 import { HttpModule } from './http';
 import { LoggerModule } from './logger';
-import { RabbitMQModule } from './queue';
+import { RabbitMQModule } from './rabbitmq';
 import { SecretsModule } from './secrets';
 
 @Module({

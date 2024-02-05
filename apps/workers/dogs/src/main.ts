@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
-import { RabbitMQConfig } from 'libs/infra/queue';
+import { RabbitMQConfig } from 'libs/infra/rabbitmq';
 import { Microservice } from 'libs/utils/enum';
 
 import { DogsModule } from './module';

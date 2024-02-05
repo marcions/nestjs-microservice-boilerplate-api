@@ -2,7 +2,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateDogsDto, ResponseTypeDto } from 'core/dto';
 import { ILoggerAdapter } from 'libs/infra/logger';
-import { MicroserviceProxy } from 'libs/infra/queue';
+import { MicroserviceProxy } from 'libs/infra/rabbitmq';
 import { CreatedModel } from 'libs/infra/repository';
 import { DogsPattern, Microservice } from 'libs/utils/enum';
 import { ApiTrancingInput } from 'libs/utils/request';
