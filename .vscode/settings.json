@@ -30,7 +30,8 @@
     "tailwind.config.js": "tailwind.config*, postcss.config*",
     ".env.local": ".env*",
     ".env": ".env*",
-    "pm2.yaml": "pm2*, ecosystem*"
+    "pm2.yaml": "pm2*, ecosystem*",
+    "sonar-project.js": "sonar-project*"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.confirmDelete": false,
