@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TokenModule } from 'libs/auth';
 import { RedisCacheModule } from 'libs/infra/cache/redis';
 import { ILoggerAdapter, LoggerModule } from 'libs/infra/logger';
-import { MicroserviceProxy } from 'libs/infra/queue';
+import { MicroserviceProxy } from 'libs/infra/rabbitmq';
 import { IsLoggedMiddleware } from 'libs/utils/middlewares/is-logged.middleware';
 
 import { PrismaModule } from '@/prisma';
