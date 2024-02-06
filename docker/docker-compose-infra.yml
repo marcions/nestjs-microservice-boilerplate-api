@@ -378,6 +378,58 @@ services:
     networks:
       - internal
 
+  sentry:
+    image: sentry
+    container_name: sentry
+    #restart: always
+    environment:
+      SENTRY_SECRET_KEY: '!!!SECRET!!!'
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: redis
+    ports:
+      - 9000:9000
+    links:
+      - redis
+      - postgres
+    networks:
+      - internal
+
+  cron:
+    image: sentry
+    container_name: cron
+    #restart: always
+    command: 'sentry run cron'
+    environment:
+      SENTRY_SECRET_KEY: '!!!SECRET!!!'
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: redis
+    links:
+      - redis
+      - postgres
+    networks:
+      - internal
+
+  worker:
+    image: sentry
+    container_name: worker
+    #restart: always
+    command: 'sentry run worker'
+    environment:
+      SENTRY_SECRET_KEY: '!!!SECRET!!!'
+      SENTRY_POSTGRES_HOST: postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: redis
+    links:
+      - redis
+      - postgres
+    networks:
+      - internal
+
 volumes:
   postgres-data:
     external: true
