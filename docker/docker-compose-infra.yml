@@ -459,11 +459,11 @@ services:
       - ./clickhouse/clickhouse-config.xml:/etc/clickhouse-server/config.xml
       - ./clickhouse/clickhouse-users.xml:/etc/clickhouse-server/users.xml
       - ./clickhouse/clickhouse-cluster.xml:/etc/clickhouse-server/config.d/cluster.xml
-      - ./clickhouse/clickhouse-storage.xml:/etc/clickhouse-server/config.d/storage.xml
+      #- ./clickhouse/clickhouse-storage.xml:/etc/clickhouse-server/config.d/storage.xml
       - ./clickhouse/custom-function.xml:/etc/clickhouse-server/custom-function.xml
       - ./clickhouse/user_scripts:/var/lib/clickhouse/user_scripts/
       - clickhouse-data:/var/lib/clickhouse/
-    restart: on-failure
+    #restart: on-failure
     tty: true
     depends_on:
       - zookeeper
@@ -497,7 +497,7 @@ services:
       - --storage.path=/data
 
   query-service:
-    image: signoz/query-service:${DOCKER_TAG:-0.38.0}
+    image: signoz/query-service:0.38.0
     container_name: signoz-query-service
     command: [
         '-config=/root/config/prometheus.yml'
@@ -545,7 +545,7 @@ services:
 
   otel-collector-migrator:
     image: signoz/signoz-schema-migrator:0.88.9
-    container_name: otel-migrator
+    container_name: signoz-otel-migrator
     command:
       - '--dsn=tcp://clickhouse:9000'
     depends_on:
